@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import {
   Switch,
   Route
@@ -10,7 +9,6 @@ import Contactanos from "../../pages/contactanos/Contactanos"
 
 function Routes () {
   return (
-    <div>
       <Switch>
         <Route path="/acerca">
           <Acerca />
@@ -22,7 +20,6 @@ function Routes () {
           <Inicio />
         </Route>
       </Switch>
-    </div>
   );
 }
 

@@ -1,10 +1,9 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import Routes from "./utilities/router/Routes";
+import Routes from "./shared/router/Routes";
 import Navbar from "./components/navbar/Navbar";
-import 'primereact/resources/themes/md-light-deeppurple/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-import 'primeflex/primeflex.css';
+import '@fortawesome/fontawesome-free/css/all.min.css'; 
+import 'bootstrap-css-only/css/bootstrap.min.css'; 
+import 'mdbreact/dist/css/mdb.css';
 
 function App() {
   return (
