@@ -21,15 +21,11 @@ const Navbar = (props) => {
         <MDBNavbarToggler onClick={toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
           <MDBNavbarNav left>
-            <MDBNavItem active>
-              <MDBNavLink to={PATHS.INICIO}>Inicio</MDBNavLink>
+          {PATHS.map(({path, name}) => (
+            <MDBNavItem key={name}>
+              <MDBNavLink to={path}>{name}</MDBNavLink>
             </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to={PATHS.ACERCA}>Acerca</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to={PATHS.CONTACTANOS}>Contáctanos</MDBNavLink>
-            </MDBNavItem>
+          ))}
           </MDBNavbarNav>
           <MDBNavbarNav right>
             <MDBNavItem>

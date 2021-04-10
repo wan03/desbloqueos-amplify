@@ -6,6 +6,7 @@ import {
 import Inicio from "../../pages/inicio/Inicio";
 import Acerca from "../../pages/acerca/Acerca";
 import Contactanos from "../../pages/contactanos/Contactanos"
+import Desbloqueos from "../../pages/desbloqueos/Desbloqueos"
 
 function Routes () {
   return (
@@ -15,6 +16,9 @@ function Routes () {
         </Route>
         <Route path="/contactanos">
           <Contactanos />
+        </Route>
+        <Route path="/desbloqueos">
+          <Desbloqueos />
         </Route>
         <Route path="/">
           <Inicio />

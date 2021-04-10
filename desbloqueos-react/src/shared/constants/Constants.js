@@ -3,9 +3,9 @@ export const CONSTANTS = {
 
 }
 
-export const PATHS = {
-    INICIO: "/",
-    ACERCA: "/acerca",
-    CONTACTANOS: "/contactanos",
-    DESBLOQUEOS: "/desbloqueos",
-}
+export const PATHS = [
+    {name: "Inicio", path:"/"},
+    {name: "Acerca", path:"/acerca"},
+    {name: "Contáctanos", path:"/contactanos"},
+    {name: "Desbloqueos", path:"/desbloqueos"},
+]
