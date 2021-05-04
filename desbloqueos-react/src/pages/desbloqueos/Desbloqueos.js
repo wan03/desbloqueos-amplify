@@ -1,6 +1,6 @@
 import React from "react";
 import { MDBContainer, Row, Col } from "mdbreact";
-import From from "./formSection/Form";
+import Form from "./form/DesbloqueosForm";
 
 const Desbloqueos = () => {
   return (
@@ -23,6 +23,9 @@ const Desbloqueos = () => {
             Aliquam erat volutpat. Curabitur sodales non nunc quis elementum.
           </p>
         </Col>
+      </Row>
+      <Row>
+        <Form />
       </Row>
     </MDBContainer>
   );
