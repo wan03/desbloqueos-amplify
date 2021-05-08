@@ -14,7 +14,7 @@ import {
 import {
   formatForOptions, countries, networks, brands, devices,
 } from './desbloqueosFormUtils';
-import Select from '../../../components/form/select/Select';
+import Select from '../../../components/formik/select/Select';
 
 const DesbloqueosForm = () => {
   const [formActivePanel, setFromActivePanel] = useState({
@@ -125,7 +125,6 @@ const DesbloqueosForm = () => {
                 label="Compañia Télefonica"
               />
               <MDBBtn
-                color="mdb-color"
                 rounded
                 className="float-right"
                 onClick={() => handleNextPrevClick(2)}
@@ -151,7 +150,6 @@ const DesbloqueosForm = () => {
                 label="Modelo"
               />
               <MDBBtn
-                color="mdb-color"
                 rounded
                 className="float-left"
                 onClick={() => handleNextPrevClick(1)}
@@ -159,7 +157,6 @@ const DesbloqueosForm = () => {
                 Anterior
               </MDBBtn>
               <MDBBtn
-                color="mdb-color"
                 rounded
                 className="float-right"
                 onClick={() => handleNextPrevClick(3)}
@@ -186,7 +183,6 @@ const DesbloqueosForm = () => {
                 id="checkbox2"
               />
               <MDBBtn
-                color="mdb-color"
                 rounded
                 className="float-left"
                 onClick={() => handleNextPrevClick(2)}
@@ -194,7 +190,6 @@ const DesbloqueosForm = () => {
                 previous
               </MDBBtn>
               <MDBBtn
-                color="mdb-color"
                 rounded
                 className="float-right"
                 onClick={() => handleNextPrevClick(4)}
@@ -213,7 +208,6 @@ const DesbloqueosForm = () => {
                 Registration completed!
               </h2>
               <MDBBtn
-                color="mdb-color"
                 rounded
                 className="float-left"
                 onClick={() => handleNextPrevClick(3)}
