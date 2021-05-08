@@ -1,17 +1,11 @@
-import { featuredPhonesMock } from "./featuredPhonesMock";
-
-
-
-
+import { featuredPhonesMock } from './featuredPhonesMock';
 
 export const getPhones = () => {
 
-}
+};
 
 export const getFeaturedPhones = () => {
+  const featuredPhones = featuredPhonesMock;
 
-    const featuredPhones = featuredPhonesMock;
-
-    return featuredPhones;
-
-}
+  return featuredPhones;
+};

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 import {
   MDBContainer,
   MDBRow,
@@ -7,11 +9,14 @@ import {
   MDBStep,
   MDBBtn,
   MDBInput,
-  MDBSelect
-} from "mdbreact";
-import { countries, formatForOptions } from "./desbloqueosFormUtils";
+  // MDBSelect,
+} from '../../../shared/dist/mdbreact';
+import {
+  formatForOptions, countries, networks, brands, devices,
+} from './desbloqueosFormUtils';
+import Select from '../../../components/form/select/Select';
 
-const Form = () => {
+const DesbloqueosForm = () => {
   const [formActivePanel, setFromActivePanel] = useState({
     formActivePanelId: 1,
     formActivePanelChange: false,
@@ -32,16 +37,22 @@ const Form = () => {
   };
 
   const handleSubmission = () => {
-    alert("Form submitted!");
+    // eslint-disable-next-line no-alert
+    alert('Form submitted!');
   };
 
   const calculateAutofocus = (currentPanel) => {
-    if (formActivePanel.formActivePanelChange && formActivePanel.formActivePanelId === currentPanel) {
+    if (formActivePanel.formActivePanelChange
+      && formActivePanel.formActivePanelId === currentPanel) {
       return true;
     }
+    return false;
   };
 
   const [countriesOptions] = useState(formatForOptions(countries));
+  const [networkOptions] = useState(formatForOptions(networks));
+  const [brandOptions] = useState(formatForOptions(brands));
+  const [devicesOptions] = useState(formatForOptions(devices));
 
   return (
     <MDBContainer>
@@ -53,69 +64,99 @@ const Form = () => {
           icon="city"
           stepName="Compañia Télefonica"
           onClick={() => swapFormActive(1)}
-        ></MDBStep>
+        />
         <MDBStep
           icon="mobile"
           stepName="Personal Data"
           onClick={() => swapFormActive(2)}
-        ></MDBStep>
+        />
         <MDBStep
           icon="user"
           stepName="Terms and Conditions"
           onClick={() => swapFormActive(3)}
-        ></MDBStep>
+        />
         <MDBStep
           icon="check"
           stepName="Finish"
           onClick={() => swapFormActive(4)}
-        ></MDBStep>
+        />
       </MDBStepper>
+      <Formik
+        initialValues={{
+          country: '',
+          network: '',
+          brand: '',
+          device: '',
 
-      <form action="" method="post">
-        <MDBRow>
-          {formActivePanel.formActivePanelId === 1 && (
+        }}
+        validationSchema={Yup.object({
+          country: Yup.string()
+            .required('Requerido'),
+          network: Yup.string()
+            .required('Requerido'),
+          brand: Yup.string()
+            .required('Requerido'),
+          device: Yup.string()
+            .required('Requerido'),
+        })}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            // eslint-disable-next-line no-alert
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        <Form>
+          <MDBRow>
+            {formActivePanel.formActivePanelId === 1 && (
             <MDBCol md="12">
               <h3 className="font-weight-bold pl-0 my-4">
-                <strong>Compañia Télefonica Original</strong>
+                <strong>Pais y Operadora</strong>
               </h3>
-              <MDBSelect
+              <Select
+                name="country"
                 options={countriesOptions}
                 label="Pais"
               />
-              <MDBInput label="Username" className="mt-4" />
-              <MDBInput label="Password" className="mt-4" />
-              <MDBInput label="Repeat Password" className="mt-4" />
+              <Select
+                name="network"
+                options={networkOptions}
+                label="Compañia Télefonica"
+              />
               <MDBBtn
                 color="mdb-color"
                 rounded
                 className="float-right"
                 onClick={() => handleNextPrevClick(2)}
               >
-                next
+                Siguiente
               </MDBBtn>
             </MDBCol>
-          )}
+            )}
 
-          {formActivePanel.formActivePanelId === 2 && (
+            {formActivePanel.formActivePanelId === 2 && (
             <MDBCol md="12">
               <h3 className="font-weight-bold pl-0 my-4">
-                <strong>Personal Data</strong>
+                <strong>Télefono</strong>
               </h3>
-              <MDBInput
-                label="First Name"
-                className="mt-3"
-                autoFocus={() => calculateAutofocus(2)}
+              <Select
+                name="brand"
+                options={brandOptions}
+                label="Marca"
               />
-              <MDBInput label="Second Name" className="mt-3" />
-              <MDBInput label="Surname" className="mt-3" />
-              <MDBInput label="Address" type="textarea" rows="2" />
+              <Select
+                name="device"
+                options={devicesOptions}
+                label="Modelo"
+              />
               <MDBBtn
                 color="mdb-color"
                 rounded
                 className="float-left"
                 onClick={() => handleNextPrevClick(1)}
               >
-                previous
+                Anterior
               </MDBBtn>
               <MDBBtn
                 color="mdb-color"
@@ -123,15 +164,15 @@ const Form = () => {
                 className="float-right"
                 onClick={() => handleNextPrevClick(3)}
               >
-                next
+                Siguiente
               </MDBBtn>
             </MDBCol>
-          )}
+            )}
 
-          {formActivePanel.formActivePanelId === 3 && (
+            {formActivePanel.formActivePanelId === 3 && (
             <MDBCol md="12">
               <h3 className="font-weight-bold pl-0 my-4">
-                <strong>Terms and conditions</strong>
+                <strong>Servicio de desbloqueo</strong>
               </h3>
               <MDBInput
                 label="I agreee to the terms and conditions"
@@ -161,9 +202,9 @@ const Form = () => {
                 next
               </MDBBtn>
             </MDBCol>
-          )}
+            )}
 
-          {formActivePanel.formActivePanelId === 4 && (
+            {formActivePanel.formActivePanelId === 4 && (
             <MDBCol md="12">
               <h3 className="font-weight-bold pl-0 my-4">
                 <strong>Finish</strong>
@@ -188,11 +229,12 @@ const Form = () => {
                 submit
               </MDBBtn>
             </MDBCol>
-          )}
-        </MDBRow>
-      </form>
+            )}
+          </MDBRow>
+        </Form>
+      </Formik>
     </MDBContainer>
   );
 };
 
-export default Form;
+export default DesbloqueosForm;

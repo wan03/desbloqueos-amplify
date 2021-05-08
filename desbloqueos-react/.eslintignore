@@ -1,0 +1,3 @@
+#ignore mdbreact
+/src/shared/dist/*
+/src/reportWebVitals.js
