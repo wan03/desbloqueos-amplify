@@ -57,7 +57,7 @@ const DesbloqueosForm = () => {
   return (
     <MDBContainer>
       <h2 className="text-center font-weight-bold pt-4 pb-5 mb-2">
-        <strong>Registration form</strong>
+        <strong>Desbloquea Tu Celular</strong>
       </h2>
       <MDBStepper icon>
         <MDBStep

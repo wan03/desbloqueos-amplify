@@ -34,7 +34,6 @@ const Contactanos = () => (
                   phone: '',
                   company: '',
                   message: '',
-
                 }}
                 validationSchema={Yup.object({
                   name: Yup.string()

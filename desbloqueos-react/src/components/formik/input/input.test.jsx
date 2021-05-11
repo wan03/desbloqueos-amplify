@@ -8,7 +8,7 @@ import {
 import Input from './Input';
 
 describe('Option', () => {
-  afterEach(cleanup());
+  afterEach(() => cleanup());
   it('Renders without crashing', () => {
     render(<Input />);
   });

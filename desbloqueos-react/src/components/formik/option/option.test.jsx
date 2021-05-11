@@ -8,7 +8,7 @@ import {
 import Option from './Options';
 
 describe('Option', () => {
-  afterEach(cleanup());
+  afterEach(() => cleanup());
   it('Renders without crashing', () => {
     render(<Option />);
   });

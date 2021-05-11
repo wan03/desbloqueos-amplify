@@ -8,7 +8,7 @@ import {
 import Desbloqueos from './Desbloqueos';
 
 describe('Desbloqueos', () => {
-  afterEach(cleanup());
+  afterEach(() => cleanup());
   it('renders with or without content', () => {
     render(<Desbloqueos />);
   });

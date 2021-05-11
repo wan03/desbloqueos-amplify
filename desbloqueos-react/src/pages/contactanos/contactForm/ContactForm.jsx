@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form, Field } from 'formik';
 import {
   MDBRow, MDBIcon, MDBBtn, MDBCol,
 } from '../../../shared/dist/mdbreact';
 import Input from '../../../components/formik/input/Input';
 
-// eslint-disable-next-line react/prop-types
 const ContactForm = ({ errors, touched }) => {
   const validation = { errors, touched };
   return (
@@ -72,6 +72,15 @@ const ContactForm = ({ errors, touched }) => {
       </MDBRow>
     </Form>
   );
+};
+
+ContactForm.propTypes = {
+  touched: PropTypes.objectOf(
+    PropTypes.object,
+  ).isRequired,
+  errors: PropTypes.objectOf(
+    PropTypes.object,
+  ).isRequired,
 };
 
 export default ContactForm;

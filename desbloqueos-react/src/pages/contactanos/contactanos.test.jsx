@@ -1,17 +1,18 @@
-import { render, cleanup } from "@testing-library/react";
-import React from "react";
+import React from 'react';
+import {
+  render, cleanup,
+} from '@testing-library/react';
+import {
+  it, afterEach, describe,
+  // eslint-disable-next-line import/no-extraneous-dependencies
+} from '@jest/globals';
 
-import Contactanos from "./Contactanos";
+import Contactanos from './Contactanos';
 
+describe('Contactanos', () => {
+  afterEach(() => cleanup());
 
-afterEach(() => {
- cleanup()
-});
-
-
-it("renders with or without content", () => {
-  const{ container } = render(<Contactanos />);
-
-  expect(container.children).toBeTruthy();
-
+  it('renders with or without content', () => {
+    render(<Contactanos />);
+  });
 });
