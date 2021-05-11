@@ -7,12 +7,12 @@ import {
   // eslint-disable-next-line import/no-extraneous-dependencies
 } from '@jest/globals';
 
-import Acerca from './Acerca';
+import ContactForm from './ContactForm';
 
-describe('Acerca', () => {
+describe('ContactForm', () => {
   afterEach(() => cleanup());
 
   it('renders with or without content', () => {
-    render(<Acerca />);
+    render(<ContactForm />);
   });
 });

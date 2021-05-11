@@ -1,18 +1,15 @@
 import React from 'react';
-import {
-  render, cleanup,
-} from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import {
   it, afterEach, describe,
   // eslint-disable-next-line import/no-extraneous-dependencies
 } from '@jest/globals';
 
-import Acerca from './Acerca';
+import Option from './Options';
 
-describe('Acerca', () => {
+describe('Option', () => {
   afterEach(() => cleanup());
-
-  it('renders with or without content', () => {
-    render(<Acerca />);
+  it('Renders without crashing', () => {
+    render(<Option />);
   });
 });

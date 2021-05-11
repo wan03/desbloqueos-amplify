@@ -5,11 +5,11 @@ import {
   // eslint-disable-next-line import/no-extraneous-dependencies
 } from '@jest/globals';
 
-import Option from './Options';
+import Input from './Input';
 
 describe('Option', () => {
-  afterEach(cleanup());
+  afterEach(() => cleanup());
   it('Renders without crashing', () => {
-    render(<Option />);
+    render(<Input />);
   });
 });
