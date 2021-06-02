@@ -1,20 +1,26 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-desbloqueos-dev-233422-authRole",
-      "UnauthRoleArn": "arn:aws:iam::716324966417:role/amplify-desbloqueos-dev-233422-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::716324966417:role/amplify-desbloqueos-dev-233422-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-desbloqueos-dev-233422-deployment",
-      "UnauthRoleName": "amplify-desbloqueos-dev-233422-unauthRole",
-      "StackName": "amplify-desbloqueos-dev-233422",
-      "StackId": "arn:aws:cloudformation:us-east-2:716324966417:stack/amplify-desbloqueos-dev-233422/c882fed0-b209-11eb-a172-0212e61935fe",
-      "AmplifyAppId": "d26tlmmw63xjt7"
-    },
-    "categories": {
-      "auth": {
-        "desbloqueos03b50c29": {}
-      }
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-desbloqueos-dev-233422-authRole",
+            "UnauthRoleArn": "arn:aws:iam::716324966417:role/amplify-desbloqueos-dev-233422-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::716324966417:role/amplify-desbloqueos-dev-233422-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-desbloqueos-dev-233422-deployment",
+            "UnauthRoleName": "amplify-desbloqueos-dev-233422-unauthRole",
+            "StackName": "amplify-desbloqueos-dev-233422",
+            "StackId": "arn:aws:cloudformation:us-east-2:716324966417:stack/amplify-desbloqueos-dev-233422/c882fed0-b209-11eb-a172-0212e61935fe",
+            "AmplifyAppId": "d26tlmmw63xjt7"
+        },
+        "categories": {
+            "auth": {
+                "desbloqueos03b50c29": {}
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d26tlmmw63xjt7",
+                    "type": "cicd"
+                }
+            }
+        }
     }
-  }
 }
