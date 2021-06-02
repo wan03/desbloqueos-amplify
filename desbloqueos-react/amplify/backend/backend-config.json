@@ -21,5 +21,12 @@
       "customAuth": false
     }
   },
-  "function": {}
+  "function": {},
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "type": "cicd",
+      "lastPushTimeStamp": "2021-06-02T15:38:12.729Z"
+    }
+  }
 }
