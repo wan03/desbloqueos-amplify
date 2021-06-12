@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import {
   MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText,
 } from '../../shared/dist/mdbreact';
+// eslint-disable-next-line no-unused-vars
+import { CONSTANTS, PATHS } from '../../shared/constants/Constants';
 
 const Card = ({
   title, text, buttonText, buttonHref, imgSrc,
