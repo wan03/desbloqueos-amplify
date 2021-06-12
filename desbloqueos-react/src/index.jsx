@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './shared/apollo/Apollo';
 import reportWebVitals from './reportWebVitals';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -11,7 +13,9 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
