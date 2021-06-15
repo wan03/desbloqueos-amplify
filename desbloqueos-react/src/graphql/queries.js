@@ -70,16 +70,6 @@ export const getNetwork = /* GraphQL */ `
         }
         nextToken
       }
-      brands {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       providers {
         items {
           id
@@ -109,9 +99,6 @@ export const listNetworks = /* GraphQL */ `
         countries {
           nextToken
         }
-        brands {
-          nextToken
-        }
         providers {
           nextToken
         }
@@ -128,16 +115,6 @@ export const getBrand = /* GraphQL */ `
       id
       name
       description
-      networks {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       devices {
         items {
           id
@@ -175,9 +152,6 @@ export const listBrands = /* GraphQL */ `
         id
         name
         description
-        networks {
-          nextToken
-        }
         devices {
           nextToken
         }

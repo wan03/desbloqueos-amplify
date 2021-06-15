@@ -118,9 +118,6 @@ export const onCreateCountryNetwork = /* GraphQL */ `
         countries {
           nextToken
         }
-        brands {
-          nextToken
-        }
         providers {
           nextToken
         }
@@ -154,9 +151,6 @@ export const onUpdateCountryNetwork = /* GraphQL */ `
         id
         name
         countries {
-          nextToken
-        }
-        brands {
           nextToken
         }
         providers {
@@ -194,9 +188,6 @@ export const onDeleteCountryNetwork = /* GraphQL */ `
         countries {
           nextToken
         }
-        brands {
-          nextToken
-        }
         providers {
           nextToken
         }
@@ -218,16 +209,6 @@ export const onCreateNetwork = /* GraphQL */ `
           id
           countryID
           networkID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      brands {
-        items {
-          id
-          networkID
-          brandID
           createdAt
           updatedAt
         }
@@ -264,16 +245,6 @@ export const onUpdateNetwork = /* GraphQL */ `
         }
         nextToken
       }
-      brands {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       providers {
         items {
           id
@@ -305,16 +276,6 @@ export const onDeleteNetwork = /* GraphQL */ `
         }
         nextToken
       }
-      brands {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       providers {
         items {
           id
@@ -331,148 +292,12 @@ export const onDeleteNetwork = /* GraphQL */ `
     }
   }
 `;
-export const onCreateNetworkBrand = /* GraphQL */ `
-  subscription OnCreateNetworkBrand {
-    onCreateNetworkBrand {
-      id
-      networkID
-      brandID
-      network {
-        id
-        name
-        countries {
-          nextToken
-        }
-        brands {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      brand {
-        id
-        name
-        description
-        networks {
-          nextToken
-        }
-        devices {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateNetworkBrand = /* GraphQL */ `
-  subscription OnUpdateNetworkBrand {
-    onUpdateNetworkBrand {
-      id
-      networkID
-      brandID
-      network {
-        id
-        name
-        countries {
-          nextToken
-        }
-        brands {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      brand {
-        id
-        name
-        description
-        networks {
-          nextToken
-        }
-        devices {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteNetworkBrand = /* GraphQL */ `
-  subscription OnDeleteNetworkBrand {
-    onDeleteNetworkBrand {
-      id
-      networkID
-      brandID
-      network {
-        id
-        name
-        countries {
-          nextToken
-        }
-        brands {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      brand {
-        id
-        name
-        description
-        networks {
-          nextToken
-        }
-        devices {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateBrand = /* GraphQL */ `
   subscription OnCreateBrand {
     onCreateBrand {
       id
       name
       description
-      networks {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       devices {
         items {
           id
@@ -505,16 +330,6 @@ export const onUpdateBrand = /* GraphQL */ `
       id
       name
       description
-      networks {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       devices {
         items {
           id
@@ -547,16 +362,6 @@ export const onDeleteBrand = /* GraphQL */ `
       id
       name
       description
-      networks {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       devices {
         items {
           id
@@ -593,9 +398,6 @@ export const onCreateBrandDevice = /* GraphQL */ `
         id
         name
         description
-        networks {
-          nextToken
-        }
         devices {
           nextToken
         }
@@ -634,9 +436,6 @@ export const onUpdateBrandDevice = /* GraphQL */ `
         id
         name
         description
-        networks {
-          nextToken
-        }
         devices {
           nextToken
         }
@@ -675,9 +474,6 @@ export const onDeleteBrandDevice = /* GraphQL */ `
         id
         name
         description
-        networks {
-          nextToken
-        }
         devices {
           nextToken
         }

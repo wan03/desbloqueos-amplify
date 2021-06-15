@@ -130,9 +130,6 @@ export const createCountryNetwork = /* GraphQL */ `
         countries {
           nextToken
         }
-        brands {
-          nextToken
-        }
         providers {
           nextToken
         }
@@ -169,9 +166,6 @@ export const updateCountryNetwork = /* GraphQL */ `
         id
         name
         countries {
-          nextToken
-        }
-        brands {
           nextToken
         }
         providers {
@@ -212,9 +206,6 @@ export const deleteCountryNetwork = /* GraphQL */ `
         countries {
           nextToken
         }
-        brands {
-          nextToken
-        }
         providers {
           nextToken
         }
@@ -239,16 +230,6 @@ export const createNetwork = /* GraphQL */ `
           id
           countryID
           networkID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      brands {
-        items {
-          id
-          networkID
-          brandID
           createdAt
           updatedAt
         }
@@ -288,16 +269,6 @@ export const updateNetwork = /* GraphQL */ `
         }
         nextToken
       }
-      brands {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       providers {
         items {
           id
@@ -332,16 +303,6 @@ export const deleteNetwork = /* GraphQL */ `
         }
         nextToken
       }
-      brands {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       providers {
         items {
           id
@@ -358,141 +319,6 @@ export const deleteNetwork = /* GraphQL */ `
     }
   }
 `;
-export const createNetworkBrand = /* GraphQL */ `
-  mutation CreateNetworkBrand(
-    $input: CreateNetworkBrandInput!
-    $condition: ModelNetworkBrandConditionInput
-  ) {
-    createNetworkBrand(input: $input, condition: $condition) {
-      id
-      networkID
-      brandID
-      network {
-        id
-        name
-        countries {
-          nextToken
-        }
-        brands {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      brand {
-        id
-        name
-        description
-        networks {
-          nextToken
-        }
-        devices {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateNetworkBrand = /* GraphQL */ `
-  mutation UpdateNetworkBrand(
-    $input: UpdateNetworkBrandInput!
-    $condition: ModelNetworkBrandConditionInput
-  ) {
-    updateNetworkBrand(input: $input, condition: $condition) {
-      id
-      networkID
-      brandID
-      network {
-        id
-        name
-        countries {
-          nextToken
-        }
-        brands {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      brand {
-        id
-        name
-        description
-        networks {
-          nextToken
-        }
-        devices {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteNetworkBrand = /* GraphQL */ `
-  mutation DeleteNetworkBrand(
-    $input: DeleteNetworkBrandInput!
-    $condition: ModelNetworkBrandConditionInput
-  ) {
-    deleteNetworkBrand(input: $input, condition: $condition) {
-      id
-      networkID
-      brandID
-      network {
-        id
-        name
-        countries {
-          nextToken
-        }
-        brands {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      brand {
-        id
-        name
-        description
-        networks {
-          nextToken
-        }
-        devices {
-          nextToken
-        }
-        providers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createBrand = /* GraphQL */ `
   mutation CreateBrand(
     $input: CreateBrandInput!
@@ -502,16 +328,6 @@ export const createBrand = /* GraphQL */ `
       id
       name
       description
-      networks {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       devices {
         items {
           id
@@ -547,16 +363,6 @@ export const updateBrand = /* GraphQL */ `
       id
       name
       description
-      networks {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       devices {
         items {
           id
@@ -592,16 +398,6 @@ export const deleteBrand = /* GraphQL */ `
       id
       name
       description
-      networks {
-        items {
-          id
-          networkID
-          brandID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       devices {
         items {
           id
@@ -641,9 +437,6 @@ export const createBrandDevice = /* GraphQL */ `
         id
         name
         description
-        networks {
-          nextToken
-        }
         devices {
           nextToken
         }
@@ -685,9 +478,6 @@ export const updateBrandDevice = /* GraphQL */ `
         id
         name
         description
-        networks {
-          nextToken
-        }
         devices {
           nextToken
         }
@@ -729,9 +519,6 @@ export const deleteBrandDevice = /* GraphQL */ `
         id
         name
         description
-        networks {
-          nextToken
-        }
         devices {
           nextToken
         }
