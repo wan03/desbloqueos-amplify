@@ -1,0 +1,72 @@
+type Country 
+  @model @auth(rules: [{ allow: public, provider: iam }]) 
+  @key(name: "byDrSimID", fields: ["drSimID"]) {
+  id: ID!
+  drSimID: String
+  name: String!
+  networks: [CountryNetwork] @connection(keyName: "byCountry", fields: ["id"])
+}
+
+type CountryNetwork
+  @model(queries: null)
+  @key(name: "byCountry", fields: ["countryID", "networkID"])
+  @key(name: "byNetwork", fields: ["networkID", "countryID"])
+  @auth(rules: [{ allow: public, provider: iam }]) {
+  id: ID!
+  countryID: ID!
+  networkID: ID!
+  country: Country! @connection(fields: ["countryID"])
+  network: Network! @connection(fields: ["networkID"])
+}
+
+type Network 
+  @model @auth(rules: [{ allow: public, provider: iam }]) 
+  @key(name: "byDrSimID", fields: ["drSimID"]) {
+  id: ID!
+  drSimID: String
+  name: String!
+  countries: [CountryNetwork] @connection(keyName: "byNetwork", fields: ["id"])
+}
+
+type Brand 
+  @model @auth(rules: [{ allow: public, provider: iam }]) 
+  @key(name: "byDrSimID", fields: ["drSimID"]) {
+  id: ID!
+  drSimID: String
+  name: String!
+  description: String
+  devices: [BrandDevice]  @connection(keyName: "byBrand", fields: ["id"])
+}
+
+type BrandDevice
+  @model(queries: null)
+  @key(name: "byBrand", fields: ["brandID", "deviceID"])
+  @key(name: "byDevice", fields: ["deviceID", "brandID"]) 
+  @auth(rules: [{ allow: public, provider: iam }]) {
+  id: ID!
+  brandID: ID!
+  deviceID: ID!
+  brand: Brand! @connection(fields: ["brandID"])
+  device: Device! @connection(fields: ["deviceID"])
+}
+
+type Device 
+  @model @auth(rules: [{ allow: public, provider: iam }]) 
+  @key(name: "byDrSimID", fields: ["drSimID"]) {
+  id: ID!
+  drSimID: String
+  name: String!
+  image: String!
+  description: String
+  brands: [BrandDevice] @connection(keyName: "byDevice", fields: ["id"])
+}
+
+input CreateCountryInput {
+  id: ID
+  drSimID: String
+  name: String!
+}
+
+type Mutation {
+  batchCreateCountries (countries: [CreateCountryInput!]): [Country]
+}
