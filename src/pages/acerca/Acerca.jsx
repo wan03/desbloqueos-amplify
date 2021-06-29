@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   MDBContainer, MDBRow,
-} from '../../shared/dist/mdbreact';
+} from '../../shared/mdbreact/mdbreact';
 import { LOREM_IPSUM, PLACEHOLDER_IMAGE } from '../../shared/constants/dev';
 
 const Acerca = () => (

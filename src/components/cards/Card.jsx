@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText,
-} from '../../shared/dist/mdbreact';
+} from '../../shared/mdbreact/mdbreact';
 // eslint-disable-next-line no-unused-vars
 import { CONSTANTS, PATHS } from '../../shared/constants/Constants';
 

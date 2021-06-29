@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem,
   MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
-} from '../../shared/dist/mdbreact';
+} from '../../shared/mdbreact/mdbreact';
 import { PATHS } from '../../shared/constants/Constants';
 
 const Navbar = () => {

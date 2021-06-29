@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MDBCol, MDBContainer, MDBRow } from '../../../shared/dist/mdbreact';
+import { MDBCol, MDBContainer, MDBRow } from '../../../shared/mdbreact/mdbreact';
 import { CONSTANTS, PATHS } from '../../../shared/constants/Constants';
 import CardWithImage from '../../../components/cards/Card';
 import { getFeaturedPhones } from '../../../shared/api/getPhones';
