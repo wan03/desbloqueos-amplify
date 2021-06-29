@@ -10,7 +10,7 @@ import {
   MDBBtn,
   MDBInput,
   // MDBSelect,
-} from '../../../shared/dist/mdbreact';
+} from '../../../shared/mdbreact/mdbreact';
 import {
   formatForOptions, countries, networks, brands, devices,
 } from './desbloqueosFormUtils';

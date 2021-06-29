@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Field } from 'formik';
 import {
   MDBRow, MDBIcon, MDBBtn, MDBCol,
-} from '../../../shared/dist/mdbreact';
+} from '../../../shared/mdbreact/mdbreact';
 import Input from '../../../components/formik/input/Input';
 
 const ContactForm = ({ errors, touched }) => {

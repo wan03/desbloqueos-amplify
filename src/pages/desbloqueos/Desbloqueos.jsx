@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBContainer, Row, Col } from '../../shared/dist/mdbreact';
+import { MDBContainer, Row, Col } from '../../shared/mdbreact/mdbreact';
 import DesbloqueosForm from './form/DesbloqueosForm';
 
 const Desbloqueos = () => (

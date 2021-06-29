@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MDBRow, MDBCol, MDBIcon } from '../../../shared/dist/mdbreact';
+import { MDBRow, MDBCol, MDBIcon } from '../../../shared/mdbreact/mdbreact';
 
 const WhyUS = ({ whyUsTitle, whyUsReasons }) => (
   <section className="text-center my-5">

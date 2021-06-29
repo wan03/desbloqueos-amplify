@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MDBCol, MDBContainer, MDBRow } from '../../../shared/dist/mdbreact';
+import { MDBCol, MDBContainer, MDBRow } from '../../../shared/mdbreact/mdbreact';
 import Card from '../../../components/cards/Card';
 
 const Servicios = ({ servicioTitle, servicios }) => (

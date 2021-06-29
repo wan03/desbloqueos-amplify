@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   MDBInput,
-} from '../../../shared/dist/mdbreact';
+} from '../../../shared/mdbreact/mdbreact';
 
 const Input = ({
   name, label, placeholder, validation, ...props
