@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'bootstrap-css-only/css/bootstrap.min.css';
-import './shared/dist/css/mdb.css';
+import './shared/mdbreact/css/mdb.css';
 
 import App from './App';
 
