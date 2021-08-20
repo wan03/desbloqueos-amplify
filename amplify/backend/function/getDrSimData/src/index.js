@@ -1,6 +1,6 @@
 /* Amplify Params - DO NOT EDIT
-	ENV
-	REGION
+  ENV
+  REGION
 Amplify Params - DO NOT EDIT */
 
 import axios from 'axios';
@@ -12,61 +12,58 @@ const COUNTRIES_URL = '/countries';
 const NETWORKS_URL = '/networks';
 const BRANDS_URL = '/brands';
 const DEVICES_URL = '/devices';
-const DRSIM = 'DRSIM';
 const SANDBOX_KEY = '';
 const SANDBOX_SECRET = '';
 
 const createCountries = gql`
-  mutation BatchCreateCountries(
-    $input: [CreateCountryInput!]
-  ) {
-    createCountries(input: $input) {
-        items{
-            id
-        }      
+mutation BatchCreateCountries($countries: [CreateCountryInput!] = {name: "", drSimID: ""}) {
+  batchCreateCountries(countries: $countries) {
+    drSimID
+    id
+  }
+}
 `;
 
 const createNetworks = gql`
-  mutation CreateNetworks(
-    $input: [CreateNetworkInput!]
-  ) {
-    createCountries(input: $input) {
-        items{
-            id
-        }      
+mutation BatchCreateNetworks($networks: [CreateNetworkInput!] = {name: "", counrtyID: "ID!", drSimID: ""}) {
+  batchCreateNetworks(networks: $networks) {
+    id
+  }
+}
 `;
 
 const createBrands = gql`
-  mutation CreateBrands(
-    $input: [CreateBrandInput!]
-  ) {
-    createCountries(input: $input) {
-        items{
-            id
-        }      
+  mutation BatchCreateBrands($brands: [CreateBrandInput!] = {name: "", drSimID: "", description: ""}) {
+    batchCreateBrands(brands: $brands) {
+      id
+    }
+  }
 `;
 
 const createDevices = gql`
-  mutation CreateDevices(
-    $input: [CreateDeviceInput!]
-  ) {
-    createCountries(input: $input) {
-        items{
-            id
-        }      
+mutation BatchCreateDevices($Devices: [CreateDeviceInput!] = {brandID: "ID!", name: "", drSimID: "", image: "", description: ""}) {
+  batchCreateDevices(Devices: $Devices) {
+    id
+  }
+}   
 `;
 
 const callDRSIM = async (url) => {
-  const response = await axios.get({
-    baseUrl: DRSIM_BASE_URL,
-    url,
-    headers: {
-      DSIM_KEY: `${SANDBOX_KEY}`,
-      DSIM_SECRET: `${SANDBOX_SECRET}`,
-    },
-  });
+  try {
+    const response = await axios.get({
+      baseUrl: DRSIM_BASE_URL,
+      url,
+      headers: {
+        DSIM_KEY: `${SANDBOX_KEY}`,
+        DSIM_SECRET: `${SANDBOX_SECRET}`,
+      },
+    });
 
-  return response;
+    return response;
+  } catch (error) {
+    console.log('DRSIM error: '.error);
+    return null;
+  }
 };
 
 const getCountries = async () => {
@@ -76,11 +73,8 @@ const getCountries = async () => {
 
   const countries = countriesIDs.map((countryID) => {
     const country = {
+      drSimID: countryID,
       name: response.res[countryID],
-      providers: {
-        providerName: DRSIM,
-        providerID: countryID,
-      },
     };
 
     return country;
@@ -94,18 +88,15 @@ const getNetworks = async () => {
 
   const countryIDs = Object.keys(response.res);
 
-  const networks = countryIDs.map((countryID) => {
-    const networkIDs = Object.keys(response.res[countryID]);
-    const currentCountry = response.res[countryID];
+  const networks = countryIDs.map((countryDrSimID) => {
+    const networkIDs = Object.keys(response.res[countryDrSimID]);
+    const currentCountry = response.res[countryDrSimID];
 
     const formattedNetworks = networkIDs.map((networkID) => {
       const network = {
-        countryID,
+        countryDrSimID,
         name: currentCountry[networkID],
-        providers: {
-          providerName: DRSIM,
-          providerID: networkIDs,
-        },
+        drSimID: networkID,
       };
       return network;
     });
@@ -127,10 +118,7 @@ const getBrands = async () => {
     const brand = {
       name: currentBrand.brand,
       description: currentBrand.desc,
-      providers: {
-        providerName: DRSIM,
-        providerID: brandID,
-      },
+      drSimID: brandID,
     };
 
     return brand;
@@ -144,20 +132,18 @@ const getDevices = async () => {
 
   const brandIDs = Object.keys(response.res);
 
-  const devices = brandIDs.map((brandID) => {
-    const deviceIDs = Object.keys(response.res[brandID]);
+  const devices = brandIDs.map((brandDrSimID) => {
+    const deviceIDs = Object.keys(response.res[brandDrSimID]);
 
     const formattedDevices = deviceIDs.map((deviceID) => {
-      const currentDevice = response.res[brandID][deviceID];
+      const currentDevice = response.res[brandDrSimID][deviceID];
 
       const device = {
+        brandDrSimID,
         name: currentDevice.name,
         image: currentDevice.img,
         description: currentDevice.desc,
-        providers: {
-          providerName: DRSIM,
-          providerID: deviceID,
-        },
+        drSimID: deviceID,
       };
       return device;
     });
@@ -201,10 +187,7 @@ const insertDataIntoDatabase = async (data, query) => {
         query: print(query),
       },
       variables: {
-        input: {
-          name: 'Hello world!',
-          description: 'My first todo',
-        },
+        input: { ...data },
       },
 
     });
@@ -220,17 +203,64 @@ const insertDataIntoDatabase = async (data, query) => {
     };
   } catch (err) {
     console.log('error posting to appsync: ', err);
+    return null;
   }
 };
 
 exports.handler = async (event) => {
   // TODO implement
+  let addedCountries;
+  let addedNetworks;
+  let addedBrands;
+  let addedDevices;
+  let body;
+
+  if (event) {
+    console.log(event);
+  }
 
   const data = getData();
 
-  const body = {
-    message: 'Successfully inserted data into database!',
-  };
+  if (data.countries) {
+    addedCountries = insertDataIntoDatabase(data.countries, createCountries);
+  }
+
+  if (data.networks && addedCountries) {
+    const completeNetworks = data.networks.map((network) => {
+      const country = addedCountries
+        .find((tempCountry) => tempCountry.drSimID === network.countryDrSimID);
+      return {
+        countryID: country.id,
+        ...network,
+      };
+    });
+    addedNetworks = insertDataIntoDatabase(completeNetworks, createNetworks);
+  }
+
+  if (data.brands) {
+    addedBrands = insertDataIntoDatabase(data.brands, createBrands);
+  }
+
+  if (data.devices && addedBrands) {
+    const completeDevices = data.devices.map((device) => {
+      const brand = addedBrands.find((tempBrand) => tempBrand.drSimID === device.brandDrSimID);
+      return {
+        brandID: brand.id,
+        ...device,
+      };
+    });
+    addedDevices = insertDataIntoDatabase(completeDevices, createDevices);
+  }
+
+  if (addedCountries && addedNetworks && addedBrands && addedDevices) {
+    body = {
+      message: 'Successfully inserted data into database!',
+    };
+  } else {
+    body = {
+      message: 'There was an error inserting data into database!',
+    };
+  }
 
   return {
     statusCode: 200,
