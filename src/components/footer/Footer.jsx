@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   MDBCol, MDBContainer, MDBRow, MDBFooter,
-} from '../../shared/dist/mdbreact';
+} from '../../shared/mdbreact/mdbreact';
 import { PATHS } from '../../shared/constants/Constants';
 
 const Footer = () => (

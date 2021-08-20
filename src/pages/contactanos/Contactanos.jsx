@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import {
   MDBContainer, MDBRow, MDBIcon, MDBCard, MDBCardBody, MDBCol,
-} from '../../shared/dist/mdbreact';
+} from '../../shared/mdbreact/mdbreact';
 import { LOREM_IPSUM } from '../../shared/constants/dev';
 import ContactForm from './contactForm/ContactForm';
 

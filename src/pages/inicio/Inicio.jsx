@@ -6,7 +6,7 @@ import Servicios from './services/Services';
 import WhyUS from './whyUs/WhyUs';
 import Spinner from '../../components/spinner/Spinner';
 import { getInicio } from '../../shared/api/contentful/queries';
-import { toast, ToastContainer } from '../../shared/dist/mdbreact';
+import { toast, ToastContainer } from '../../shared/mdbreact/mdbreact';
 
 const Inicio = () => {
   const {

@@ -2,7 +2,7 @@ import React from 'react';
 import {
   MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBView,
 } from
-  '../../shared/dist/mdbreact';
+  '../../shared/mdbreact/mdbreact';
 
 const Carousel = () => (
   <MDBContainer fluid>
