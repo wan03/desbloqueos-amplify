@@ -4,28 +4,17 @@ type Country
   id: ID!
   drSimID: String
   name: String!
-  networks: [CountryNetwork] @connection(keyName: "byCountry", fields: ["id"])
+  networks: [Network] @connection(keyName: "byCountry", fields: ["id"])
 }
-
-type CountryNetwork
-  @model(queries: null)
-  @key(name: "byCountry", fields: ["countryID", "networkID"])
-  @key(name: "byNetwork", fields: ["networkID", "countryID"])
-  @auth(rules: [{ allow: public, provider: iam }]) {
-  id: ID!
-  countryID: ID!
-  networkID: ID!
-  country: Country! @connection(fields: ["countryID"])
-  network: Network! @connection(fields: ["networkID"])
-}
-
 type Network 
   @model @auth(rules: [{ allow: public, provider: iam }]) 
+  @key(name: "byCountry", fields: ["countryID", "id", "name"]) 
   @key(name: "byDrSimID", fields: ["drSimID"]) {
   id: ID!
+  countryID: ID!
   drSimID: String
   name: String!
-  countries: [CountryNetwork] @connection(keyName: "byNetwork", fields: ["id"])
+  country: Country @connection(fields: ["countryID"])
 }
 
 type Brand 
@@ -35,38 +24,57 @@ type Brand
   drSimID: String
   name: String!
   description: String
-  devices: [BrandDevice]  @connection(keyName: "byBrand", fields: ["id"])
+  devices: [Device]  @connection(keyName: "byBrand", fields: ["id"])
 }
-
-type BrandDevice
-  @model(queries: null)
-  @key(name: "byBrand", fields: ["brandID", "deviceID"])
-  @key(name: "byDevice", fields: ["deviceID", "brandID"]) 
-  @auth(rules: [{ allow: public, provider: iam }]) {
-  id: ID!
-  brandID: ID!
-  deviceID: ID!
-  brand: Brand! @connection(fields: ["brandID"])
-  device: Device! @connection(fields: ["deviceID"])
-}
-
 type Device 
-  @model @auth(rules: [{ allow: public, provider: iam }]) 
+  @model @auth(rules: [{ allow: public, provider: iam }])
+  @key(name: "byBrand", fields: ["brandID", "id", "name"]) 
   @key(name: "byDrSimID", fields: ["drSimID"]) {
   id: ID!
+  brandID: ID!
   drSimID: String
   name: String!
-  image: String!
+  image: String
   description: String
-  brands: [BrandDevice] @connection(keyName: "byDevice", fields: ["id"])
+  brand: Brand @connection(fields: ["brandID"])
 }
 
 input CreateCountryInput {
   id: ID
   drSimID: String
   name: String!
+  networks: [CreateNetworkInput]
+}
+
+input CreateNetworkInput {
+  id: ID
+  countryID: ID!
+  drSimID: String
+  name: String!
+  country: CreateCountryInput
+}
+
+input CreateBrandInput {
+  id: ID
+  drSimID: String
+  name: String!
+  description: String
+  devices: [CreateDeviceInput]
+}
+
+input CreateDeviceInput {
+  id: ID
+  brandID: ID!
+  drSimID: String
+  name: String!
+  image: String
+  description: String
+  brand: CreateBrandInput 
 }
 
 type Mutation {
   batchCreateCountries (countries: [CreateCountryInput!]): [Country]
+  batchCreateNetworks (networks: [CreateNetworkInput!]): [Network]
+  batchCreateBrands (brands: [CreateBrandInput!]): [Brand]
+  batchCreateDevices (Devices: [CreateDeviceInput!]): [Device]
 }

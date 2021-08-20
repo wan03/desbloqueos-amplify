@@ -11,6 +11,9 @@ import './shared/mdbreact/css/mdb.css';
 
 import App from './App';
 
+// eslint-disable-next-line no-unused-vars
+const BUILD_ENV = process.env.REACT_APP_BUILD_ENV || 'any-default-local-build_env';
+
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
