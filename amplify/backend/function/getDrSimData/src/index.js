@@ -13,8 +13,8 @@ const COUNTRIES_URL = '/countries';
 const NETWORKS_URL = '/networks';
 const BRANDS_URL = '/brands';
 const DEVICES_URL = '/devices';
-const SANDBOX_KEY = '';
-const SANDBOX_SECRET = '';
+const SANDBOX_KEY = process.env.SANDBOX_KEY;
+const SANDBOX_SECRET = process.env.SANDBOX_SECRET;
 
 const createCountries = gql`
 mutation BatchCreateCountries($countries: [CreateCountryInput!] = {name: "", drSimID: ""}) {
@@ -51,47 +51,51 @@ mutation BatchCreateDevices($Devices: [CreateDeviceInput!] = {brandID: "ID!", na
 
 const callDRSIM = async (url) => {
   try {
-    const response = await axios.get({
-      baseUrl: DRSIM_BASE_URL,
-      url,
+    console.log(`JDMA url` , url)
+    
+    const response = await axios({
+      url: DRSIM_BASE_URL + url,
+      method: 'get',
       headers: {
-        DSIM_KEY: `${SANDBOX_KEY}`,
-        DSIM_SECRET: `${SANDBOX_SECRET}`,
+        DSIM_KEY: SANDBOX_KEY,
+        DSIM_SECRET: SANDBOX_SECRET,
       },
     });
+    
+    console.log(`JDMA response ${url}` , response.data.res)
 
-    return response;
+    return response.data.res;
   } catch (error) {
-    console.log('DRSIM error: '.error);
+    console.log('DRSIM error: ', error);
     return null;
   }
 };
 
 const getCountries = async () => {
-  const response = callDRSIM(COUNTRIES_URL);
+  const response = await callDRSIM(COUNTRIES_URL);
 
-  const countriesIDs = Object.keys(response.res);
+  const countriesIDs = Object.keys(response);
 
   const countries = countriesIDs.map((countryID) => {
     const country = {
       drSimID: countryID,
-      name: response.res[countryID],
+      name: response[countryID],
     };
 
     return country;
   });
-
+console.log(`JDMA countries` , countries)
   return countries;
 };
 
 const getNetworks = async () => {
-  const response = callDRSIM(NETWORKS_URL);
+  const response = await callDRSIM(NETWORKS_URL);
 
-  const countryIDs = Object.keys(response.res);
+  const countryIDs = Object.keys(response);
 
   const networks = countryIDs.map((countryDrSimID) => {
-    const networkIDs = Object.keys(response.res[countryDrSimID]);
-    const currentCountry = response.res[countryDrSimID];
+    const networkIDs = Object.keys(response[countryDrSimID]);
+    const currentCountry = response[countryDrSimID];
 
     const formattedNetworks = networkIDs.map((networkID) => {
       const network = {
@@ -104,17 +108,17 @@ const getNetworks = async () => {
 
     return formattedNetworks;
   });
-
+console.log(`JDMA networks` , networks)
   return networks;
 };
 
 const getBrands = async () => {
-  const response = callDRSIM(BRANDS_URL);
+  const response = await callDRSIM(BRANDS_URL);
 
-  const brandIDs = Object.keys(response.res);
+  const brandIDs = Object.keys(response);
 
   const brands = brandIDs.map((brandID) => {
-    const currentBrand = response.res[brandID];
+    const currentBrand = response[brandID];
 
     const brand = {
       name: currentBrand.brand,
@@ -124,20 +128,20 @@ const getBrands = async () => {
 
     return brand;
   });
-
+console.log(`JDMA brands` , brands)
   return brands;
 };
 
 const getDevices = async () => {
-  const response = callDRSIM(DEVICES_URL);
+  const response = await callDRSIM(DEVICES_URL);
 
-  const brandIDs = Object.keys(response.res);
+  const brandIDs = Object.keys(response);
 
   const devices = brandIDs.map((brandDrSimID) => {
-    const deviceIDs = Object.keys(response.res[brandDrSimID]);
+    const deviceIDs = Object.keys(response[brandDrSimID]);
 
     const formattedDevices = deviceIDs.map((deviceID) => {
-      const currentDevice = response.res[brandDrSimID][deviceID];
+      const currentDevice = response[brandDrSimID][deviceID];
 
       const device = {
         brandDrSimID,
@@ -151,26 +155,30 @@ const getDevices = async () => {
 
     return formattedDevices;
   });
-
+console.log(`JDMA devices` , devices)
   return devices;
 };
 
-const getData = () => {
+const getData = async () => {
   try {
-    const countries = getCountries();
+    const countries = await getCountries();
+    console.log(`JDMA getData countries` , countries)
 
-    const networks = getNetworks();
+    const networks = await getNetworks();
+    console.log(`JDMA getData networks` , networks)
 
-    const brands = getBrands();
+    const brands = await getBrands();
+    console.log(`JDMA getData brands` , brands)
 
-    const devices = getDevices();
+    const devices = await getDevices();
+    console.log(`JDMA getData devices` , devices)
 
     return {
       countries, networks, brands, devices,
     };
   } catch (error) {
     // TODO: Handle Error
-    console.error(error);
+    console.error('getData error: ',error);
 
     return 'ERROR';
   }
@@ -178,6 +186,9 @@ const getData = () => {
 
 const insertDataIntoDatabase = async (data, query) => {
   try {
+    console.log(`JDMA insertDataIntoDatabase process.env.API_URL` , process.env.API_URL)
+    console.log(`JDMA insertDataIntoDatabase data` , data)
+    console.log(`JDMA insertDataIntoDatabase query` , query)
     const graphqlData = await axios({
       url: process.env.API_URL,
       method: 'post',
@@ -192,9 +203,11 @@ const insertDataIntoDatabase = async (data, query) => {
       },
 
     });
+    console.log(`JDMA graphqlData` , graphqlData)
     const body = {
       graphqlData,
     };
+    console.log(`JDMA body` , body)
     return {
       statusCode: 200,
       body: JSON.stringify(body),
@@ -217,13 +230,14 @@ exports.handler = async (event) => {
   let body;
 
   if (event) {
-    console.log(event);
+    console.log('This is the event: ',event);
   }
 
-  const data = getData();
+  const data = await getData();
 
   if (data.countries) {
-    addedCountries = insertDataIntoDatabase(data.countries, createCountries);
+    addedCountries = await insertDataIntoDatabase(data.countries, createCountries);
+    console.log(`JDMA addedCountries` , addedCountries)
   }
 
   if (data.networks && addedCountries) {
@@ -235,11 +249,13 @@ exports.handler = async (event) => {
         ...network,
       };
     });
-    addedNetworks = insertDataIntoDatabase(completeNetworks, createNetworks);
+    addedNetworks = await insertDataIntoDatabase(completeNetworks, createNetworks);
+    console.log(`JDMA addedNetworks` , addedNetworks)
   }
 
   if (data.brands) {
-    addedBrands = insertDataIntoDatabase(data.brands, createBrands);
+    addedBrands = await insertDataIntoDatabase(data.brands, createBrands);
+    console.log(`JDMA addedBrands` , addedBrands)
   }
 
   if (data.devices && addedBrands) {
@@ -250,7 +266,8 @@ exports.handler = async (event) => {
         ...device,
       };
     });
-    addedDevices = insertDataIntoDatabase(completeDevices, createDevices);
+    addedDevices = await insertDataIntoDatabase(completeDevices, createDevices);
+    console.log(`JDMA addedDevices` , addedDevices)
   }
 
   if (addedCountries && addedNetworks && addedBrands && addedDevices) {
@@ -262,7 +279,7 @@ exports.handler = async (event) => {
       message: 'There was an error inserting data into database!',
     };
   }
-
+console.log(`JDMA body` , body)
   return {
     statusCode: 200,
     body: JSON.stringify(body),
