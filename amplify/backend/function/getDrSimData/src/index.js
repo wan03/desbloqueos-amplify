@@ -3,9 +3,10 @@
   REGION
 Amplify Params - DO NOT EDIT */
 
-import axios from 'axios';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
+const axios = require('axios');
+const gql = require('axgraphql-tagios');
+const graphql = require('graphql');
+const { print } = graphql;
 
 const DRSIM_BASE_URL = 'https://api.doctorsim.com';
 const COUNTRIES_URL = '/countries';
