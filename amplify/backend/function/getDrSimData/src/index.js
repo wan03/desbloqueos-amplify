@@ -4,7 +4,7 @@
 Amplify Params - DO NOT EDIT */
 
 const axios = require('axios');
-const gql = require('axgraphql-tagios');
+const gql = require('graphql-tag');
 const graphql = require('graphql');
 const { print } = graphql;
 
