@@ -11,7 +11,8 @@ export const getCountry = /* GraphQL */ `
         items {
           id
           countryID
-          networkID
+          drSimID
+          name
           createdAt
           updatedAt
         }
@@ -47,17 +48,18 @@ export const getNetwork = /* GraphQL */ `
   query GetNetwork($id: ID!) {
     getNetwork(id: $id) {
       id
+      countryID
       drSimID
       name
-      countries {
-        items {
-          id
-          countryID
-          networkID
-          createdAt
-          updatedAt
+      country {
+        id
+        drSimID
+        name
+        networks {
+          nextToken
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -73,10 +75,15 @@ export const listNetworks = /* GraphQL */ `
     listNetworks(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        countryID
         drSimID
         name
-        countries {
-          nextToken
+        country {
+          id
+          drSimID
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -96,7 +103,10 @@ export const getBrand = /* GraphQL */ `
         items {
           id
           brandID
-          deviceID
+          drSimID
+          name
+          image
+          description
           createdAt
           updatedAt
         }
@@ -133,19 +143,21 @@ export const getDevice = /* GraphQL */ `
   query GetDevice($id: ID!) {
     getDevice(id: $id) {
       id
+      brandID
       drSimID
       name
       image
       description
-      brands {
-        items {
-          id
-          brandID
-          deviceID
-          createdAt
-          updatedAt
+      brand {
+        id
+        drSimID
+        name
+        description
+        devices {
+          nextToken
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -161,12 +173,18 @@ export const listDevices = /* GraphQL */ `
     listDevices(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        brandID
         drSimID
         name
         image
         description
-        brands {
-          nextToken
+        brand {
+          id
+          drSimID
+          name
+          description
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt

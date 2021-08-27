@@ -1,4 +1,13 @@
 {
-  "permissions": {},
+  "permissions": {
+    "api": {
+      "UNLOCKSERVICE": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
   "lambdaLayers": []
 }

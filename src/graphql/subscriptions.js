@@ -11,7 +11,8 @@ export const onCreateCountry = /* GraphQL */ `
         items {
           id
           countryID
-          networkID
+          drSimID
+          name
           createdAt
           updatedAt
         }
@@ -32,7 +33,8 @@ export const onUpdateCountry = /* GraphQL */ `
         items {
           id
           countryID
-          networkID
+          drSimID
+          name
           createdAt
           updatedAt
         }
@@ -53,104 +55,12 @@ export const onDeleteCountry = /* GraphQL */ `
         items {
           id
           countryID
-          networkID
+          drSimID
+          name
           createdAt
           updatedAt
         }
         nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateCountryNetwork = /* GraphQL */ `
-  subscription OnCreateCountryNetwork {
-    onCreateCountryNetwork {
-      id
-      countryID
-      networkID
-      country {
-        id
-        drSimID
-        name
-        networks {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      network {
-        id
-        drSimID
-        name
-        countries {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateCountryNetwork = /* GraphQL */ `
-  subscription OnUpdateCountryNetwork {
-    onUpdateCountryNetwork {
-      id
-      countryID
-      networkID
-      country {
-        id
-        drSimID
-        name
-        networks {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      network {
-        id
-        drSimID
-        name
-        countries {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteCountryNetwork = /* GraphQL */ `
-  subscription OnDeleteCountryNetwork {
-    onDeleteCountryNetwork {
-      id
-      countryID
-      networkID
-      country {
-        id
-        drSimID
-        name
-        networks {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      network {
-        id
-        drSimID
-        name
-        countries {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
       createdAt
       updatedAt
@@ -161,17 +71,18 @@ export const onCreateNetwork = /* GraphQL */ `
   subscription OnCreateNetwork {
     onCreateNetwork {
       id
+      countryID
       drSimID
       name
-      countries {
-        items {
-          id
-          countryID
-          networkID
-          createdAt
-          updatedAt
+      country {
+        id
+        drSimID
+        name
+        networks {
+          nextToken
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -182,17 +93,18 @@ export const onUpdateNetwork = /* GraphQL */ `
   subscription OnUpdateNetwork {
     onUpdateNetwork {
       id
+      countryID
       drSimID
       name
-      countries {
-        items {
-          id
-          countryID
-          networkID
-          createdAt
-          updatedAt
+      country {
+        id
+        drSimID
+        name
+        networks {
+          nextToken
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -203,17 +115,18 @@ export const onDeleteNetwork = /* GraphQL */ `
   subscription OnDeleteNetwork {
     onDeleteNetwork {
       id
+      countryID
       drSimID
       name
-      countries {
-        items {
-          id
-          countryID
-          networkID
-          createdAt
-          updatedAt
+      country {
+        id
+        drSimID
+        name
+        networks {
+          nextToken
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -231,7 +144,10 @@ export const onCreateBrand = /* GraphQL */ `
         items {
           id
           brandID
-          deviceID
+          drSimID
+          name
+          image
+          description
           createdAt
           updatedAt
         }
@@ -253,7 +169,10 @@ export const onUpdateBrand = /* GraphQL */ `
         items {
           id
           brandID
-          deviceID
+          drSimID
+          name
+          image
+          description
           createdAt
           updatedAt
         }
@@ -275,113 +194,14 @@ export const onDeleteBrand = /* GraphQL */ `
         items {
           id
           brandID
-          deviceID
+          drSimID
+          name
+          image
+          description
           createdAt
           updatedAt
         }
         nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateBrandDevice = /* GraphQL */ `
-  subscription OnCreateBrandDevice {
-    onCreateBrandDevice {
-      id
-      brandID
-      deviceID
-      brand {
-        id
-        drSimID
-        name
-        description
-        devices {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      device {
-        id
-        drSimID
-        name
-        image
-        description
-        brands {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateBrandDevice = /* GraphQL */ `
-  subscription OnUpdateBrandDevice {
-    onUpdateBrandDevice {
-      id
-      brandID
-      deviceID
-      brand {
-        id
-        drSimID
-        name
-        description
-        devices {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      device {
-        id
-        drSimID
-        name
-        image
-        description
-        brands {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteBrandDevice = /* GraphQL */ `
-  subscription OnDeleteBrandDevice {
-    onDeleteBrandDevice {
-      id
-      brandID
-      deviceID
-      brand {
-        id
-        drSimID
-        name
-        description
-        devices {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      device {
-        id
-        drSimID
-        name
-        image
-        description
-        brands {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
       createdAt
       updatedAt
@@ -392,19 +212,21 @@ export const onCreateDevice = /* GraphQL */ `
   subscription OnCreateDevice {
     onCreateDevice {
       id
+      brandID
       drSimID
       name
       image
       description
-      brands {
-        items {
-          id
-          brandID
-          deviceID
-          createdAt
-          updatedAt
+      brand {
+        id
+        drSimID
+        name
+        description
+        devices {
+          nextToken
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -415,19 +237,21 @@ export const onUpdateDevice = /* GraphQL */ `
   subscription OnUpdateDevice {
     onUpdateDevice {
       id
+      brandID
       drSimID
       name
       image
       description
-      brands {
-        items {
-          id
-          brandID
-          deviceID
-          createdAt
-          updatedAt
+      brand {
+        id
+        drSimID
+        name
+        description
+        devices {
+          nextToken
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -438,19 +262,21 @@ export const onDeleteDevice = /* GraphQL */ `
   subscription OnDeleteDevice {
     onDeleteDevice {
       id
+      brandID
       drSimID
       name
       image
       description
-      brands {
-        items {
-          id
-          brandID
-          deviceID
-          createdAt
-          updatedAt
+      brand {
+        id
+        drSimID
+        name
+        description
+        devices {
+          nextToken
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt

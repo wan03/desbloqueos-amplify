@@ -1,20 +1,20 @@
 /* Amplify Params - DO NOT EDIT
-  ENV
-  REGION
+	API_UNLOCKSERVICE_GRAPHQLAPIENDPOINTOUTPUT
+	API_UNLOCKSERVICE_GRAPHQLAPIIDOUTPUT
+	ENV
+	REGION
 Amplify Params - DO NOT EDIT */
 
 const AWS = require("aws-sdk");
 const https = require('https');
-// const urlParse = require("url").Url;
-// const gql = require('graphql-tag');
 const axios = require('axios');
-const appsyncUrl = 'https://jttucitmujegbany3tmhitrg4a.appsync-api.us-east-2.amazonaws.com';
+const appsyncUrl = API_UNLOCKSERVICE_GRAPHQLAPIENDPOINTOUTPUT;
 console.log('JDMA response appsyncUrl', appsyncUrl)
 const region = process.env.REGION;
 console.log('JDMA response region', region)
-const apiKey = process.env.API_unlockService_GRAPHQLAPIKEYOUTPUT;
+const apiKey = process.env.API_UNLOCKSERVICE_GRAPHQLAPIKEYOUTPUT;
 console.log('JDMA response apiKey', apiKey)
-const endpoint = 'jttucitmujegbany3tmhitrg4a.appsync-api.us-east-2.amazonaws.com'
+const endpoint = new URL(appsyncUrl).hostname;
 console.log('JDMA response endpoint', endpoint)
 
 
