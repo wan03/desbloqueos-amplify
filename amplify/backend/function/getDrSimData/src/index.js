@@ -3,10 +3,20 @@
   REGION
 Amplify Params - DO NOT EDIT */
 
+const AWS = require("aws-sdk");
+const https = require('https');
+// const urlParse = require("url").Url;
+// const gql = require('graphql-tag');
 const axios = require('axios');
-const gql = require('graphql-tag');
-const graphql = require('graphql');
-const { print } = graphql;
+const appsyncUrl = 'https://jttucitmujegbany3tmhitrg4a.appsync-api.us-east-2.amazonaws.com';
+console.log('JDMA response appsyncUrl', appsyncUrl)
+const region = process.env.REGION;
+console.log('JDMA response region', region)
+const apiKey = process.env.API_unlockService_GRAPHQLAPIKEYOUTPUT;
+console.log('JDMA response apiKey', apiKey)
+const endpoint = 'jttucitmujegbany3tmhitrg4a.appsync-api.us-east-2.amazonaws.com'
+console.log('JDMA response endpoint', endpoint)
+
 
 const DRSIM_BASE_URL = 'https://api.doctorsim.com';
 const COUNTRIES_URL = '/countries';
@@ -16,7 +26,7 @@ const DEVICES_URL = '/devices';
 const SANDBOX_KEY = process.env.SANDBOX_KEY;
 const SANDBOX_SECRET = process.env.SANDBOX_SECRET;
 
-const createCountries = gql`
+const createCountries = `
 mutation BatchCreateCountries($countries: [CreateCountryInput!] = {name: "", drSimID: ""}) {
   batchCreateCountries(countries: $countries) {
     drSimID
@@ -25,7 +35,7 @@ mutation BatchCreateCountries($countries: [CreateCountryInput!] = {name: "", drS
 }
 `;
 
-const createNetworks = gql`
+const createNetworks = `
 mutation BatchCreateNetworks($networks: [CreateNetworkInput!] = {name: "", counrtyID: "ID!", drSimID: ""}) {
   batchCreateNetworks(networks: $networks) {
     id
@@ -33,7 +43,7 @@ mutation BatchCreateNetworks($networks: [CreateNetworkInput!] = {name: "", counr
 }
 `;
 
-const createBrands = gql`
+const createBrands = `
   mutation BatchCreateBrands($brands: [CreateBrandInput!] = {name: "", drSimID: "", description: ""}) {
     batchCreateBrands(brands: $brands) {
       id
@@ -41,7 +51,7 @@ const createBrands = gql`
   }
 `;
 
-const createDevices = gql`
+const createDevices = `
 mutation BatchCreateDevices($Devices: [CreateDeviceInput!] = {brandID: "ID!", name: "", drSimID: "", image: "", description: ""}) {
   batchCreateDevices(Devices: $Devices) {
     id
@@ -49,10 +59,10 @@ mutation BatchCreateDevices($Devices: [CreateDeviceInput!] = {brandID: "ID!", na
 }   
 `;
 
-const callDRSIM = async (url) => {
+const callDRSIM = async(url) => {
   try {
-    console.log(`JDMA url` , url)
-    
+    console.log(`JDMA url`, url)
+
     const response = await axios({
       url: DRSIM_BASE_URL + url,
       method: 'get',
@@ -61,17 +71,18 @@ const callDRSIM = async (url) => {
         DSIM_SECRET: SANDBOX_SECRET,
       },
     });
-    
-    console.log(`JDMA response ${url}` , response.data.res)
+
+    console.log(`JDMA response ${url}`, response.data.res)
 
     return response.data.res;
-  } catch (error) {
+  }
+  catch (error) {
     console.log('DRSIM error: ', error);
     return null;
   }
 };
 
-const getCountries = async () => {
+const getCountries = async() => {
   const response = await callDRSIM(COUNTRIES_URL);
 
   const countriesIDs = Object.keys(response);
@@ -84,11 +95,11 @@ const getCountries = async () => {
 
     return country;
   });
-console.log(`JDMA countries` , countries)
+  console.log(`JDMA countries`, countries)
   return countries;
 };
 
-const getNetworks = async () => {
+const getNetworks = async() => {
   const response = await callDRSIM(NETWORKS_URL);
 
   const countryIDs = Object.keys(response);
@@ -108,11 +119,11 @@ const getNetworks = async () => {
 
     return formattedNetworks;
   });
-console.log(`JDMA networks` , networks)
+  console.log(`JDMA networks`, networks)
   return networks;
 };
 
-const getBrands = async () => {
+const getBrands = async() => {
   const response = await callDRSIM(BRANDS_URL);
 
   const brandIDs = Object.keys(response);
@@ -128,11 +139,11 @@ const getBrands = async () => {
 
     return brand;
   });
-console.log(`JDMA brands` , brands)
+  console.log(`JDMA brands`, brands)
   return brands;
 };
 
-const getDevices = async () => {
+const getDevices = async() => {
   const response = await callDRSIM(DEVICES_URL);
 
   const brandIDs = Object.keys(response);
@@ -155,73 +166,124 @@ const getDevices = async () => {
 
     return formattedDevices;
   });
-console.log(`JDMA devices` , devices)
+  console.log(`JDMA devices`, devices)
   return devices;
 };
 
-const getData = async () => {
+const getData = async() => {
   try {
     const countries = await getCountries();
-    console.log(`JDMA getData countries` , countries)
+    console.log(`JDMA getData countries`, countries)
 
     const networks = await getNetworks();
-    console.log(`JDMA getData networks` , networks)
+    console.log(`JDMA getData networks`, networks)
 
     const brands = await getBrands();
-    console.log(`JDMA getData brands` , brands)
+    console.log(`JDMA getData brands`, brands)
 
     const devices = await getDevices();
-    console.log(`JDMA getData devices` , devices)
+    console.log(`JDMA getData devices`, devices)
 
     return {
-      countries, networks, brands, devices,
+      countries,
+      networks,
+      brands,
+      devices,
     };
-  } catch (error) {
+  }
+  catch (error) {
     // TODO: Handle Error
-    console.error('getData error: ',error);
+    console.error('getData error: ', error);
 
     return 'ERROR';
   }
 };
 
-const insertDataIntoDatabase = async (data, query) => {
-  try {
-    console.log(`JDMA insertDataIntoDatabase process.env.API_URL` , process.env.API_URL)
-    console.log(`JDMA insertDataIntoDatabase data` , data)
-    console.log(`JDMA insertDataIntoDatabase query` , query)
-    const graphqlData = await axios({
-      url: process.env.API_URL,
-      method: 'post',
-      headers: {
-        'x-api-key': process.env.API_unlockService_GRAPHQLAPIKEYOUTPUT,
-      },
-      data: {
-        query: print(query),
-      },
-      variables: {
-        input: { ...data },
-      },
+const insertDataIntoDatabase = async(data, query) => {
+  const req = new AWS.HttpRequest(appsyncUrl, region);
 
-    });
-    console.log(`JDMA graphqlData` , graphqlData)
-    const body = {
-      graphqlData,
-    };
-    console.log(`JDMA body` , body)
-    return {
-      statusCode: 200,
-      body: JSON.stringify(body),
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    };
-  } catch (err) {
-    console.log('error posting to appsync: ', err);
-    return null;
+  const item = {
+    input: {
+      ...data
+    }
+  };
+
+  req.method = "POST";
+  req.path = "/graphql";
+  req.headers.host = endpoint;
+  req.headers["Content-Type"] = "application/json";
+  req.body = JSON.stringify({
+    query: query,
+    // operationName: "createTodo",
+    variables: item
+  });
+
+  if (apiKey) {
+    req.headers["x-api-key"] = apiKey;
   }
+  else {
+    const signer = new AWS.Signers.V4(req, "appsync", true);
+    signer.addAuthorization(AWS.config.credentials, AWS.util.date.getDate());
+  }
+
+  const response = await new Promise((resolve, reject) => {
+    const httpRequest = https.request({ ...req, host: endpoint }, (result) => {
+      let data = "";
+
+      result.on("data", (chunk) => {
+        data += chunk;
+      });
+
+      result.on("end", () => {
+        resolve(JSON.parse(data.toString()));
+      });
+    });
+
+    httpRequest.write(req.body);
+    httpRequest.end();
+  });
+
+  console.log(`JDMA getData response`, response)
+
+  return response;
+
+  // try {
+  //   console.log(`JDMA insertDataIntoDatabase process.env.API_URL` , process.env.API_URL)
+  //   console.log(`JDMA insertDataIntoDatabase data` , data)
+  //   console.log(`JDMA insertDataIntoDatabase query` , query)
+  //   const graphqlData = await axios({
+  //     url: process.env.API_URL,
+  //     method: 'post',
+  //     headers: {
+  //       'x-api-key': process.env.API_unlockService_GRAPHQLAPIKEYOUTPUT,
+  //     },
+  //     data: {
+  //       query: print(query),
+  //     },
+  //     variables: {
+  //       input: { ...data },
+  //     },
+
+  //   });
+  //   console.log(`JDMA graphqlData` , graphqlData)
+  //   const body = {
+  //     graphqlData,
+  //   };
+  //   console.log(`JDMA body` , body)
+  //   return {
+  //     statusCode: 200,
+  //     body: JSON.stringify(body),
+  //     headers: {
+  //       'Access-Control-Allow-Origin': '*',
+  //     },
+  //   };
+  // } catch (err) {
+  //   console.log('error posting to appsync: ', err);
+  //   return null;
+  // }
 };
 
-exports.handler = async (event) => {
+exports.handler = async(event) => {
   // TODO implement
   let addedCountries;
   let addedNetworks;
@@ -230,14 +292,14 @@ exports.handler = async (event) => {
   let body;
 
   if (event) {
-    console.log('This is the event: ',event);
+    console.log('This is the event: ', event);
   }
 
   const data = await getData();
 
   if (data.countries) {
     addedCountries = await insertDataIntoDatabase(data.countries, createCountries);
-    console.log(`JDMA addedCountries` , addedCountries)
+    console.log(`JDMA addedCountries`, addedCountries)
   }
 
   if (data.networks && addedCountries) {
@@ -250,12 +312,12 @@ exports.handler = async (event) => {
       };
     });
     addedNetworks = await insertDataIntoDatabase(completeNetworks, createNetworks);
-    console.log(`JDMA addedNetworks` , addedNetworks)
+    console.log(`JDMA addedNetworks`, addedNetworks)
   }
 
   if (data.brands) {
     addedBrands = await insertDataIntoDatabase(data.brands, createBrands);
-    console.log(`JDMA addedBrands` , addedBrands)
+    console.log(`JDMA addedBrands`, addedBrands)
   }
 
   if (data.devices && addedBrands) {
@@ -267,19 +329,20 @@ exports.handler = async (event) => {
       };
     });
     addedDevices = await insertDataIntoDatabase(completeDevices, createDevices);
-    console.log(`JDMA addedDevices` , addedDevices)
+    console.log(`JDMA addedDevices`, addedDevices)
   }
 
   if (addedCountries && addedNetworks && addedBrands && addedDevices) {
     body = {
       message: 'Successfully inserted data into database!',
     };
-  } else {
+  }
+  else {
     body = {
       message: 'There was an error inserting data into database!',
     };
   }
-console.log(`JDMA body` , body)
+  console.log(`JDMA body`, body)
   return {
     statusCode: 200,
     body: JSON.stringify(body),
