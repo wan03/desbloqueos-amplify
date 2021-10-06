@@ -11,6 +11,7 @@ export const getCountry = /* GraphQL */ `
         items {
           id
           countryID
+          countryDrSimID
           drSimID
           name
           createdAt
@@ -49,6 +50,7 @@ export const getNetwork = /* GraphQL */ `
     getNetwork(id: $id) {
       id
       countryID
+      countryDrSimID
       drSimID
       name
       country {
@@ -76,6 +78,7 @@ export const listNetworks = /* GraphQL */ `
       items {
         id
         countryID
+        countryDrSimID
         drSimID
         name
         country {
@@ -104,6 +107,7 @@ export const getBrand = /* GraphQL */ `
           id
           brandID
           drSimID
+          brandDrSimID
           name
           image
           description
@@ -145,6 +149,7 @@ export const getDevice = /* GraphQL */ `
       id
       brandID
       drSimID
+      brandDrSimID
       name
       image
       description
@@ -175,6 +180,7 @@ export const listDevices = /* GraphQL */ `
         id
         brandID
         drSimID
+        brandDrSimID
         name
         image
         description

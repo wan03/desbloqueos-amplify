@@ -294,11 +294,9 @@ const InsertData = (data) => {
         return 'There was an error getting data from drSim!'
     }
 
-    if (data.countries) {
-        const batchCountries = splitEvery25(data.countries)
-        console.log(`JDMA batchCountries`, batchCountries)        
+    if (data.countries) {     
 
-        addedCountries = batchCreate({data: batchCountries, mutation: createCountries, type: countries, fieldName: 'batchCreateCountries'})
+        addedCountries = batchCreate({data: data.countries, mutation: createCountries, type: countries, fieldName: 'batchCreateCountries'})
         console.log(`JDMA addedCountries`, addedCountries)
     }
 
@@ -308,20 +306,13 @@ const InsertData = (data) => {
 
         const completeNetworks = insertParentID(rawNetworks)
 
-        const batchNetworks = splitEvery25(completeNetworks)
-        console.log(`JDMA batchNetworks`, batchNetworks)
-        
-        addedNetworks = batchCreate({data: batchNetworks, mutation: createNetworks, type: networks, fieldName: 'batchCreateNetworks'})
+        addedNetworks = batchCreate({data: completeNetworks, mutation: createNetworks, type: networks, fieldName: 'batchCreateNetworks'})
         console.log(`JDMA addedNetworks`, addedNetworks)
     }
 
     if (data.brands) {
 
-        const batchBrands = splitEvery25(data.brands)
-        console.log(`JDMA batchBrands`, batchBrands)
-
-
-        addedBrands = batchCreate({data: batchBrands, mutation: createBrands, type: brands, fieldName: 'batchCreateBrands'})
+        addedBrands = batchCreate({data: data.brands, mutation: createBrands, type: brands, fieldName: 'batchCreateBrands'})
         console.log(`JDMA addedBrands`, addedBrands)
     }
 
@@ -331,10 +322,7 @@ const InsertData = (data) => {
         
         const completeDevices = insertParentID(rawDevices)
 
-        const batchDevices = splitEvery25(completeDevices)
-        console.log(`JDMA batchDevices`, batchDevices)
-
-        addedDevices = batchCreate({data: batchDevices, mutation: createDevices, type: devices, fieldName: 'batchCreateDevices'})
+        addedDevices = batchCreate({data: completeDevices, mutation: createDevices, type: devices, fieldName: 'batchCreateDevices'})
         console.log(`JDMA addedDevices`, addedDevices)
     }
 

@@ -11,6 +11,7 @@ export const onCreateCountry = /* GraphQL */ `
         items {
           id
           countryID
+          countryDrSimID
           drSimID
           name
           createdAt
@@ -33,6 +34,7 @@ export const onUpdateCountry = /* GraphQL */ `
         items {
           id
           countryID
+          countryDrSimID
           drSimID
           name
           createdAt
@@ -55,6 +57,7 @@ export const onDeleteCountry = /* GraphQL */ `
         items {
           id
           countryID
+          countryDrSimID
           drSimID
           name
           createdAt
@@ -72,6 +75,7 @@ export const onCreateNetwork = /* GraphQL */ `
     onCreateNetwork {
       id
       countryID
+      countryDrSimID
       drSimID
       name
       country {
@@ -94,6 +98,7 @@ export const onUpdateNetwork = /* GraphQL */ `
     onUpdateNetwork {
       id
       countryID
+      countryDrSimID
       drSimID
       name
       country {
@@ -116,6 +121,7 @@ export const onDeleteNetwork = /* GraphQL */ `
     onDeleteNetwork {
       id
       countryID
+      countryDrSimID
       drSimID
       name
       country {
@@ -145,6 +151,7 @@ export const onCreateBrand = /* GraphQL */ `
           id
           brandID
           drSimID
+          brandDrSimID
           name
           image
           description
@@ -170,6 +177,7 @@ export const onUpdateBrand = /* GraphQL */ `
           id
           brandID
           drSimID
+          brandDrSimID
           name
           image
           description
@@ -195,6 +203,7 @@ export const onDeleteBrand = /* GraphQL */ `
           id
           brandID
           drSimID
+          brandDrSimID
           name
           image
           description
@@ -214,6 +223,7 @@ export const onCreateDevice = /* GraphQL */ `
       id
       brandID
       drSimID
+      brandDrSimID
       name
       image
       description
@@ -239,6 +249,7 @@ export const onUpdateDevice = /* GraphQL */ `
       id
       brandID
       drSimID
+      brandDrSimID
       name
       image
       description
@@ -264,6 +275,7 @@ export const onDeleteDevice = /* GraphQL */ `
       id
       brandID
       drSimID
+      brandDrSimID
       name
       image
       description

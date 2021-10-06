@@ -11,6 +11,7 @@ export const batchCreateCountries = /* GraphQL */ `
         items {
           id
           countryID
+          countryDrSimID
           drSimID
           name
           createdAt
@@ -28,6 +29,7 @@ export const batchCreateNetworks = /* GraphQL */ `
     batchCreateNetworks(networks: $networks) {
       id
       countryID
+      countryDrSimID
       drSimID
       name
       country {
@@ -57,6 +59,7 @@ export const batchCreateBrands = /* GraphQL */ `
           id
           brandID
           drSimID
+          brandDrSimID
           name
           image
           description
@@ -71,11 +74,12 @@ export const batchCreateBrands = /* GraphQL */ `
   }
 `;
 export const batchCreateDevices = /* GraphQL */ `
-  mutation BatchCreateDevices($Devices: [CreateDeviceInput!]) {
-    batchCreateDevices(Devices: $Devices) {
+  mutation BatchCreateDevices($devices: [CreateDeviceInput!]) {
+    batchCreateDevices(devices: $devices) {
       id
       brandID
       drSimID
+      brandDrSimID
       name
       image
       description
@@ -108,6 +112,7 @@ export const createCountry = /* GraphQL */ `
         items {
           id
           countryID
+          countryDrSimID
           drSimID
           name
           createdAt
@@ -133,6 +138,7 @@ export const updateCountry = /* GraphQL */ `
         items {
           id
           countryID
+          countryDrSimID
           drSimID
           name
           createdAt
@@ -158,6 +164,7 @@ export const deleteCountry = /* GraphQL */ `
         items {
           id
           countryID
+          countryDrSimID
           drSimID
           name
           createdAt
@@ -178,6 +185,7 @@ export const createNetwork = /* GraphQL */ `
     createNetwork(input: $input, condition: $condition) {
       id
       countryID
+      countryDrSimID
       drSimID
       name
       country {
@@ -203,6 +211,7 @@ export const updateNetwork = /* GraphQL */ `
     updateNetwork(input: $input, condition: $condition) {
       id
       countryID
+      countryDrSimID
       drSimID
       name
       country {
@@ -228,6 +237,7 @@ export const deleteNetwork = /* GraphQL */ `
     deleteNetwork(input: $input, condition: $condition) {
       id
       countryID
+      countryDrSimID
       drSimID
       name
       country {
@@ -260,6 +270,7 @@ export const createBrand = /* GraphQL */ `
           id
           brandID
           drSimID
+          brandDrSimID
           name
           image
           description
@@ -288,6 +299,7 @@ export const updateBrand = /* GraphQL */ `
           id
           brandID
           drSimID
+          brandDrSimID
           name
           image
           description
@@ -316,6 +328,7 @@ export const deleteBrand = /* GraphQL */ `
           id
           brandID
           drSimID
+          brandDrSimID
           name
           image
           description
@@ -338,6 +351,7 @@ export const createDevice = /* GraphQL */ `
       id
       brandID
       drSimID
+      brandDrSimID
       name
       image
       description
@@ -366,6 +380,7 @@ export const updateDevice = /* GraphQL */ `
       id
       brandID
       drSimID
+      brandDrSimID
       name
       image
       description
@@ -394,6 +409,7 @@ export const deleteDevice = /* GraphQL */ `
       id
       brandID
       drSimID
+      brandDrSimID
       name
       image
       description
