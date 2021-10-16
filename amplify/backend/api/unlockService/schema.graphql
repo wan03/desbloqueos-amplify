@@ -5,6 +5,7 @@ type Country
   drSimID: String
   name: String!
   networks: [Network] @connection(keyName: "byCountry", fields: ["id"])
+  expirationTime: AWSTimestamp! @ttl
 }
 type Network 
   @model @auth(rules: [{ allow: public, provider: iam }])
@@ -15,6 +16,7 @@ type Network
   drSimID: String
   name: String!
   country: Country @connection(fields: ["countryID"])
+  expirationTime: AWSTimestamp! @ttl
 }
 
 type Brand 
@@ -25,6 +27,7 @@ type Brand
   name: String!
   description: String
   devices: [Device]  @connection(keyName: "byBrand", fields: ["id"])
+  expirationTime: AWSTimestamp! @ttl
 }
 type Device 
   @model @auth(rules: [{ allow: public, provider: iam }])
@@ -37,6 +40,7 @@ type Device
   image: String
   description: String
   brand: Brand @connection(fields: ["brandID"])
+  expirationTime: AWSTimestamp! @ttl
 }
 
 input CreateCountryInput {

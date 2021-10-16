@@ -14,11 +14,13 @@ export const onCreateCountry = /* GraphQL */ `
           countryDrSimID
           drSimID
           name
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -37,11 +39,13 @@ export const onUpdateCountry = /* GraphQL */ `
           countryDrSimID
           drSimID
           name
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -60,11 +64,13 @@ export const onDeleteCountry = /* GraphQL */ `
           countryDrSimID
           drSimID
           name
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -85,9 +91,11 @@ export const onCreateNetwork = /* GraphQL */ `
         networks {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -108,9 +116,11 @@ export const onUpdateNetwork = /* GraphQL */ `
         networks {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -131,9 +141,11 @@ export const onDeleteNetwork = /* GraphQL */ `
         networks {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -155,11 +167,13 @@ export const onCreateBrand = /* GraphQL */ `
           name
           image
           description
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -181,11 +195,13 @@ export const onUpdateBrand = /* GraphQL */ `
           name
           image
           description
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -207,11 +223,13 @@ export const onDeleteBrand = /* GraphQL */ `
           name
           image
           description
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -235,9 +253,11 @@ export const onCreateDevice = /* GraphQL */ `
         devices {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -261,9 +281,11 @@ export const onUpdateDevice = /* GraphQL */ `
         devices {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -287,9 +309,11 @@ export const onDeleteDevice = /* GraphQL */ `
         devices {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }

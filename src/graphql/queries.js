@@ -14,11 +14,13 @@ export const getCountry = /* GraphQL */ `
           countryDrSimID
           drSimID
           name
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -38,6 +40,7 @@ export const listCountrys = /* GraphQL */ `
         networks {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
@@ -60,9 +63,11 @@ export const getNetwork = /* GraphQL */ `
         networks {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -85,9 +90,11 @@ export const listNetworks = /* GraphQL */ `
           id
           drSimID
           name
+          expirationTime
           createdAt
           updatedAt
         }
+        expirationTime
         createdAt
         updatedAt
       }
@@ -111,11 +118,13 @@ export const getBrand = /* GraphQL */ `
           name
           image
           description
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -136,6 +145,7 @@ export const listBrands = /* GraphQL */ `
         devices {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
@@ -161,9 +171,11 @@ export const getDevice = /* GraphQL */ `
         devices {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -189,9 +201,11 @@ export const listDevices = /* GraphQL */ `
           drSimID
           name
           description
+          expirationTime
           createdAt
           updatedAt
         }
+        expirationTime
         createdAt
         updatedAt
       }
