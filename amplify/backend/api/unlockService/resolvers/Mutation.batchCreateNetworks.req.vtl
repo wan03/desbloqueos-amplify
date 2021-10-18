@@ -1,19 +1,15 @@
-#set($netwoksdata=[])
-#foreach($item in ${ctx.args.brands})
-  $util.qr($keys.add({
+#set($networksdata=[])
+#foreach($item in ${ctx.args.networks})
     $util.qr($item.put("createdAt", $util.time.nowISO8601()))
     $util.qr($item.put("updatedAt", $util.time.nowISO8601()))
     $util.qr($item.put("__typename", "Network"))
     $util.qr($item.put("id", $util.defaultIfNullOrBlank($item.id, $util.autoId())))
-    $util.qr($netwoksdata.add($util.dynamodb.toMapValues($item)))
-  }))
+    $util.qr($networksdata.add($util.dynamodb.toMapValues($item)))
 #end
 {
   "version": "2018-05-29",
   "operation": "BatchPutItem",
   "tables": {
-    "tables": {
-      "Network-rfz5dbz25vdg3ends7cmg4g4na-dev": $util.toJson($netwoksdata)
-    }
+      "Network-vhfi2qhi7reqnhfsz2fmp7crk4-dev": $util.toJson($networksdata)
   }
 }

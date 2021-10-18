@@ -1,6 +1,6 @@
 {
   "api": {
-    "unlockService": {
+    "UNLOCKSERVICE": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -13,21 +13,21 @@
       }
     }
   },
-  "auth": {
-    "desbloqueos03b50c29": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
-    }
-  },
   "function": {
     "getDrSimData": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "dependsOn": []
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "UNLOCKSERVICE",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        }
+      ]
     }
-  },
-  "hosting": {}
+  }
 }

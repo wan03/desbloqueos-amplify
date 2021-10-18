@@ -11,12 +11,97 @@ export const batchCreateCountries = /* GraphQL */ `
         items {
           id
           countryID
-          networkID
+          countryDrSimID
+          drSimID
+          name
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const batchCreateNetworks = /* GraphQL */ `
+  mutation BatchCreateNetworks($networks: [CreateNetworkInput!]) {
+    batchCreateNetworks(networks: $networks) {
+      id
+      countryID
+      countryDrSimID
+      drSimID
+      name
+      country {
+        id
+        drSimID
+        name
+        networks {
+          nextToken
+        }
+        expirationTime
+        createdAt
+        updatedAt
+      }
+      expirationTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const batchCreateBrands = /* GraphQL */ `
+  mutation BatchCreateBrands($brands: [CreateBrandInput!]) {
+    batchCreateBrands(brands: $brands) {
+      id
+      drSimID
+      name
+      description
+      devices {
+        items {
+          id
+          brandID
+          drSimID
+          brandDrSimID
+          name
+          image
+          description
+          expirationTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      expirationTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const batchCreateDevices = /* GraphQL */ `
+  mutation BatchCreateDevices($devices: [CreateDeviceInput!]) {
+    batchCreateDevices(devices: $devices) {
+      id
+      brandID
+      drSimID
+      brandDrSimID
+      name
+      image
+      description
+      brand {
+        id
+        drSimID
+        name
+        description
+        devices {
+          nextToken
+        }
+        expirationTime
+        createdAt
+        updatedAt
+      }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -35,12 +120,16 @@ export const createCountry = /* GraphQL */ `
         items {
           id
           countryID
-          networkID
+          countryDrSimID
+          drSimID
+          name
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -59,12 +148,16 @@ export const updateCountry = /* GraphQL */ `
         items {
           id
           countryID
-          networkID
+          countryDrSimID
+          drSimID
+          name
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -83,114 +176,16 @@ export const deleteCountry = /* GraphQL */ `
         items {
           id
           countryID
-          networkID
+          countryDrSimID
+          drSimID
+          name
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createCountryNetwork = /* GraphQL */ `
-  mutation CreateCountryNetwork(
-    $input: CreateCountryNetworkInput!
-    $condition: ModelCountryNetworkConditionInput
-  ) {
-    createCountryNetwork(input: $input, condition: $condition) {
-      id
-      countryID
-      networkID
-      country {
-        id
-        drSimID
-        name
-        networks {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      network {
-        id
-        drSimID
-        name
-        countries {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateCountryNetwork = /* GraphQL */ `
-  mutation UpdateCountryNetwork(
-    $input: UpdateCountryNetworkInput!
-    $condition: ModelCountryNetworkConditionInput
-  ) {
-    updateCountryNetwork(input: $input, condition: $condition) {
-      id
-      countryID
-      networkID
-      country {
-        id
-        drSimID
-        name
-        networks {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      network {
-        id
-        drSimID
-        name
-        countries {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteCountryNetwork = /* GraphQL */ `
-  mutation DeleteCountryNetwork(
-    $input: DeleteCountryNetworkInput!
-    $condition: ModelCountryNetworkConditionInput
-  ) {
-    deleteCountryNetwork(input: $input, condition: $condition) {
-      id
-      countryID
-      networkID
-      country {
-        id
-        drSimID
-        name
-        networks {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      network {
-        id
-        drSimID
-        name
-        countries {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -203,18 +198,22 @@ export const createNetwork = /* GraphQL */ `
   ) {
     createNetwork(input: $input, condition: $condition) {
       id
+      countryID
+      countryDrSimID
       drSimID
       name
-      countries {
-        items {
-          id
-          countryID
-          networkID
-          createdAt
-          updatedAt
+      country {
+        id
+        drSimID
+        name
+        networks {
+          nextToken
         }
-        nextToken
+        expirationTime
+        createdAt
+        updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -227,18 +226,22 @@ export const updateNetwork = /* GraphQL */ `
   ) {
     updateNetwork(input: $input, condition: $condition) {
       id
+      countryID
+      countryDrSimID
       drSimID
       name
-      countries {
-        items {
-          id
-          countryID
-          networkID
-          createdAt
-          updatedAt
+      country {
+        id
+        drSimID
+        name
+        networks {
+          nextToken
         }
-        nextToken
+        expirationTime
+        createdAt
+        updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -251,18 +254,22 @@ export const deleteNetwork = /* GraphQL */ `
   ) {
     deleteNetwork(input: $input, condition: $condition) {
       id
+      countryID
+      countryDrSimID
       drSimID
       name
-      countries {
-        items {
-          id
-          countryID
-          networkID
-          createdAt
-          updatedAt
+      country {
+        id
+        drSimID
+        name
+        networks {
+          nextToken
         }
-        nextToken
+        expirationTime
+        createdAt
+        updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -282,12 +289,18 @@ export const createBrand = /* GraphQL */ `
         items {
           id
           brandID
-          deviceID
+          drSimID
+          brandDrSimID
+          name
+          image
+          description
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -307,12 +320,18 @@ export const updateBrand = /* GraphQL */ `
         items {
           id
           brandID
-          deviceID
+          drSimID
+          brandDrSimID
+          name
+          image
+          description
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -332,123 +351,18 @@ export const deleteBrand = /* GraphQL */ `
         items {
           id
           brandID
-          deviceID
+          drSimID
+          brandDrSimID
+          name
+          image
+          description
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createBrandDevice = /* GraphQL */ `
-  mutation CreateBrandDevice(
-    $input: CreateBrandDeviceInput!
-    $condition: ModelBrandDeviceConditionInput
-  ) {
-    createBrandDevice(input: $input, condition: $condition) {
-      id
-      brandID
-      deviceID
-      brand {
-        id
-        drSimID
-        name
-        description
-        devices {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      device {
-        id
-        drSimID
-        name
-        image
-        description
-        brands {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateBrandDevice = /* GraphQL */ `
-  mutation UpdateBrandDevice(
-    $input: UpdateBrandDeviceInput!
-    $condition: ModelBrandDeviceConditionInput
-  ) {
-    updateBrandDevice(input: $input, condition: $condition) {
-      id
-      brandID
-      deviceID
-      brand {
-        id
-        drSimID
-        name
-        description
-        devices {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      device {
-        id
-        drSimID
-        name
-        image
-        description
-        brands {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteBrandDevice = /* GraphQL */ `
-  mutation DeleteBrandDevice(
-    $input: DeleteBrandDeviceInput!
-    $condition: ModelBrandDeviceConditionInput
-  ) {
-    deleteBrandDevice(input: $input, condition: $condition) {
-      id
-      brandID
-      deviceID
-      brand {
-        id
-        drSimID
-        name
-        description
-        devices {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      device {
-        id
-        drSimID
-        name
-        image
-        description
-        brands {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -461,20 +375,25 @@ export const createDevice = /* GraphQL */ `
   ) {
     createDevice(input: $input, condition: $condition) {
       id
+      brandID
       drSimID
+      brandDrSimID
       name
       image
       description
-      brands {
-        items {
-          id
-          brandID
-          deviceID
-          createdAt
-          updatedAt
+      brand {
+        id
+        drSimID
+        name
+        description
+        devices {
+          nextToken
         }
-        nextToken
+        expirationTime
+        createdAt
+        updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -487,20 +406,25 @@ export const updateDevice = /* GraphQL */ `
   ) {
     updateDevice(input: $input, condition: $condition) {
       id
+      brandID
       drSimID
+      brandDrSimID
       name
       image
       description
-      brands {
-        items {
-          id
-          brandID
-          deviceID
-          createdAt
-          updatedAt
+      brand {
+        id
+        drSimID
+        name
+        description
+        devices {
+          nextToken
         }
-        nextToken
+        expirationTime
+        createdAt
+        updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -513,20 +437,25 @@ export const deleteDevice = /* GraphQL */ `
   ) {
     deleteDevice(input: $input, condition: $condition) {
       id
+      brandID
       drSimID
+      brandDrSimID
       name
       image
       description
-      brands {
-        items {
-          id
-          brandID
-          deviceID
-          createdAt
-          updatedAt
+      brand {
+        id
+        drSimID
+        name
+        description
+        devices {
+          nextToken
         }
-        nextToken
+        expirationTime
+        createdAt
+        updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }

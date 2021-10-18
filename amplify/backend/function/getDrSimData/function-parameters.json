@@ -1,4 +1,63 @@
 {
-  "permissions": {},
-  "lambdaLayers": []
+  "permissions": {
+    "api": {
+      "UNLOCKSERVICE": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "brandsUrl",
+      "environmentVariableName": "BRANDS_URL"
+    },
+    {
+      "cloudFormationParameterName": "countriesUrl",
+      "environmentVariableName": "COUNTRIES_URL"
+    },
+    {
+      "cloudFormationParameterName": "devicesUrl",
+      "environmentVariableName": "DEVICES_URL"
+    },
+    {
+      "cloudFormationParameterName": "drsimBaseUrl",
+      "environmentVariableName": "DRSIM_BASE_URL"
+    },
+    {
+      "cloudFormationParameterName": "error",
+      "environmentVariableName": "ERROR"
+    },
+    {
+      "cloudFormationParameterName": "networksUrl",
+      "environmentVariableName": "NETWORKS_URL"
+    },
+    {
+      "cloudFormationParameterName": "sandboxKey",
+      "environmentVariableName": "SANDBOX_KEY"
+    },
+    {
+      "cloudFormationParameterName": "sandboxSecret",
+      "environmentVariableName": "SANDBOX_SECRET"
+    },
+    {
+      "cloudFormationParameterName": "brands",
+      "environmentVariableName": "brands"
+    },
+    {
+      "cloudFormationParameterName": "countries",
+      "environmentVariableName": "countries"
+    },
+    {
+      "cloudFormationParameterName": "devices",
+      "environmentVariableName": "devices"
+    },
+    {
+      "cloudFormationParameterName": "networks",
+      "environmentVariableName": "networks"
+    }
+  ]
 }
