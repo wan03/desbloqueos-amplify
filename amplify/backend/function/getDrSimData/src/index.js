@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-plusplus */
 /* Amplify Params - DO NOT EDIT
@@ -33,8 +34,9 @@ const { ERROR } = process.env;
 const { SANDBOX_KEY } = process.env;
 const { SANDBOX_SECRET } = process.env;
 const expirationTime = Math.floor(Date.now() / 1000 + 604800);
+
 const createCountries = `
-mutation BatchCreateCountries($countries: [CreateCountryInput!] = {name: "", drSimID: ""}) {
+mutation BatchCreateCountries($countries: [CreateCountryInput!] = {name: "", drSimID: "", expirationTime: ${expirationTime}}) {
   batchCreateCountries(countries: $countries) {
     id
     drSimID
@@ -43,7 +45,7 @@ mutation BatchCreateCountries($countries: [CreateCountryInput!] = {name: "", drS
 `;
 
 const createNetworks = `
-mutation BatchCreateNetworks($networks: [CreateNetworkInput!] = {name: "", countryID: "ID!", drSimID: "", countryDrSimID: ""}) {
+mutation BatchCreateNetworks($networks: [CreateNetworkInput!] = {name: "", countryID: "ID!", drSimID: "", countryDrSimID: "", expirationTime: ${expirationTime}}) {
   batchCreateNetworks(networks: $networks) {
     id
   }
@@ -51,7 +53,7 @@ mutation BatchCreateNetworks($networks: [CreateNetworkInput!] = {name: "", count
 `;
 
 const createBrands = `
-mutation BatchCreateBrands($brands: [CreateBrandInput!] = {name: "", drSimID: "", description: ""}) {
+mutation BatchCreateBrands($brands: [CreateBrandInput!] = {name: "", drSimID: "", description: "", expirationTime: ${expirationTime}}) {
     batchCreateBrands(brands: $brands) {
       id
       drSimID
@@ -60,7 +62,7 @@ mutation BatchCreateBrands($brands: [CreateBrandInput!] = {name: "", drSimID: ""
 `;
 
 const createDevices = `
-mutation BatchCreateDevices($devices: [CreateDeviceInput!] = {brandID: "ID!", name: "", drSimID: "", image: "", description: "", brandDrSimID: ""}) {
+mutation BatchCreateDevices($devices: [CreateDeviceInput!] = {brandID: "ID!", name: "", drSimID: "", image: "", description: "", brandDrSimID: "", expirationTime: ${expirationTime}}) {
   batchCreateDevices(devices: $devices) {
     id
   }
@@ -80,8 +82,7 @@ const callDRSIM = async (url) => {
 
     return response.data.res;
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('DRSIM error: ', error);
+    console.error('DRSIM error: ', error);
 
     return null;
   }
@@ -194,6 +195,8 @@ const getData = async () => {
       devices: rawDevices.flat(),
     };
   } catch (error) {
+    console.error('Error in getData: ', error);
+
     return ERROR;
   }
 };
@@ -264,18 +267,18 @@ const batchCreate = async ({
 }) => {
   const batchData = splitEvery25(data);
   const finalResponse = [];
+  const responsePromises = [];
 
-  const batchCreatePromises = asyncForEach(batchData,
-    async (batch) => insertDataIntoDatabase(batch, mutation, type));
+  await asyncForEach(batchData,
+    async (batch) => {
+      const temp = insertDataIntoDatabase(batch, mutation, type);
+      responsePromises.push(temp);
+    });
 
-  console.log('batchCreatePromises', batchCreatePromises);
+  const responseBatch = await Promise.all(responsePromises);
 
-  const [rawResponse] = await Promise.all([batchCreatePromises]);
-
-  console.log('rawResponse', rawResponse);
-
-  rawResponse.forEach((batch) => {
-    console.log('batch', batch);
+  responseBatch.forEach((batch) => {
+    console.log('batch in responseBatch', batch);
     finalResponse.push(...batch[fieldName]);
   });
 
@@ -296,6 +299,17 @@ const insertParentID = ({
   };
 }).filter((child) => child[fieldName]);
 
+const prepareChildren = ({
+  parents, children, fieldName, childName,
+}) => {
+  const rawData = {
+    parents, children, fieldName, childName,
+  };
+  const completeData = insertParentID(rawData);
+
+  return completeData;
+};
+
 const InsertData = async (data) => {
   if (data === ERROR) {
     return 'There was an error getting data from drSim!';
@@ -305,56 +319,38 @@ const InsertData = async (data) => {
     data: data.countries, mutation: createCountries, type: countries, fieldName: 'batchCreateCountries',
   });
 
-  console.log('addCountriesPromise', addCountriesPromise);
-
   const addBrandsPromise = batchCreate({
     data: data.brands, mutation: createBrands, type: brands, fieldName: 'batchCreateBrands',
   });
 
-  console.log('addBrandsPromise', addBrandsPromise);
-
   const [addedCountries, addedBrands] = await Promise.all(
     [addCountriesPromise, addBrandsPromise],
   );
-  console.log('addedCountries', addedCountries);
-  console.log('addedBrands', addedBrands);
 
-  const addNetworksPromise = async () => {
-    const rawNetworks = {
+  const addNetworksPromise = batchCreate({
+    data: prepareChildren({
       parents: addedCountries, children: data.networks, fieldName: 'countryID', childName: 'countryDrSimID',
-    };
-    const completeNetworks = insertParentID(rawNetworks);
+    }),
+    mutation: createNetworks,
+    type: networks,
+    fieldName: 'batchCreateNetworks',
+  });
 
-    return batchCreate({
-      data: completeNetworks, mutation: createNetworks, type: networks, fieldName: 'batchCreateNetworks',
-    });
-  };
-
-  console.log('addNetworksPromise', addNetworksPromise);
-
-  const addDevicesPromise = async () => {
-    const rawDevices = {
+  const addDevicesPromise = batchCreate({
+    data: prepareChildren({
       parents: addedBrands, children: data.devices, fieldName: 'brandID', childName: 'brandDrSimID',
-    };
-    const completeDevices = insertParentID(rawDevices);
-
-    return batchCreate({
-      data: completeDevices, mutation: createDevices, type: devices, fieldName: 'batchCreateDevices',
-    });
-  };
-
-  console.log('addDevicesPromise', addDevicesPromise);
+    }),
+    mutation: createDevices,
+    type: devices,
+    fieldName: 'batchCreateDevices',
+  });
 
   const [addedNetworks, addedDevices] = await Promise.all(
     [addNetworksPromise, addDevicesPromise],
   );
 
-  console.log('addedNetworks', addedNetworks);
-  console.log('addedDevices', addedDevices);
-
   if (addedCountries.length && addedNetworks.length
     && addedBrands.length && addedDevices.length) {
-    // eslint-disable-next-line no-console
     console.log('Final data: ',
       addedCountries, addedNetworks,
       addedBrands, addedDevices);
@@ -364,15 +360,11 @@ const InsertData = async (data) => {
 };
 
 exports.handler = async (event) => {
-  if (event) {
-    // eslint-disable-next-line no-console
-    console.log('This is the event: ', event);
-  }
+  console.log('This is the event: ', event);
 
   const data = await getData();
   const body = await InsertData(data);
 
-  // eslint-disable-next-line no-console
   console.log('Body: ', body);
 
   if (body === 'Successfully inserted data into database!') {

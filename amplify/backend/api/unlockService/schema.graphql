@@ -48,6 +48,7 @@ input CreateCountryInput {
   drSimID: String
   name: String!
   networks: [CreateNetworkInput]
+  expirationTime: AWSTimestamp!
 }
 
 input CreateNetworkInput {
@@ -57,6 +58,7 @@ input CreateNetworkInput {
   countryDrSimID: String
   name: String!
   country: CreateCountryInput
+  expirationTime: AWSTimestamp!
 }
 
 input CreateBrandInput {
@@ -65,6 +67,7 @@ input CreateBrandInput {
   name: String!
   description: String
   devices: [CreateDeviceInput]
+  expirationTime: AWSTimestamp!
 }
 
 input CreateDeviceInput {
@@ -76,6 +79,7 @@ input CreateDeviceInput {
   image: String
   description: String
   brand: CreateBrandInput 
+  expirationTime: AWSTimestamp!
 }
 
 type Mutation {
