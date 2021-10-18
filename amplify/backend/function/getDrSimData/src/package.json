@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "aws-sdk": "^2.977.0",
-    "axios": "^0.21.1",
-    "https": "^1.0.0"
+    "https": "^1.0.0",
+    "axios": "^0.21.2"
   }
 }
