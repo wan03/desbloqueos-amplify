@@ -1,0 +1,12 @@
+BRANDS_URL = /brands
+COUNTRIES_URL = /countries
+DEVICES_URL = /devices
+DRSIM_BASE_URL = https://api.doctorsim.com
+ERROR = ERROR
+NETWORKS_URL = /networks
+SANDBOX_KEY = sboxDUKut995
+SANDBOX_SECRET = QUzuBaLu8828
+brands = brands
+countries = countries
+devices = devices
+networks = networks

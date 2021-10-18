@@ -1,42 +1,46 @@
 type Country 
-  @model @auth(rules: [{ allow: public, provider: iam }]) 
-  @key(name: "byDrSimID", fields: ["drSimID"]) {
+  @model @auth(rules: [{ allow: public, provider: iam }])
+  @key(name: "byName", fields: ["name", "id", "name"]) {
   id: ID!
   drSimID: String
   name: String!
   networks: [Network] @connection(keyName: "byCountry", fields: ["id"])
+  expirationTime: AWSTimestamp! @ttl
 }
 type Network 
-  @model @auth(rules: [{ allow: public, provider: iam }]) 
-  @key(name: "byCountry", fields: ["countryID", "id", "name"]) 
-  @key(name: "byDrSimID", fields: ["drSimID"]) {
+  @model @auth(rules: [{ allow: public, provider: iam }])
+  @key(name: "byCountry", fields: ["countryID", "id", "name"]) {
   id: ID!
   countryID: ID!
+  countryDrSimID: String
   drSimID: String
   name: String!
   country: Country @connection(fields: ["countryID"])
+  expirationTime: AWSTimestamp! @ttl
 }
 
 type Brand 
-  @model @auth(rules: [{ allow: public, provider: iam }]) 
-  @key(name: "byDrSimID", fields: ["drSimID"]) {
+  @model @auth(rules: [{ allow: public, provider: iam }])
+  @key(name: "byName", fields:["name", "id"]) {
   id: ID!
   drSimID: String
   name: String!
   description: String
   devices: [Device]  @connection(keyName: "byBrand", fields: ["id"])
+  expirationTime: AWSTimestamp! @ttl
 }
 type Device 
   @model @auth(rules: [{ allow: public, provider: iam }])
-  @key(name: "byBrand", fields: ["brandID", "id", "name"]) 
-  @key(name: "byDrSimID", fields: ["drSimID"]) {
+  @key(name: "byBrand", fields: ["brandID", "id", "name"]) {
   id: ID!
   brandID: ID!
   drSimID: String
+  brandDrSimID: String
   name: String!
   image: String
   description: String
   brand: Brand @connection(fields: ["brandID"])
+  expirationTime: AWSTimestamp! @ttl
 }
 
 input CreateCountryInput {
@@ -44,14 +48,17 @@ input CreateCountryInput {
   drSimID: String
   name: String!
   networks: [CreateNetworkInput]
+  expirationTime: AWSTimestamp!
 }
 
 input CreateNetworkInput {
   id: ID
   countryID: ID!
   drSimID: String
+  countryDrSimID: String
   name: String!
   country: CreateCountryInput
+  expirationTime: AWSTimestamp!
 }
 
 input CreateBrandInput {
@@ -60,21 +67,24 @@ input CreateBrandInput {
   name: String!
   description: String
   devices: [CreateDeviceInput]
+  expirationTime: AWSTimestamp!
 }
 
 input CreateDeviceInput {
   id: ID
   brandID: ID!
+  brandDrSimID: String
   drSimID: String
   name: String!
   image: String
   description: String
   brand: CreateBrandInput 
+  expirationTime: AWSTimestamp!
 }
 
 type Mutation {
   batchCreateCountries (countries: [CreateCountryInput!]): [Country]
   batchCreateNetworks (networks: [CreateNetworkInput!]): [Network]
   batchCreateBrands (brands: [CreateBrandInput!]): [Brand]
-  batchCreateDevices (Devices: [CreateDeviceInput!]): [Device]
+  batchCreateDevices (devices: [CreateDeviceInput!]): [Device]
 }

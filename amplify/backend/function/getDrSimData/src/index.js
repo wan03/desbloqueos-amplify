@@ -1,48 +1,69 @@
+/* eslint-disable no-console */
+/* eslint-disable linebreak-style */
+/* eslint-disable no-plusplus */
 /* Amplify Params - DO NOT EDIT
-  ENV
-  REGION
+
+    API_UNLOCKSERVICE_GRAPHQLAPIENDPOINTOUTPUT
+
+    API_UNLOCKSERVICE_GRAPHQLAPIIDOUTPUT
+
+    ENV
+
+    REGION
+
 Amplify Params - DO NOT EDIT */
 
-import axios from 'axios';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
+const AWS = require('aws-sdk');
+const https = require('https');
+const axios = require('axios');
 
-const DRSIM_BASE_URL = 'https://api.doctorsim.com';
-const COUNTRIES_URL = '/countries';
-const NETWORKS_URL = '/networks';
-const BRANDS_URL = '/brands';
-const DEVICES_URL = '/devices';
-const SANDBOX_KEY = '';
-const SANDBOX_SECRET = '';
+const appsyncUrl = process.env.API_UNLOCKSERVICE_GRAPHQLAPIENDPOINTOUTPUT;
+const region = process.env.REGION;
+const apiKey = process.env.API_UNLOCKSERVICE_GRAPHQLAPIKEYOUTPUT;
+const endpoint = new URL(appsyncUrl).hostname;
+const { DRSIM_BASE_URL } = process.env;
+const { COUNTRIES_URL } = process.env;
+const { NETWORKS_URL } = process.env;
+const { BRANDS_URL } = process.env;
+const { DEVICES_URL } = process.env;
+const { countries } = process.env;
+const { networks } = process.env;
+const { brands } = process.env;
+const { devices } = process.env;
+const { ERROR } = process.env;
+const { SANDBOX_KEY } = process.env;
+const { SANDBOX_SECRET } = process.env;
+const expirationTime = Math.floor(Date.now() / 1000 + 604800);
 
-const createCountries = gql`
-mutation BatchCreateCountries($countries: [CreateCountryInput!] = {name: "", drSimID: ""}) {
+const createCountries = `
+mutation BatchCreateCountries($countries: [CreateCountryInput!] = {name: "", drSimID: "", expirationTime: ${expirationTime}}) {
   batchCreateCountries(countries: $countries) {
-    drSimID
     id
+    drSimID
   }
 }
 `;
 
-const createNetworks = gql`
-mutation BatchCreateNetworks($networks: [CreateNetworkInput!] = {name: "", counrtyID: "ID!", drSimID: ""}) {
+const createNetworks = `
+mutation BatchCreateNetworks($networks: [CreateNetworkInput!] = {name: "", countryID: "ID!", drSimID: "", countryDrSimID: "", expirationTime: ${expirationTime}}) {
   batchCreateNetworks(networks: $networks) {
     id
   }
 }
 `;
 
-const createBrands = gql`
-  mutation BatchCreateBrands($brands: [CreateBrandInput!] = {name: "", drSimID: "", description: ""}) {
+const createBrands = `
+mutation BatchCreateBrands($brands: [CreateBrandInput!] = {name: "", drSimID: "", description: "", expirationTime: ${expirationTime}}) {
     batchCreateBrands(brands: $brands) {
       id
+      drSimID
     }
   }
 `;
 
-const createDevices = gql`
-mutation BatchCreateDevices($Devices: [CreateDeviceInput!] = {brandID: "ID!", name: "", drSimID: "", image: "", description: ""}) {
-  batchCreateDevices(Devices: $Devices) {
+const createDevices = `
+mutation BatchCreateDevices($devices: [CreateDeviceInput!] = {brandID: "ID!", name: "", drSimID: "", image: "", description: "", brandDrSimID: "", expirationTime: ${expirationTime}}) {
+  batchCreateDevices(devices: $devices) {
     id
   }
 }   
@@ -50,93 +71,98 @@ mutation BatchCreateDevices($Devices: [CreateDeviceInput!] = {brandID: "ID!", na
 
 const callDRSIM = async (url) => {
   try {
-    const response = await axios.get({
-      baseUrl: DRSIM_BASE_URL,
-      url,
+    const response = await axios({
+      url: DRSIM_BASE_URL + url,
+      method: 'get',
       headers: {
-        DSIM_KEY: `${SANDBOX_KEY}`,
-        DSIM_SECRET: `${SANDBOX_SECRET}`,
+        DSIM_KEY: SANDBOX_KEY,
+        DSIM_SECRET: SANDBOX_SECRET,
       },
     });
 
-    return response;
+    return response.data.res;
   } catch (error) {
-    console.log('DRSIM error: '.error);
+    console.error('DRSIM error: ', error);
+
     return null;
   }
 };
 
 const getCountries = async () => {
-  const response = callDRSIM(COUNTRIES_URL);
-
-  const countriesIDs = Object.keys(response.res);
-
-  const countries = countriesIDs.map((countryID) => {
+  const response = await callDRSIM(COUNTRIES_URL);
+  const countriesIDs = Object.keys(response);
+  const drSimCountries = countriesIDs.map((countryID) => {
     const country = {
       drSimID: countryID,
-      name: response.res[countryID],
+      name: response[countryID],
+      expirationTime,
     };
 
     return country;
   });
 
-  return countries;
+  return drSimCountries;
 };
 
 const getNetworks = async () => {
-  const response = callDRSIM(NETWORKS_URL);
+  const response = await callDRSIM(NETWORKS_URL);
 
-  const countryIDs = Object.keys(response.res);
+  const countryIDs = Object.keys(response);
+  const drSimNetworks = countryIDs.map((countryDrSimID) => {
+    const networkIDs = Object.keys(response[countryDrSimID]);
 
-  const networks = countryIDs.map((countryDrSimID) => {
-    const networkIDs = Object.keys(response.res[countryDrSimID]);
-    const currentCountry = response.res[countryDrSimID];
+    const currentCountry = response[countryDrSimID];
 
     const formattedNetworks = networkIDs.map((networkID) => {
       const network = {
         countryDrSimID,
         name: currentCountry[networkID],
         drSimID: networkID,
+        expirationTime,
       };
+
       return network;
     });
 
     return formattedNetworks;
   });
 
-  return networks;
+  return drSimNetworks;
 };
 
 const getBrands = async () => {
-  const response = callDRSIM(BRANDS_URL);
+  const response = await callDRSIM(BRANDS_URL);
 
-  const brandIDs = Object.keys(response.res);
+  const brandIDs = Object.keys(response);
 
-  const brands = brandIDs.map((brandID) => {
-    const currentBrand = response.res[brandID];
+  const drSimBrands = brandIDs.map((brandID) => {
+    const currentBrand = response[brandID];
 
     const brand = {
       name: currentBrand.brand,
       description: currentBrand.desc,
       drSimID: brandID,
+      expirationTime,
     };
 
     return brand;
   });
 
-  return brands;
+  return drSimBrands;
 };
 
 const getDevices = async () => {
-  const response = callDRSIM(DEVICES_URL);
+  const isDummyDevice = (data) => data !== '0';
 
-  const brandIDs = Object.keys(response.res);
+  const response = await callDRSIM(DEVICES_URL);
 
-  const devices = brandIDs.map((brandDrSimID) => {
-    const deviceIDs = Object.keys(response.res[brandDrSimID]);
+  const brandIDs = Object.keys(response);
+
+  const drSimDevices = brandIDs.map((brandDrSimID) => {
+    const deviceIDs = Object.keys(response[brandDrSimID]);
 
     const formattedDevices = deviceIDs.map((deviceID) => {
-      const currentDevice = response.res[brandDrSimID][deviceID];
+      const currentDevice = response[brandDrSimID][deviceID];
 
       const device = {
         brandDrSimID,
@@ -144,56 +170,204 @@ const getDevices = async () => {
         image: currentDevice.img,
         description: currentDevice.desc,
         drSimID: deviceID,
+        expirationTime,
       };
+
       return device;
-    });
+    }).filter((device) => isDummyDevice(device.brandDrSimID));
 
     return formattedDevices;
   });
 
-  return devices;
+  return drSimDevices;
 };
 
-const getData = () => {
+const getData = async () => {
   try {
-    const countries = getCountries();
-
-    const networks = getNetworks();
-
-    const brands = getBrands();
-
-    const devices = getDevices();
+    const [rawCountries, rawNetworks, rawBrands, rawDevices] = await Promise.all(
+      [getCountries(), getNetworks(), getBrands(), getDevices()],
+    );
 
     return {
-      countries, networks, brands, devices,
+      countries: rawCountries,
+      networks: rawNetworks.flat(),
+      brands: rawBrands,
+      devices: rawDevices.flat(),
     };
   } catch (error) {
-    // TODO: Handle Error
-    console.error(error);
+    console.error('Error in getData: ', error);
 
-    return 'ERROR';
+    return ERROR;
   }
 };
 
-const insertDataIntoDatabase = async (data, query) => {
-  try {
-    const graphqlData = await axios({
-      url: process.env.API_URL,
-      method: 'post',
-      headers: {
-        'x-api-key': process.env.API_unlockService_GRAPHQLAPIKEYOUTPUT,
-      },
-      data: {
-        query: print(query),
-      },
-      variables: {
-        input: { ...data },
-      },
+const splitEvery25 = (list = []) => {
+  const result = [];
+  let index = 0;
 
+  while (index < list.length) {
+    result.push(list.slice(index, index += 25));
+  }
+
+  return result;
+};
+
+const asyncForEach = async (array, callback) => {
+  for (let index = 0; index < array.length; index++) {
+    // eslint-disable-next-line no-await-in-loop
+    await callback(array[index], index, array);
+  }
+};
+
+const insertDataIntoDatabase = async (data, query, type) => {
+  const req = new AWS.HttpRequest(appsyncUrl, region);
+
+  const input = {};
+  input[type] = data;
+
+  req.method = 'POST';
+  req.path = '/graphql';
+  req.headers.host = endpoint;
+  req.headers['Content-Type'] = 'application/json';
+  req.body = JSON.stringify({
+    query,
+    variables: input,
+  });
+
+  if (apiKey) {
+    req.headers['x-api-key'] = apiKey;
+  } else {
+    const signer = new AWS.Signers.V4(req, 'appsync', true);
+
+    signer.addAuthorization(AWS.config.credentials, AWS.util.date.getDate());
+  }
+
+  const response = await new Promise((resolve) => {
+    const httpRequest = https.request({ ...req, host: endpoint }, (result) => {
+      let tempData = '';
+
+      result.on('data', (chunk) => {
+        tempData += chunk;
+      });
+
+      result.on('end', () => {
+        resolve(JSON.parse(tempData.toString()));
+      });
     });
-    const body = {
-      graphqlData,
-    };
+
+    httpRequest.write(req.body);
+    httpRequest.end();
+  });
+
+  return response.data;
+};
+
+const batchCreate = async ({
+  data, mutation, type, fieldName,
+}) => {
+  const batchData = splitEvery25(data);
+  const finalResponse = [];
+  const responsePromises = [];
+
+  await asyncForEach(batchData,
+    async (batch) => {
+      const temp = insertDataIntoDatabase(batch, mutation, type);
+      responsePromises.push(temp);
+    });
+
+  const responseBatch = await Promise.all(responsePromises);
+
+  responseBatch.forEach((batch) => {
+    console.log('batch in responseBatch', batch);
+    finalResponse.push(...batch[fieldName]);
+  });
+
+  return finalResponse;
+};
+
+const insertParentID = ({
+  parents, children, fieldName, childName,
+}) => children.map((child) => {
+  const parent = parents.find((tempParent) => tempParent?.drSimID === child?.[childName]);
+
+  return {
+
+    [fieldName]: parent?.id,
+
+    ...child,
+
+  };
+}).filter((child) => child[fieldName]);
+
+const prepareChildren = ({
+  parents, children, fieldName, childName,
+}) => {
+  const rawData = {
+    parents, children, fieldName, childName,
+  };
+  const completeData = insertParentID(rawData);
+
+  return completeData;
+};
+
+const InsertData = async (data) => {
+  if (data === ERROR) {
+    return 'There was an error getting data from drSim!';
+  }
+
+  const addCountriesPromise = batchCreate({
+    data: data.countries, mutation: createCountries, type: countries, fieldName: 'batchCreateCountries',
+  });
+
+  const addBrandsPromise = batchCreate({
+    data: data.brands, mutation: createBrands, type: brands, fieldName: 'batchCreateBrands',
+  });
+
+  const [addedCountries, addedBrands] = await Promise.all(
+    [addCountriesPromise, addBrandsPromise],
+  );
+
+  const addNetworksPromise = batchCreate({
+    data: prepareChildren({
+      parents: addedCountries, children: data.networks, fieldName: 'countryID', childName: 'countryDrSimID',
+    }),
+    mutation: createNetworks,
+    type: networks,
+    fieldName: 'batchCreateNetworks',
+  });
+
+  const addDevicesPromise = batchCreate({
+    data: prepareChildren({
+      parents: addedBrands, children: data.devices, fieldName: 'brandID', childName: 'brandDrSimID',
+    }),
+    mutation: createDevices,
+    type: devices,
+    fieldName: 'batchCreateDevices',
+  });
+
+  const [addedNetworks, addedDevices] = await Promise.all(
+    [addNetworksPromise, addDevicesPromise],
+  );
+
+  if (addedCountries.length && addedNetworks.length
+    && addedBrands.length && addedDevices.length) {
+    console.log('Final data: ',
+      addedCountries, addedNetworks,
+      addedBrands, addedDevices);
+    return 'Successfully inserted data into database!';
+  }
+  return 'There was an error inserting data into database!';
+};
+
+exports.handler = async (event) => {
+  console.log('This is the event: ', event);
+
+  const data = await getData();
+  const body = await InsertData(data);
+
+  console.log('Body: ', body);
+
+  if (body === 'Successfully inserted data into database!') {
     return {
       statusCode: 200,
       body: JSON.stringify(body),
@@ -201,69 +375,10 @@ const insertDataIntoDatabase = async (data, query) => {
         'Access-Control-Allow-Origin': '*',
       },
     };
-  } catch (err) {
-    console.log('error posting to appsync: ', err);
-    return null;
-  }
-};
-
-exports.handler = async (event) => {
-  // TODO implement
-  let addedCountries;
-  let addedNetworks;
-  let addedBrands;
-  let addedDevices;
-  let body;
-
-  if (event) {
-    console.log(event);
-  }
-
-  const data = getData();
-
-  if (data.countries) {
-    addedCountries = insertDataIntoDatabase(data.countries, createCountries);
-  }
-
-  if (data.networks && addedCountries) {
-    const completeNetworks = data.networks.map((network) => {
-      const country = addedCountries
-        .find((tempCountry) => tempCountry.drSimID === network.countryDrSimID);
-      return {
-        countryID: country.id,
-        ...network,
-      };
-    });
-    addedNetworks = insertDataIntoDatabase(completeNetworks, createNetworks);
-  }
-
-  if (data.brands) {
-    addedBrands = insertDataIntoDatabase(data.brands, createBrands);
-  }
-
-  if (data.devices && addedBrands) {
-    const completeDevices = data.devices.map((device) => {
-      const brand = addedBrands.find((tempBrand) => tempBrand.drSimID === device.brandDrSimID);
-      return {
-        brandID: brand.id,
-        ...device,
-      };
-    });
-    addedDevices = insertDataIntoDatabase(completeDevices, createDevices);
-  }
-
-  if (addedCountries && addedNetworks && addedBrands && addedDevices) {
-    body = {
-      message: 'Successfully inserted data into database!',
-    };
-  } else {
-    body = {
-      message: 'There was an error inserting data into database!',
-    };
   }
 
   return {
-    statusCode: 200,
+    statusCode: 500,
     body: JSON.stringify(body),
     headers: {
       'Access-Control-Allow-Origin': '*',

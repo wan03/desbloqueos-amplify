@@ -15,6 +15,50 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "apiUNLOCKSERVICEGraphQLAPIIdOutput": {
+      "Type": "String",
+      "Default": "apiUNLOCKSERVICEGraphQLAPIIdOutput"
+    },
+    "apiUNLOCKSERVICEGraphQLAPIEndpointOutput": {
+      "Type": "String",
+      "Default": "apiUNLOCKSERVICEGraphQLAPIEndpointOutput"
+    },
+    "brandsUrl": {
+      "Type": "String"
+    },
+    "countriesUrl": {
+      "Type": "String"
+    },
+    "devicesUrl": {
+      "Type": "String"
+    },
+    "drsimBaseUrl": {
+      "Type": "String"
+    },
+    "error": {
+      "Type": "String"
+    },
+    "networksUrl": {
+      "Type": "String"
+    },
+    "sandboxKey": {
+      "Type": "String"
+    },
+    "sandboxSecret": {
+      "Type": "String"
+    },
+    "brands": {
+      "Type": "String"
+    },
+    "countries": {
+      "Type": "String"
+    },
+    "devices": {
+      "Type": "String"
+    },
+    "networks": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -69,6 +113,48 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "API_UNLOCKSERVICE_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apiUNLOCKSERVICEGraphQLAPIIdOutput"
+            },
+            "API_UNLOCKSERVICE_GRAPHQLAPIENDPOINTOUTPUT": {
+              "Ref": "apiUNLOCKSERVICEGraphQLAPIEndpointOutput"
+            },
+            "BRANDS_URL": {
+              "Ref": "brandsUrl"
+            },
+            "COUNTRIES_URL": {
+              "Ref": "countriesUrl"
+            },
+            "DEVICES_URL": {
+              "Ref": "devicesUrl"
+            },
+            "DRSIM_BASE_URL": {
+              "Ref": "drsimBaseUrl"
+            },
+            "ERROR": {
+              "Ref": "error"
+            },
+            "NETWORKS_URL": {
+              "Ref": "networksUrl"
+            },
+            "SANDBOX_KEY": {
+              "Ref": "sandboxKey"
+            },
+            "SANDBOX_SECRET": {
+              "Ref": "sandboxSecret"
+            },
+            "brands": {
+              "Ref": "brands"
+            },
+            "countries": {
+              "Ref": "countries"
+            },
+            "devices": {
+              "Ref": "devices"
+            },
+            "networks": {
+              "Ref": "networks"
             }
           }
         },
@@ -80,7 +166,7 @@
         },
         "Runtime": "nodejs14.x",
         "Layers": [],
-        "Timeout": "25"
+        "Timeout": 25
       }
     },
     "LambdaExecutionRole": {
@@ -89,12 +175,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "desbloqueosLambdaRoleda1ec635",
+            "desbloqueatucelLambdaRolec0855c25",
             {
               "Fn::Join": [
                 "",
                 [
-                  "desbloqueosLambdaRoleda1ec635",
+                  "desbloqueatucelLambdaRolec0855c25",
                   "-",
                   {
                     "Ref": "env"
@@ -160,6 +246,78 @@
                   }
                 ]
               }
+            }
+          ]
+        }
+      }
+    },
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "appsync:Create*",
+                "appsync:StartSchemaCreation",
+                "appsync:GraphQL",
+                "appsync:Get*",
+                "appsync:List*",
+                "appsync:Update*",
+                "appsync:Delete*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apiUNLOCKSERVICEGraphQLAPIIdOutput"
+                      },
+                      "/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apiUNLOCKSERVICEGraphQLAPIIdOutput"
+                      }
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }

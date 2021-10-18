@@ -11,12 +11,16 @@ export const getCountry = /* GraphQL */ `
         items {
           id
           countryID
-          networkID
+          countryDrSimID
+          drSimID
+          name
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -36,6 +40,7 @@ export const listCountrys = /* GraphQL */ `
         networks {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
@@ -47,18 +52,22 @@ export const getNetwork = /* GraphQL */ `
   query GetNetwork($id: ID!) {
     getNetwork(id: $id) {
       id
+      countryID
+      countryDrSimID
       drSimID
       name
-      countries {
-        items {
-          id
-          countryID
-          networkID
-          createdAt
-          updatedAt
+      country {
+        id
+        drSimID
+        name
+        networks {
+          nextToken
         }
-        nextToken
+        expirationTime
+        createdAt
+        updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -73,11 +82,19 @@ export const listNetworks = /* GraphQL */ `
     listNetworks(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        countryID
+        countryDrSimID
         drSimID
         name
-        countries {
-          nextToken
+        country {
+          id
+          drSimID
+          name
+          expirationTime
+          createdAt
+          updatedAt
         }
+        expirationTime
         createdAt
         updatedAt
       }
@@ -96,12 +113,18 @@ export const getBrand = /* GraphQL */ `
         items {
           id
           brandID
-          deviceID
+          drSimID
+          brandDrSimID
+          name
+          image
+          description
+          expirationTime
           createdAt
           updatedAt
         }
         nextToken
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -122,6 +145,7 @@ export const listBrands = /* GraphQL */ `
         devices {
           nextToken
         }
+        expirationTime
         createdAt
         updatedAt
       }
@@ -133,20 +157,25 @@ export const getDevice = /* GraphQL */ `
   query GetDevice($id: ID!) {
     getDevice(id: $id) {
       id
+      brandID
       drSimID
+      brandDrSimID
       name
       image
       description
-      brands {
-        items {
-          id
-          brandID
-          deviceID
-          createdAt
-          updatedAt
+      brand {
+        id
+        drSimID
+        name
+        description
+        devices {
+          nextToken
         }
-        nextToken
+        expirationTime
+        createdAt
+        updatedAt
       }
+      expirationTime
       createdAt
       updatedAt
     }
@@ -161,13 +190,22 @@ export const listDevices = /* GraphQL */ `
     listDevices(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        brandID
         drSimID
+        brandDrSimID
         name
         image
         description
-        brands {
-          nextToken
+        brand {
+          id
+          drSimID
+          name
+          description
+          expirationTime
+          createdAt
+          updatedAt
         }
+        expirationTime
         createdAt
         updatedAt
       }
