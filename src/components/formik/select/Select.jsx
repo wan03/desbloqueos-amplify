@@ -3,7 +3,7 @@ import { useField } from 'formik';
 import PropTypes from 'prop-types';
 import Options from '../option/Options';
 
-const Select = ({ label, options, ...props }) => {
+function Select({ label, options, ...props }) {
   const [field, meta] = useField(props);
 
   return (
@@ -17,7 +17,7 @@ const Select = ({ label, options, ...props }) => {
       ) : null}
     </div>
   );
-};
+}
 
 Select.propTypes = {
   label: PropTypes.string,

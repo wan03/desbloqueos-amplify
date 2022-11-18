@@ -8,7 +8,7 @@ import Spinner from '../../components/spinner/Spinner';
 import { getInicio } from '../../shared/api/contentful/queries';
 import { toast, ToastContainer } from '../../shared/mdbreact/mdbreact';
 
-const Inicio = () => {
+function Inicio() {
   const {
     data, loading, error,
   } = useQuery(getInicio, { variables: { id: '3jDI1X9rZoL25IpElqhGKZ' } });
@@ -39,6 +39,6 @@ const Inicio = () => {
       />
     </>
   );
-};
+}
 
 export default Inicio;

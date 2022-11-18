@@ -1,7 +1,11 @@
 import React from 'react';
+import { Amplify } from 'aws-amplify';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './shared/router/Routes';
 import Layout from './pages/layout/Layout';
+import awsExports from './aws-exports';
+
+Amplify.configure(awsExports);
 
 function App() {
   return (

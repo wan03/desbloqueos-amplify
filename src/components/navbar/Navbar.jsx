@@ -6,7 +6,7 @@ import {
 } from '../../shared/mdbreact/mdbreact';
 import { PATHS } from '../../shared/constants/Constants';
 
-const Navbar = () => {
+function Navbar() {
   const [isOpen, toggleIsOpen] = useState(false);
 
   const toggleCollapse = () => {
@@ -39,6 +39,6 @@ const Navbar = () => {
       </MDBCollapse>
     </MDBNavbar>
   );
-};
+}
 
 export default withRouter(Navbar);
