@@ -1,11 +1,17 @@
-import React from 'react';
 import {
-  MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBView,
-} from
-  '../../shared/mdbreact/mdbreact';
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@mui/material';
+import React from 'react';
+import { getPhones } from '../../shared/api/getPhones';
 
 function Carousel() {
+  const allPhone = getPhones();
   return (
+  /*
     <MDBContainer fluid>
       <MDBCarousel
         activeItem={1}
@@ -46,6 +52,17 @@ function Carousel() {
         </MDBCarouselInner>
       </MDBCarousel>
     </MDBContainer>
+    */
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Card sx={{ maxWidth: '345px' }}>
+        <CardMedia component="img" image={allPhone[0].imageURL} />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {allPhone[0].name}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Box>
   );
 }
 

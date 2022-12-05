@@ -1,29 +1,25 @@
 import {
-  Box,
-  Card,
-  Container,
-  Typography,
+  Box, Button, Card, Container, Typography,
 } from '@mui/material';
-import React from 'react';
 import { Formik } from 'formik';
+import React from 'react';
+import { useNavigate } from 'react-router';
 import * as Yup from 'yup';
-import ContactForm from './contactForm/ContactForm';
-import { LOREM_IPSUM } from '../../shared/constants/dev';
+import RegisterForm from './registerForm/RegisterForm';
 
-function Contactanos() {
+function Register() {
+  const navigate = useNavigate();
   return (
-    <Container sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '30px',
-      padding: '30px',
-    }}
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '30px',
+        padding: '30px',
+      }}
     >
-      <Typography variant="h5" color="initial">
-        Contactanos
-      </Typography>
-      <Typography>
-        {LOREM_IPSUM}
+      <Typography variant="h5">
+        Register
       </Typography>
       <Box
         sx={{
@@ -48,11 +44,8 @@ function Contactanos() {
             noValidate
             autoComplete="off"
           >
-            <Typography variant="h6" color="initial">
-              Escribenos
-            </Typography>
             <Formik
-              component={ContactForm}
+              component={RegisterForm}
               initialValues={{
                 name: '',
                 email: '',
@@ -63,12 +56,11 @@ function Contactanos() {
               validationSchema={Yup.object({
                 name: Yup.string()
                   .required('*Requerido'),
+                password: Yup.string()
+                  .required('*Requerido'),
                 email: Yup.string()
                   .required('*Requerido'),
                 phone: Yup.string()
-                  .required('*Requerido'),
-                company: Yup.string(),
-                message: Yup.string()
                   .required('*Requerido'),
               })}
               onSubmit={(values, { setSubmitting }) => {
@@ -79,6 +71,17 @@ function Contactanos() {
                 }, 400);
               }}
             />
+            <Typography sx={{ display: 'flex', gap: '10px' }}>
+              Tiene cuenta?
+              <Button
+                color="primary"
+                onClick={() => {
+                  navigate('/login');
+                }}
+              >
+                Inicia Sesion
+              </Button>
+            </Typography>
           </Box>
         </Card>
       </Box>
@@ -86,4 +89,4 @@ function Contactanos() {
   );
 }
 
-export default Contactanos;
+export default Register;

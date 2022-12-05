@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { MDBCol, MDBContainer, MDBRow } from '../../../shared/mdbreact/mdbreact';
+import { Box, Container, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { CONSTANTS, PATHS } from '../../../shared/constants/Constants';
 import CardWithImage from '../../../components/cards/Card';
 import { getFeaturedPhones } from '../../../shared/api/getPhones';
@@ -12,7 +12,6 @@ function FeaturedPhones() {
     setFeaturedPhones([...phones]);
   }, []);
 
-  // TODO Is this the best way?
   const cardInformation = featuredPhones.map((phone) => {
     const card = {
       key: phone.id,
@@ -20,23 +19,35 @@ function FeaturedPhones() {
       buttonText: CONSTANTS.DESBLOQUEATUCELULAR,
       buttonHref: PATHS.DESBLOQUEOS,
       imgSrc: phone.imageURL,
+      text: phone.description,
     };
     return card;
   });
 
   return (
-    <MDBContainer className="text-center my-5">
-      <h2 className="h1-responsive font-weight-bold text-center my-5">
-        Teléfonos Destacados
-      </h2>
-      <MDBRow>
-        {cardInformation.map((card) => (
-          <MDBCol key={card.key}>
-            <CardWithImage {...card} />
-          </MDBCol>
-        ))}
-      </MDBRow>
-    </MDBContainer>
+    <Container>
+      <Typography variant="h5" alignItems="center"> Teléfonos Destacados </Typography>
+      <Box sx={{
+        display: 'flex',
+        gap: '30px',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        marginTop: '30px',
+      }}
+      >
+        {
+          cardInformation.map((card) => (
+            <CardWithImage
+              key={card.key}
+              title={card.title}
+              buttonText={card.buttonText}
+              imgSrc={card.imgSrc}
+              id={card.key}
+            />
+          ))
+        }
+      </Box>
+    </Container>
   );
 }
 

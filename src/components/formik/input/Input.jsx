@@ -1,19 +1,26 @@
+/* eslint-disable react/prop-types */
+import { Container, TextField, Typography } from '@mui/material';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  MDBInput,
-} from '../../../shared/mdbreact/mdbreact';
 
 function Input({
   name, label, placeholder, validation, ...props
 }) {
   return (
-    <div className="mb-2">
-      <MDBInput name={name} label={label} placeholder={placeholder} {...props} />
+    <Container sx={{ display: 'flex', gap: '10px' }}>
+      <TextField
+        name={name}
+        label={label}
+        placeholder={placeholder}
+        {...props}
+        variant="outlined"
+      />
       {validation?.touched?.[name] && validation?.errors ? (
-        <div className="error">{validation?.errors?.[name]}</div>
+        <Typography variant="body1" color="primary">
+          {validation?.errors?.[name]}
+        </Typography>
       ) : null}
-    </div>
+    </Container>
   );
 }
 

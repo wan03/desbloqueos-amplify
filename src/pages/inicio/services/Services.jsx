@@ -1,10 +1,11 @@
+import { Container, Typography } from '@mui/material';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MDBCol, MDBContainer, MDBRow } from '../../../shared/mdbreact/mdbreact';
 import Card from '../../../components/cards/Card';
 
 function Servicios({ servicioTitle, servicios }) {
   return (
+  /*
     <MDBContainer>
       <h2 className="h1-responsive font-weight-bold text-center my-5">
         {servicioTitle}
@@ -19,6 +20,17 @@ function Servicios({ servicioTitle, servicios }) {
       ))}
 
     </MDBContainer>
+    */
+    <Container>
+      <Typography>
+        {servicioTitle}
+      </Typography>
+      {
+        servicios.map((servicio) => (
+          <Card key={servicio.sys.id} {...servicio} />
+        ))
+      }
+    </Container>
   );
 }
 
