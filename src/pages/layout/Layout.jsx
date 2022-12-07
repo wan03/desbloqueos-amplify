@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer';
 
-const Layout = ({ children }) => (
-  <div className="d-flex flex-column min-vh-100">
-    <Navbar />
-    <main className="flex-shrink-0">{children}</main>
-    <Footer />
-  </div>
-);
+function Layout({ children }) {
+  return (
+    <div className="d-flex flex-column min-vh-100">
+      <Navbar />
+      <main className="flex-shrink-0">{children}</main>
+      <Footer />
+    </div>
+  );
+}
 
 Layout.propTypes = {
   children: PropTypes.oneOfType([

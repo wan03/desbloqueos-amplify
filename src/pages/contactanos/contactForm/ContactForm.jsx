@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Field } from 'formik';
@@ -6,7 +7,7 @@ import {
 } from '../../../shared/mdbreact/mdbreact';
 import Input from '../../../components/formik/input/Input';
 
-const ContactForm = ({ errors, touched }) => {
+function ContactForm({ errors, touched }) {
   const validation = { errors, touched };
   return (
     <Form>
@@ -72,7 +73,7 @@ const ContactForm = ({ errors, touched }) => {
       </MDBRow>
     </Form>
   );
-};
+}
 
 ContactForm.propTypes = {
   touched: PropTypes.objectOf(

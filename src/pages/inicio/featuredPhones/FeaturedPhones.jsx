@@ -4,7 +4,7 @@ import { CONSTANTS, PATHS } from '../../../shared/constants/Constants';
 import CardWithImage from '../../../components/cards/Card';
 import { getFeaturedPhones } from '../../../shared/api/getPhones';
 
-const FeaturedPhones = () => {
+function FeaturedPhones() {
   const [featuredPhones, setFeaturedPhones] = useState([]);
 
   useEffect(() => {
@@ -38,6 +38,6 @@ const FeaturedPhones = () => {
       </MDBRow>
     </MDBContainer>
   );
-};
+}
 
 export default FeaturedPhones;

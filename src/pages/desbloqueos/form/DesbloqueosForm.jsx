@@ -16,7 +16,7 @@ import {
 } from './desbloqueosFormUtils';
 import Select from '../../../components/formik/select/Select';
 
-const DesbloqueosForm = () => {
+function DesbloqueosForm() {
   const [formActivePanel, setFromActivePanel] = useState({
     formActivePanelId: 1,
     formActivePanelChange: false,
@@ -229,6 +229,6 @@ const DesbloqueosForm = () => {
       </Formik>
     </MDBContainer>
   );
-};
+}
 
 export default DesbloqueosForm;

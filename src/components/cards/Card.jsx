@@ -7,24 +7,26 @@ import {
 // eslint-disable-next-line no-unused-vars
 import { CONSTANTS, PATHS } from '../../shared/constants/Constants';
 
-const Card = ({
+function Card({
   title, text, buttonText, buttonHref, imgSrc,
-}) => (
-  <MDBCard className="align-items-center">
-    {imgSrc && (
-    <MDBCardImage
-      className="img-fluid"
-      src={imgSrc}
-      waves
-    />
-    )}
-    <MDBCardBody>
-      {title && <MDBCardTitle>{title}</MDBCardTitle>}
-      {text && <MDBCardText>{text}</MDBCardText>}
-      {buttonText && <MDBBtn href={buttonHref}>{buttonText}</MDBBtn>}
-    </MDBCardBody>
-  </MDBCard>
-);
+}) {
+  return (
+    <MDBCard className="align-items-center">
+      {imgSrc && (
+      <MDBCardImage
+        className="img-fluid"
+        src={imgSrc}
+        waves
+      />
+      )}
+      <MDBCardBody>
+        {title && <MDBCardTitle>{title}</MDBCardTitle>}
+        {text && <MDBCardText>{text}</MDBCardText>}
+        {buttonText && <MDBBtn href={buttonHref}>{buttonText}</MDBBtn>}
+      </MDBCardBody>
+    </MDBCard>
+  );
+}
 
 Card.propTypes = {
   title: PropTypes.string,
