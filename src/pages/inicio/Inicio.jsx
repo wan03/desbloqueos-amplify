@@ -14,7 +14,6 @@ function Inicio() {
   const { data, loading } = useQuery(getInicio, { variables: { id: '3jDI1X9rZoL25IpElqhGKZ' } });
 
   const inicio = data?.inicio;
-
   /*
 if (error) {
     toast.error('Oops, hubo un error por favor intenta de nuevo', {
@@ -38,6 +37,7 @@ if (error) {
       justifyContent: 'center',
       gap: '30px',
       padding: '20px',
+      alignItems: 'center',
     }}
     >
       <Carousel />

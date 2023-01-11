@@ -7,7 +7,12 @@ function Input({
   name, label, placeholder, validation, ...props
 }) {
   return (
-    <Container sx={{ display: 'flex', gap: '10px' }}>
+    <Container sx={{ display: 'column', gap: '50px' }}>
+      {validation?.touched?.[name] && validation?.errors ? (
+        <Typography variant="body1" color="primary">
+          {validation?.errors?.[name]}
+        </Typography>
+      ) : null}
       <TextField
         name={name}
         label={label}
@@ -15,11 +20,6 @@ function Input({
         {...props}
         variant="outlined"
       />
-      {validation?.touched?.[name] && validation?.errors ? (
-        <Typography variant="body1" color="primary">
-          {validation?.errors?.[name]}
-        </Typography>
-      ) : null}
     </Container>
   );
 }

@@ -24,7 +24,13 @@ function Acerca() {
       </MDBRow>
     </MDBContainer>
     */
-    <Container sx={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+    <Container sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '30px',
+      padding: '30px',
+    }}
+    >
       <Typography variant="h5">
         Acerca
       </Typography>

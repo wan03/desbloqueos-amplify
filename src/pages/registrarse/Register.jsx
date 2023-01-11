@@ -39,7 +39,7 @@ function Register() {
         >
           <Box
             sx={{
-              '& .MuiTextField-root': { mr: 1, width: '25ch' }, padding: '30px', display: 'flex', flexDirection: 'column', gap: '20px',
+              '& .MuiTextField-root': { mr: 1 }, padding: { xs: '20px 10px', sm: '30px' }, display: 'flex', flexDirection: 'column', gap: '20px',
             }}
             noValidate
             autoComplete="off"
@@ -79,7 +79,7 @@ function Register() {
                   navigate('/login');
                 }}
               >
-                Inicia Sesion
+                Iniciar Sesion
               </Button>
             </Typography>
           </Box>

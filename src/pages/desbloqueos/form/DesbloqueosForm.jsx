@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import {
-  Box, Button, Checkbox, Container, FormControlLabel, Typography,
+  Box,
+  Button,
+  Card, Checkbox, Container, FormControlLabel, Stack, Step, StepLabel, Stepper, Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
@@ -18,7 +20,7 @@ import Select from '../../../components/formik/select/Select';
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
-    top: 22,
+    top: 25,
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
@@ -63,17 +65,20 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
 }));
 
 function ColorlibStepIcon(props) {
-  const { active, completed, className } = props;
+  const {
+    active, completed, className, icon,
+  } = props;
 
   const icons = {
-    1: 'hola',
-    2: 'hola',
-    3: 'hola',
+    1: <LocationCityIcon name="Compañia Télefonica" />,
+    2: <LocalPhoneIcon name="Personal Data" />,
+    3: <PersonIcon name="Terms and Conditions" />,
+    4: <CheckCircleIcon name="Finish" />,
   };
 
   return (
     <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
-      {icons[String(props.icon)]}
+      {icons[String(icon)]}
     </ColorlibStepIconRoot>
   );
 }
@@ -85,19 +90,20 @@ ColorlibStepIcon.propTypes = {
   icon: PropTypes.node,
 };
 
-const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'terminos y condiciones'];
+ColorlibStepIcon.defaultProps = {
+  active: false,
+  className: '',
+  completed: false,
+  icon: '',
+};
+
+const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'terminos y condiciones', 'Finalizado'];
 
 function DesbloqueosForm() {
   const [formActivePanel, setFromActivePanel] = useState({
     formActivePanelId: 1,
     formActivePanelChange: false,
   });
-  const swapFormActive = (active) => {
-    setFromActivePanel({
-      formActivePanelId: active,
-      formActivePanelChange: true,
-    });
-  };
 
   const handleNextPrevClick = (active) => {
     setFromActivePanel({
@@ -106,6 +112,10 @@ function DesbloqueosForm() {
     });
   };
   const handleSubmission = () => {
+    setFromActivePanel({
+      formActivePanelId: formActivePanel.formActivePanelId + 1,
+      formActivePanelChange: true,
+    });
     // eslint-disable-next-line no-alert
     alert('Form submitted!');
   };
@@ -115,14 +125,32 @@ function DesbloqueosForm() {
   const [devicesOptions] = useState(formatForOptions(devices));
 
   return (
-    <Container>
+    <Container sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '50px',
+    }}
+    >
       <Typography variant="h6"> Desbloquea tu celular </Typography>
-      <Box>
-        <LocationCityIcon name="Compañia Télefonica" onClick={() => swapFormActive(1)} />
-        <LocalPhoneIcon name="Personal Data" onClick={() => swapFormActive(2)} />
-        <PersonIcon name="Terms and Conditions" onClick={() => swapFormActive(3)} />
-        <CheckCircleIcon name="Finish" onClick={() => swapFormActive(4)} />
-      </Box>
+      <Stack sx={{ width: '100%' }} spacing={4}>
+        <Stepper
+          alternativeLabel
+          activeStep={formActivePanel.formActivePanelId - 1}
+          connector={<ColorlibConnector />}
+        >
+          {
+            steps.map((label) => (
+              <Step key={label}>
+                <StepLabel StepIconComponent={ColorlibStepIcon}>
+                  {
+                    label
+                  }
+                </StepLabel>
+              </Step>
+            ))
+          }
+        </Stepper>
+      </Stack>
       <Formik
         initialValues={{
           country: '',
@@ -150,62 +178,120 @@ function DesbloqueosForm() {
         }}
       >
         <Form>
-          <Container>
+          <Container sx={{
+            width: { xs: '100%', sm: '60%' },
+          }}
+          >
             {formActivePanel.formActivePanelId === 1 && (
-              <Box sx={{ maxWidth: 300 }}>
+              <Card sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '20px',
+                alignItems: 'center',
+                padding: '20px',
+              }}
+              >
                 <Typography variant="h6"> Pais y operadora </Typography>
-                <Select
-                  name="country"
-                  options={countriesOptions}
-                  label="Pais"
-                />
-                <Select
-                  name="network"
-                  options={networkOptions}
-                  label="Compañia telefonica"
-                />
+                <Box sx={{
+                  display: 'flex',
+                  gap: '30px',
+                  padding: '20px',
+                  justifyContent: 'center',
+                  width: { xs: '100%', sm: '80%' },
+                  flexDirection: { xs: 'column', sm: 'row' },
+                }}
+                >
+                  <Select
+                    name="country"
+                    options={countriesOptions}
+                    label="Pais"
+                  />
+                  <Select
+                    name="network"
+                    options={networkOptions}
+                    label="Compañia telefonica"
+                  />
+                </Box>
                 <Button variant="contained" onClick={() => handleNextPrevClick(2)}> Siguiente </Button>
-              </Box>
+              </Card>
             )}
             {formActivePanel.formActivePanelId === 2 && (
-              <Box sx={{ maxWidth: 300 }}>
+              <Card sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '20px',
+                alignItems: 'center',
+                padding: '20px',
+              }}
+              >
                 <Typography variant="h6"> Telefono </Typography>
-                <Select
-                  name="brand"
-                  options={brandOptions}
-                  label="Marca"
-                />
-                <Select
-                  name="device"
-                  options={devicesOptions}
-                  label="Modelo"
-                />
-                <Button variant="contained" onClick={() => handleNextPrevClick(1)}> Anterior </Button>
-                <Button variant="contained" onClick={() => handleNextPrevClick(3)}> Siguiente </Button>
-              </Box>
+                <Box sx={{
+                  display: 'flex',
+                  gap: '30px',
+                  padding: '20px',
+                  justifyContent: 'center',
+                  width: { xs: '100%', sm: '80%' },
+                  flexDirection: { xs: 'column', sm: 'row' },
+                }}
+                >
+                  <Select
+                    name="brand"
+                    options={brandOptions}
+                    label="Marca"
+                  />
+                  <Select
+                    name="device"
+                    options={devicesOptions}
+                    label="Modelo"
+                  />
+                </Box>
+                <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
+                  <Button variant="contained" onClick={() => handleNextPrevClick(1)}> Anterior </Button>
+                  <Button variant="contained" onClick={() => handleNextPrevClick(3)}> Siguiente </Button>
+                </Box>
+              </Card>
             )}
             { formActivePanel.formActivePanelId === 3 && (
-              <Box>
+              <Card sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '20px',
+                alignItems: 'center',
+                padding: '20px',
+              }}
+              >
                 <Typography variant="h6">
                   Servicios de desbloqueos
                 </Typography>
                 <FormControlLabel control={<Checkbox />} label="I agreee to the terms and conditions" id="checkbox" />
                 <FormControlLabel control={<Checkbox />} label="I want to receive newsletter" id="checkbox2" />
-                <Button variant="contained" onClick={() => handleNextPrevClick(2)}> Anterior </Button>
-                <Button variant="contained" onClick={() => handleNextPrevClick(4)}> Siguiente </Button>
-              </Box>
+                <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
+                  <Button variant="contained" onClick={() => handleNextPrevClick(2)}> Anterior </Button>
+                  <Button variant="contained" onClick={() => handleNextPrevClick(4)}> Siguiente </Button>
+                </Box>
+              </Card>
             )}
             { formActivePanel.formActivePanelId === 4 && (
-              <Box>
+              <Card sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '20px',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '20px',
+              }}
+              >
                 <Typography variant="h6">
                   Finish
                 </Typography>
-                <Typography>
+                <Typography textAlign="center">
                   Registration completed!
                 </Typography>
-                <Button variant="contained" onClick={() => handleNextPrevClick(3)}> Anterior </Button>
-                <Button variant="contained" onClick={() => handleSubmission()}> Submit </Button>
-              </Box>
+                <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
+                  <Button variant="contained" onClick={() => handleNextPrevClick(3)}> Anterior </Button>
+                  <Button variant="contained" onClick={() => handleSubmission()}> Submit </Button>
+                </Box>
+              </Card>
             )}
           </Container>
         </Form>

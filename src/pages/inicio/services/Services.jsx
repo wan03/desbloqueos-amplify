@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Card from '../../../components/cards/Card';
 
 function Servicios({ servicioTitle, servicios }) {
+  console.log(servicioTitle, servicios);
   return (
   /*
     <MDBContainer>

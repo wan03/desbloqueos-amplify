@@ -10,9 +10,20 @@ import DesbloqueosForm from './form/DesbloqueosForm';
 
 function Desbloqueos() {
   return (
-    <Container>
+    <Box sx={{
+      padding: '30px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '30px',
+    }}
+    >
       <Typography variant="h5"> Desbloqueos </Typography>
-      <Container>
+      <Container sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '30px',
+      }}
+      >
         <Box>
           <CardMedia component="img" height="300" image="https://via.placeholder.com/300" />
         </Box>
@@ -25,7 +36,7 @@ function Desbloqueos() {
       <Container>
         <DesbloqueosForm />
       </Container>
-    </Container>
+    </Box>
   );
 }
 

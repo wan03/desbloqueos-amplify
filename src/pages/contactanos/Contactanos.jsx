@@ -27,7 +27,7 @@ function Contactanos() {
       </Typography>
       <Box
         sx={{
-          padding: '30px',
+          padding: { xs: '10px', ms: '30px' },
           justifyContent: 'center',
           display: 'flex',
         }}
@@ -43,7 +43,12 @@ function Contactanos() {
         >
           <Box
             sx={{
-              '& .MuiTextField-root': { mr: 1, width: '25ch' }, padding: '30px', display: 'flex', flexDirection: 'column', gap: '20px',
+              '& .MuiTextField-root': { mr: 1 },
+              padding: { xs: '10px', sm: '30px' },
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '20px',
+              width: { xs: '250px', sm: '300px' },
             }}
             noValidate
             autoComplete="off"

@@ -13,7 +13,7 @@ function SelectInput({ label, options, ...props }) {
     setValueOptions(event.target.value);
   };
   return (
-    <FormControl fullWidth>
+    <FormControl sx={{ width: { xs: '100%', sm: '50%' } }}>
       <InputLabel id={field.name}>{label}</InputLabel>
       <Select
         labelId={field.name}

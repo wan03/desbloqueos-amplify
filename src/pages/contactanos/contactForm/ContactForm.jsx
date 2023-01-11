@@ -12,13 +12,14 @@ function ContactForm({ errors, touched }) {
     <Form>
       <Container sx={{
         display: 'flex',
-        gap: '30px',
         flexWrap: 'wrap',
+        gap: '30px',
         justifyContent: 'center',
-        flexDirection: 'column',
+        width: '100%',
+        alignContent: 'center',
       }}
       >
-        <Box sx={{}}>
+        <Box sx={{ }}>
           <Field
             as={Input}
             name="name"

@@ -12,7 +12,7 @@ function Telefonos() {
     setGetPhone([...phones]);
   }, []);
   return (
-    <Container>
+    <Container sx={{ padding: '20px', textAlign: 'center' }}>
       <Typography variant="h5"> Telefonos </Typography>
       <Box sx={{
         display: 'flex',
