@@ -1,51 +1,95 @@
-import React from 'react';
-import {
-  MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBView,
-} from
-  '../../shared/mdbreact/mdbreact';
+import * as React from 'react';
+import { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import MobileStepper from '@mui/material/MobileStepper';
+// import Paper from '@mui/material/Paper';
+// import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
+import { getFeaturedPhones } from '../../shared/api/getPhones';
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 function Carousel() {
+  const phone = getFeaturedPhones();
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = useState(0);
+  const maxSteps = phone.length;
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  };
   return (
-    <MDBContainer fluid>
-      <MDBCarousel
-        activeItem={1}
-        length={3}
-        showControls={false}
-        showIndicators={false}
-        className="z-depth-1"
-        slide
+    <Box sx={{ width: '400px', flexGrow: 1 }}>
+      <AutoPlaySwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={activeStep}
+        onChangeIndex={handleStepChange}
+        enableMouseEvents
       >
-        <MDBCarouselInner>
-          <MDBCarouselItem itemId="1">
-            <MDBView>
-              <img
-                className="d-block w-100"
-                src="https://mdbootstrap.com/img/Photos/Slides/img%20(35).jpg"
-                alt="First slide"
-              />
-            </MDBView>
-          </MDBCarouselItem>
-          <MDBCarouselItem itemId="2">
-            <MDBView>
-              <img
-                className="d-block w-100"
-                src="https://mdbootstrap.com/img/Photos/Slides/img%20(33).jpg"
-                alt="Second slide"
-              />
-            </MDBView>
-          </MDBCarouselItem>
-          <MDBCarouselItem itemId="3">
-            <MDBView>
-              <img
-                className="d-block w-100"
-                src="https://mdbootstrap.com/img/Photos/Slides/img%20(31).jpg"
-                alt="Third slide"
-              />
-            </MDBView>
-          </MDBCarouselItem>
-        </MDBCarouselInner>
-      </MDBCarousel>
-    </MDBContainer>
+        {
+          phone.map((step, index) => (
+            <div key={step.name}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Box
+                    component="img"
+                    sx={{
+                      display: 'block',
+                      overflow: 'hidden',
+                      width: '70%',
+                    }}
+                    src={step.imageURL}
+                    alt={step.name}
+                  />
+                </Box>
+              ) : null}
+            </div>
+          ))
+          }
+      </AutoPlaySwipeableViews>
+      <MobileStepper
+        steps={maxSteps}
+        position="static"
+        activeStep={activeStep}
+        nextButton={(
+          <Button
+            size="small"
+            onClick={handleNext}
+            disabled={activeStep === maxSteps - 1}
+          >
+            Next
+            {theme.direction === 'rtl' ? (
+              <KeyboardArrowLeft />
+            ) : (
+              <KeyboardArrowRight />
+            )}
+          </Button>
+        )}
+        backButton={(
+          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+            {theme.direction === 'rtl' ? (
+              <KeyboardArrowRight />
+            ) : (
+              <KeyboardArrowLeft />
+            )}
+            Back
+          </Button>
+        )}
+      />
+    </Box>
   );
 }
 

@@ -1,9 +1,13 @@
+import { Button } from '@mui/material';
 import React from 'react';
-import PropTypes from 'prop-types';
-import { MDBRow, MDBCol, MDBIcon } from '../../../shared/mdbreact/mdbreact';
+// import PropTypes from 'prop-types';
+/* son los parametro de la funcion
+{ whyUsTitle, whyUsReasons }
+*/
 
-function WhyUS({ whyUsTitle, whyUsReasons }) {
+function WhyUS() {
   return (
+  /*
     <section className="text-center my-5">
       <h2 className="h1-responsive font-weight-bold my-5">
         {whyUsTitle}
@@ -20,9 +24,13 @@ function WhyUS({ whyUsTitle, whyUsReasons }) {
         ))}
       </MDBRow>
     </section>
+    */
+    <Button>
+      Why us
+    </Button>
   );
 }
-
+/*
 WhyUS.propTypes = {
   whyUsTitle: PropTypes.string,
   whyUsReasons: PropTypes.arrayOf(PropTypes.shape({
@@ -35,5 +43,6 @@ WhyUS.defaultProps = {
   whyUsTitle: '',
   whyUsReasons: [],
 };
+*/
 
 export default WhyUS;

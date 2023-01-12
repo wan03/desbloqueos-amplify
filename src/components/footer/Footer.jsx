@@ -1,11 +1,11 @@
+import { Button } from '@mui/material';
 import React from 'react';
-import {
-  MDBCol, MDBContainer, MDBRow, MDBFooter,
-} from '../../shared/mdbreact/mdbreact';
-import { PATHS } from '../../shared/constants/Constants';
+
+// import { PATHS } from '../../shared/constants/Constants';
 
 function Footer() {
   return (
+  /*
     <MDBFooter color="indigo" className="font-small pt-4 mt-auto">
       <MDBContainer fluid className="text-center text-md-left">
         <MDBRow>
@@ -43,6 +43,10 @@ function Footer() {
         </MDBContainer>
       </div>
     </MDBFooter>
+    */
+    <Button variant="contained">
+      Footer
+    </Button>
   );
 }
 

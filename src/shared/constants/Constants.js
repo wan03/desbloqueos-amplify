@@ -8,4 +8,5 @@ export const PATHS = [
   { name: 'Acerca', path: '/acerca' },
   { name: 'Contáctanos', path: '/contactanos' },
   { name: 'Desbloqueos', path: '/desbloqueos' },
+  { name: 'Telefonos', path: '/telefonos' },
 ];
