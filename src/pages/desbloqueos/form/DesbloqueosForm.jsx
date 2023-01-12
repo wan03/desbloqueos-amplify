@@ -10,6 +10,7 @@ import {
 import { styled } from '@mui/material/styles';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
+import Check from '@mui/icons-material/Check';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonIcon from '@mui/icons-material/Person';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -17,6 +18,76 @@ import {
   formatForOptions, countries, networks, brands, devices,
 } from './desbloqueosFormUtils';
 import Select from '../../../components/formik/select/Select';
+
+const QontoConnector = styled(StepConnector)(({ theme }) => ({
+  [`&.${stepConnectorClasses.alternativeLabel}`]: {
+    top: 4,
+    left: 'calc(-50% + 16px)',
+    right: 'calc(50% + 16px)',
+  },
+  [`&.${stepConnectorClasses.active}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
+      borderColor: '#784af4',
+    },
+  },
+  [`&.${stepConnectorClasses.completed}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
+      borderColor: '#784af4',
+    },
+  },
+  [`& .${stepConnectorClasses.line}`]: {
+    borderColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
+    borderTopWidth: 3,
+    borderRadius: 1,
+  },
+}));
+
+const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
+  color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
+  display: 'flex',
+  height: 10,
+  alignItems: 'center',
+  ...(ownerState.active && {
+    color: '#784af4',
+  }),
+  '& .QontoStepIcon-completedIcon': {
+    color: '#784af4',
+    zIndex: 1,
+    fontSize: 18,
+  },
+  '& .QontoStepIcon-circle': {
+    width: 8,
+    height: 8,
+    borderRadius: '50%',
+    backgroundColor: 'currentColor',
+  },
+}));
+
+function QontoStepIcon(props) {
+  const { active, completed, className } = props;
+
+  return (
+    <QontoStepIconRoot ownerState={{ active }} className={className}>
+      {completed ? (
+        <Check className="QontoStepIcon-completedIcon" />
+      ) : (
+        <div className="QontoStepIcon-circle" />
+      )}
+    </QontoStepIconRoot>
+  );
+}
+
+QontoStepIcon.propTypes = {
+  active: PropTypes.bool,
+  className: PropTypes.string,
+  completed: PropTypes.bool,
+};
+
+QontoStepIcon.defaultProps = {
+  active: false,
+  className: '',
+  completed: false,
+};
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -98,6 +169,7 @@ ColorlibStepIcon.defaultProps = {
 };
 
 const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'terminos y condiciones', 'Finalizado'];
+const step = ['pais', 'telefono', 'terminos', 'Finalizado'];
 
 function DesbloqueosForm() {
   const [formActivePanel, setFromActivePanel] = useState({
@@ -125,7 +197,7 @@ function DesbloqueosForm() {
   const [devicesOptions] = useState(formatForOptions(devices));
 
   return (
-    <Container sx={{
+    <Box sx={{
       display: 'flex',
       flexDirection: 'column',
       gap: '50px',
@@ -133,10 +205,24 @@ function DesbloqueosForm() {
     >
       <Typography variant="h6"> Desbloquea tu celular </Typography>
       <Stack sx={{ width: '100%' }} spacing={4}>
+        <Stepper alternativeLabel activeStep={formActivePanel.formActivePanelId - 1} connector={<QontoConnector />} sx={{ display: { xs: 'flex', sm: 'none' } }}>
+          {
+            step.map((label) => (
+              <Step key={label}>
+                <StepLabel StepIconComponent={QontoStepIcon}>
+                  {
+                  label
+                }
+                </StepLabel>
+              </Step>
+            ))
+          }
+        </Stepper>
         <Stepper
           alternativeLabel
           activeStep={formActivePanel.formActivePanelId - 1}
           connector={<ColorlibConnector />}
+          sx={{ display: { xs: 'none', sm: 'flex' } }}
         >
           {
             steps.map((label) => (
@@ -296,7 +382,7 @@ function DesbloqueosForm() {
           </Container>
         </Form>
       </Formik>
-    </Container>
+    </Box>
   );
 }
 
