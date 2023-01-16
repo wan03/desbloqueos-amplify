@@ -1,5 +1,5 @@
 import React from 'react';
-import { Amplify } from 'aws-amplify';
+import { Amplify, API, graphqlOperation } from 'aws-amplify';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './shared/router/Routes';
 import Layout from './pages/layout/Layout';

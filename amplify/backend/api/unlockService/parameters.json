@@ -1,5 +1,5 @@
 {
-  "AppSyncApiName": "UNLOCKSERVICE",
+  "AppSyncApiName": "unlockService",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false
 }

@@ -1,46 +1,47 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
 type Country 
-  @model @auth(rules: [{ allow: public, provider: iam }])
-  @key(name: "byName", fields: ["name", "id", "name"]) {
-  id: ID!
-  drSimID: String
-  name: String!
-  networks: [Network] @connection(keyName: "byCountry", fields: ["id"])
-  expirationTime: AWSTimestamp! @ttl
+  @model @auth(rules: [{ allow: public }]) {
+  id: ID! @primaryKey 
+  drSimID: String @index(name: "byName", sortKeyFields: ["name"])
+  name: String! 
+  networks: [Network] @hasMany
+  expirationTime: AWSTimestamp! 
 }
+
 type Network 
-  @model @auth(rules: [{ allow: public, provider: iam }])
-  @key(name: "byCountry", fields: ["countryID", "id", "name"]) {
-  id: ID!
-  countryID: ID!
+  @model @auth(rules: [{ allow: public }]) {
+  id: ID! @primaryKey
+  countryID: ID! @index(name: "byCountry", sortKeyFields: ["name"])
   countryDrSimID: String
   drSimID: String
   name: String!
-  country: Country @connection(fields: ["countryID"])
-  expirationTime: AWSTimestamp! @ttl
+  country: Country @belongsTo
+  expirationTime: AWSTimestamp! 
 }
 
 type Brand 
-  @model @auth(rules: [{ allow: public, provider: iam }])
-  @key(name: "byName", fields:["name", "id"]) {
-  id: ID!
-  drSimID: String
-  name: String!
+  @model @auth(rules: [{ allow: public }]) {
+  id: ID! @primaryKey 
+  drSimID: String @index(name: "byName", sortKeyFields:["name"])
+  name: String! 
   description: String
-  devices: [Device]  @connection(keyName: "byBrand", fields: ["id"])
-  expirationTime: AWSTimestamp! @ttl
+  devices: [Device]  @hasMany
+  expirationTime: AWSTimestamp! 
 }
 type Device 
-  @model @auth(rules: [{ allow: public, provider: iam }])
-  @key(name: "byBrand", fields: ["brandID", "id", "name"]) {
-  id: ID!
-  brandID: ID!
+  @model @auth(rules: [{ allow: public }]) {
+  id: ID! @primaryKey
+  brandID: ID! @index(name: "byBrand", sortKeyFields: ["name"])
   drSimID: String
   brandDrSimID: String
   name: String!
   image: String
   description: String
-  brand: Brand @connection(fields: ["brandID"])
-  expirationTime: AWSTimestamp! @ttl
+  brand: Brand @belongsTo
+  expirationTime: AWSTimestamp! 
 }
 
 input CreateCountryInput {

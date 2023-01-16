@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { API, graphqlOperation } from 'aws-amplify';
+import { ListCountrys } from '../../../graphql/queries';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -15,6 +17,10 @@ import {
   formatForOptions, countries, networks, brands, devices,
 } from './desbloqueosFormUtils';
 import Select from '../../../components/formik/select/Select';
+
+const apiCountries = await API.graphql(graphqlOperation(ListCountrys));
+console.log("JDMA apiCountries", apiCountries)
+
 
 function DesbloqueosForm() {
   const [formActivePanel, setFromActivePanel] = useState({

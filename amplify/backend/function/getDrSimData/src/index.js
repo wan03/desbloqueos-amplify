@@ -1,17 +1,32 @@
-/* eslint-disable no-console */
-/* eslint-disable linebreak-style */
-/* eslint-disable no-plusplus */
-/* Amplify Params - DO NOT EDIT
+/*
 
-    API_UNLOCKSERVICE_GRAPHQLAPIENDPOINTOUTPUT
+Use the following code to retrieve configured secrets from SSM:
 
-    API_UNLOCKSERVICE_GRAPHQLAPIIDOUTPUT
+const aws = require('aws-sdk');
 
-    ENV
+const { Parameters } = await (new aws.SSM())
 
-    REGION
+  .getParameters({
 
-Amplify Params - DO NOT EDIT */
+    Names: ["DRSIM_KEY"].map(secretName => process.env[secretName]),
+
+    WithDecryption: true,
+
+  })
+
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+
+*/
+
+// This is sample code. Please update this to suite your schema
+
+/**
+
+ * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
+
+ */
 
 const AWS = require('aws-sdk');
 const https = require('https');
@@ -269,11 +284,13 @@ const batchCreate = async ({
   const finalResponse = [];
   const responsePromises = [];
 
-  await asyncForEach(batchData,
+  await asyncForEach(
+    batchData,
     async (batch) => {
       const temp = insertDataIntoDatabase(batch, mutation, type);
       responsePromises.push(temp);
-    });
+    },
+  );
 
   const responseBatch = await Promise.all(responsePromises);
 
@@ -351,16 +368,24 @@ const InsertData = async (data) => {
 
   if (addedCountries.length && addedNetworks.length
     && addedBrands.length && addedDevices.length) {
-    console.log('Final data: ',
-      addedCountries, addedNetworks,
-      addedBrands, addedDevices);
+    console.log(
+      'Final data: ',
+      addedCountries,
+      addedNetworks,
+      addedBrands,
+      addedDevices,
+    );
     return 'Successfully inserted data into database!';
   }
   return 'There was an error inserting data into database!';
 };
 
 exports.handler = async (event) => {
-  console.log('This is the event: ', event);
+  console.log(`EVENT: ${JSON.stringify(event)}`);
+  // const {
+  //   authorizationToken,
+  //   requestContext: { apiId, accountId },
+  // } = event;
 
   const data = await getData();
   const body = await InsertData(data);

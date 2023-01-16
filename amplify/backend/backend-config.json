@@ -1,12 +1,16 @@
 {
   "api": {
-    "UNLOCKSERVICE": {
+    "unlockService": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
+      "dependsOn": [],
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "AWS_IAM"
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            }
           },
           "additionalAuthenticationProviders": []
         }
@@ -18,16 +22,7 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "UNLOCKSERVICE",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
-        }
-      ]
+      "dependsOn": []
     }
   }
 }
