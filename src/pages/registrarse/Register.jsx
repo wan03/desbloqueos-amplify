@@ -16,6 +16,7 @@ function Register() {
         flexDirection: 'column',
         gap: '30px',
         padding: '30px',
+        textAlign: 'center',
       }}
     >
       <Typography variant="h5">

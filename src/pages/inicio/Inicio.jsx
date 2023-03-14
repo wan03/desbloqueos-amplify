@@ -38,6 +38,7 @@ if (error) {
       gap: '30px',
       padding: '20px',
       alignItems: 'center',
+      width: '90%',
     }}
     >
       <Carousel />
