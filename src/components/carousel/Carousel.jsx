@@ -32,7 +32,7 @@ function Carousel() {
     setActiveStep(step);
   };
   return (
-    <Box sx={{ width: '400px', flexGrow: 1 }}>
+    <Box sx={{ width: { sm: '400px', ms: '350px' }, flexGrow: 1 }}>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}

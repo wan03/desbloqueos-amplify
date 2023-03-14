@@ -15,6 +15,7 @@ function IniciarSesion() {
       flexDirection: 'column',
       gap: '30px',
       padding: '30px',
+      textAlign: 'center',
     }}
     >
       <Typography variant="h5" color="initial"> Iniciar Sesion </Typography>
