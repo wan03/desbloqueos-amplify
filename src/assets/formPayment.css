@@ -1,0 +1,21 @@
+.form_payment{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+.form_payment-cardElement{
+    width: 100%;
+}
+.form_payment-btn{
+    width: max-content;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #1565c0;
+    color: #f9fbe7;
+}
+.form_payment-btn:hover{
+    cursor: pointer;
+    background-color: #1976d2;
+}

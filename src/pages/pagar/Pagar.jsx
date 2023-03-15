@@ -7,9 +7,12 @@ import {
   Elements, CardElement, useStripe, useElements,
 } from '@stripe/react-stripe-js';
 import {
-  Container, Typography, Card, Box,
+  Box,
+  Card,
+  Container, Typography,
 } from '@mui/material';
 import axios from 'axios';
+import '../../assets/formPayment.css';
 
 const stripePromise = loadStripe('pk_test_51MkaXICXb1FSA7FjQkCaO2V5MFLuhvmEHflE8AnBVI1l7aZWknTtqAKSlwybqIrxy3jfHkdRZbmWoXDjuDJsnr8p00YP3V819d');
 
@@ -46,9 +49,11 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
-      <button disabled={!stripe}>
+    <form onSubmit={handleSubmit} className="form_payment">
+      <div className="form_payment-cardElement">
+        <CardElement />
+      </div>
+      <button disabled={!stripe} className="form_payment-btn">
         {loading ? (
           <div>Loading...</div>
         ) : 'Pagar'}
@@ -78,14 +83,16 @@ function Pagar() {
           padding: '20px',
           justifyContent: 'center',
           width: { xs: '100%', sm: '80%' },
-          flexDirection: { xs: 'column' },
+          flexDirection: 'column',
         }}
         >
           <Elements stripe={stripePromise}>
             <CheckoutForm />
           </Elements>
         </Box>
+
       </Card>
+
     </Container>
   );
 }

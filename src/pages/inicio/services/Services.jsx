@@ -4,24 +4,7 @@ import PropTypes from 'prop-types';
 import Card from '../../../components/cards/Card';
 
 function Servicios({ servicioTitle, servicios }) {
-  console.log(servicioTitle, servicios);
   return (
-  /*
-    <MDBContainer>
-      <h2 className="h1-responsive font-weight-bold text-center my-5">
-        {servicioTitle}
-      </h2>
-
-      {servicios.map((servicio) => (
-        <MDBRow key={servicio.sys.id}>
-          <MDBCol>
-            <Card {...servicio} />
-          </MDBCol>
-        </MDBRow>
-      ))}
-
-    </MDBContainer>
-    */
     <Container>
       <Typography>
         {servicioTitle}
