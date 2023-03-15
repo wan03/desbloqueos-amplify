@@ -7,7 +7,7 @@ import {
   Elements, CardElement, useStripe, useElements,
 } from '@stripe/react-stripe-js';
 import {
-  Container, Typography,
+  Container, Typography, Card, Box,
 } from '@mui/material';
 import axios from 'axios';
 
@@ -63,13 +63,29 @@ function Pagar() {
       width: { xs: '100%', sm: '80%' },
     }}
     >
-
-      <Typography variant="h6"> Pasarela de Pago </Typography>
-
-      <Elements stripe={stripePromise}>
-        <CheckoutForm />
-      </Elements>
-
+      <Card sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        alignItems: 'center',
+        padding: '20px',
+      }}
+      >
+        <Typography variant="h6"> Pasarela de Pago </Typography>
+        <Box sx={{
+          display: 'flex',
+          gap: '30px',
+          padding: '20px',
+          justifyContent: 'center',
+          width: { xs: '100%', sm: '80%' },
+          flexDirection: { xs: 'column' },
+        }}
+        >
+          <Elements stripe={stripePromise}>
+            <CheckoutForm />
+          </Elements>
+        </Box>
+      </Card>
     </Container>
   );
 }
