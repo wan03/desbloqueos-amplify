@@ -77,6 +77,7 @@ function Pagar() {
       }}
       >
         <Typography variant="h6"> Pasarela de Pago </Typography>
+        <Typography variant="body1" color="primary"> Monto: $100 </Typography>
         <Box sx={{
           display: 'flex',
           gap: '30px',
