@@ -15,10 +15,12 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonIcon from '@mui/icons-material/Person';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import Pagar from '../../pagar/Pagar';
 import {
   formatForOptions, countries, networks, brands, devices,
 } from './desbloqueosFormUtils';
 import Select from '../../../components/formik/select/Select';
+import Input from '../../../components/payment/input/Input';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -198,6 +200,8 @@ function DesbloqueosForm() {
   const [brandOptions] = useState(formatForOptions(brands));
   const [devicesOptions] = useState(formatForOptions(devices));
 
+  const [formImei, setFormImei] = useState(false);
+
   return (
     <Box sx={{
       display: 'flex',
@@ -360,6 +364,11 @@ function DesbloqueosForm() {
               </Card>
             )}
             { formActivePanel.formActivePanelId === 4 && (
+              formImei
+                ? <Pagar />
+                : <Input setFormImei={setFormImei} formImei={formImei} Next={handleNextPrevClick} />
+            )}
+            { formActivePanel.formActivePanelId === 5 && (
               <Card sx={{
                 display: 'flex',
                 flexDirection: 'column',
