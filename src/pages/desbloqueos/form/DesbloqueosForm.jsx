@@ -13,11 +13,14 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import Check from '@mui/icons-material/Check';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonIcon from '@mui/icons-material/Person';
+import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import Pagar from '../../pagar/Pagar';
 import {
   formatForOptions, countries, networks, brands, devices,
 } from './desbloqueosFormUtils';
 import Select from '../../../components/formik/select/Select';
+import Input from '../../../components/payment/input/Input';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -144,7 +147,8 @@ function ColorlibStepIcon(props) {
     1: <LocationCityIcon name="Compañia Télefonica" />,
     2: <LocalPhoneIcon name="Personal Data" />,
     3: <PersonIcon name="Terms and Conditions" />,
-    4: <CheckCircleIcon name="Finish" />,
+    4: <PaymentIcon name="payment" />,
+    5: <CheckCircleIcon name="Finish" />,
   };
 
   return (
@@ -168,7 +172,7 @@ ColorlibStepIcon.defaultProps = {
   icon: '',
 };
 
-const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'terminos y condiciones', 'Finalizado'];
+const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'terminos y condiciones', 'Pagar', 'Finalizado'];
 const step = ['pais', 'telefono', 'terminos', 'Finalizado'];
 
 function DesbloqueosForm() {
@@ -195,6 +199,8 @@ function DesbloqueosForm() {
   const [networkOptions] = useState(formatForOptions(networks));
   const [brandOptions] = useState(formatForOptions(brands));
   const [devicesOptions] = useState(formatForOptions(devices));
+
+  const [formImei, setFormImei] = useState(false);
 
   return (
     <Box sx={{
@@ -358,6 +364,11 @@ function DesbloqueosForm() {
               </Card>
             )}
             { formActivePanel.formActivePanelId === 4 && (
+              formImei
+                ? <Pagar />
+                : <Input setFormImei={setFormImei} formImei={formImei} Next={handleNextPrevClick} />
+            )}
+            { formActivePanel.formActivePanelId === 5 && (
               <Card sx={{
                 display: 'flex',
                 flexDirection: 'column',
