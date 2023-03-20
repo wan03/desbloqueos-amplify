@@ -16,9 +16,9 @@ function FeaturedPhones() {
     const card = {
       key: phone.id,
       title: phone.name,
-      buttonText: CONSTANTS.DESBLOQUEATUCELULAR,
-      buttonHref: PATHS.DESBLOQUEOS,
-      imgSrc: phone.imageURL,
+      buttontext: CONSTANTS.DESBLOQUEATUCELULAR,
+      buttonhref: PATHS.DESBLOQUEOS,
+      imgsrc: phone.imageURL,
       text: phone.description,
     };
     return card;
@@ -40,8 +40,8 @@ function FeaturedPhones() {
             <CardWithImage
               key={card.key}
               title={card.title}
-              buttonText={card.buttonText}
-              imgSrc={card.imgSrc}
+              buttontext={card.buttontext}
+              imgsrc={card.imgsrc}
               id={card.key}
             />
           ))

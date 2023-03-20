@@ -1,11 +1,22 @@
-.form_payment{
+.div_payment-cardElement{
     display: flex;
     flex-direction: column;
     gap: 30px;
     align-items: center;
 }
 .form_payment-cardElement{
-    width: 100%;
+    width: 80%;
+    background: #e4e3e1;
+    border-bottom: 1px;
+    border-bottom-color: #fd8d1d;
+}
+.form-label{
+	width:72px;
+	font-weight:bold;
+	display:inline-block;
+    padding: 10px;
+    color: #fd8d1d;
+    font-family: 'system-ui';
 }
 .form_payment-btn{
     width: max-content;

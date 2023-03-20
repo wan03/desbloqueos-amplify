@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './shared/apollo/Apollo';
 import reportWebVitals from './reportWebVitals';
@@ -14,14 +14,15 @@ import App from './App';
 
 // eslint-disable-next-line no-unused-vars
 const BUILD_ENV = process.env.REACT_APP_BUILD_ENV || 'any-default-local-build_env';
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
 
-ReactDOM.render(
+root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>
   </React.StrictMode>,
-  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

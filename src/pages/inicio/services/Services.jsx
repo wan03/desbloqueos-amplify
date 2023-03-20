@@ -23,8 +23,8 @@ Servicios.propTypes = {
   servicios: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     text: PropTypes.string,
-    buttonText: PropTypes.string,
-    buttonHref: PropTypes.string,
+    buttontext: PropTypes.string,
+    buttonhref: PropTypes.string,
   })),
 };
 

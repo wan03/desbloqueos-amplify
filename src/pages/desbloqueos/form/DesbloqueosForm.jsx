@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
@@ -181,6 +182,14 @@ function DesbloqueosForm() {
     formActivePanelChange: false,
   });
 
+  const [valueOptions, setValueOptions] = useState();
+
+  const handleChange = (event) => {
+    setValueOptions(event.target.value);
+    console.log(event.target.value);
+    console.log(valueOptions);
+  };
+
   const handleNextPrevClick = (active) => {
     setFromActivePanel({
       formActivePanelId: active,
@@ -193,7 +202,7 @@ function DesbloqueosForm() {
       formActivePanelChange: true,
     });
     // eslint-disable-next-line no-alert
-    alert('Form submitted!');
+    console.log('Form submitted!');
   };
   const [countriesOptions] = useState(formatForOptions(countries));
   const [networkOptions] = useState(formatForOptions(networks));
@@ -294,6 +303,8 @@ function DesbloqueosForm() {
                 }}
                 >
                   <Select
+                    value={valueOptions}
+                    onChange={handleChange}
                     name="country"
                     options={countriesOptions}
                     label="Pais"
@@ -364,9 +375,8 @@ function DesbloqueosForm() {
               </Card>
             )}
             { formActivePanel.formActivePanelId === 4 && (
-              formImei
-                ? <Pagar />
-                : <Input setFormImei={setFormImei} formImei={formImei} Next={handleNextPrevClick} />
+              // eslint-disable-next-line max-len
+              formImei ? <Pagar /> : <Input setFormImei={setFormImei} formImei={formImei} Next={handleNextPrevClick} />
             )}
             { formActivePanel.formActivePanelId === 5 && (
               <Card sx={{

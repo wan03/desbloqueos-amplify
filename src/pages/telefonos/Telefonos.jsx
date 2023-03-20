@@ -27,8 +27,8 @@ function Telefonos() {
             <Card
               key={phone.id}
               title={phone.name}
-              imgSrc={phone.imageURL}
-              buttonText={CONSTANTS.DESBLOQUEATUCELULAR}
+              imgsrc={phone.imageURL}
+              buttontext={CONSTANTS.DESBLOQUEATUCELULAR}
               id={phone.id}
             />
           ))
