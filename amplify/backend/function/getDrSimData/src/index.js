@@ -269,11 +269,13 @@ const batchCreate = async ({
   const finalResponse = [];
   const responsePromises = [];
 
-  await asyncForEach(batchData,
+  await asyncForEach(
+    batchData,
     async (batch) => {
       const temp = insertDataIntoDatabase(batch, mutation, type);
       responsePromises.push(temp);
-    });
+    },
+  );
 
   const responseBatch = await Promise.all(responsePromises);
 
@@ -351,9 +353,15 @@ const InsertData = async (data) => {
 
   if (addedCountries.length && addedNetworks.length
     && addedBrands.length && addedDevices.length) {
-    console.log('Final data: ',
-      addedCountries, addedNetworks,
-      addedBrands, addedDevices);
+    console.log(
+      'Final data: ',
+      addedCountries,
+
+      addedNetworks,
+      addedBrands,
+
+      addedDevices,
+    );
     return 'Successfully inserted data into database!';
   }
   return 'There was an error inserting data into database!';
