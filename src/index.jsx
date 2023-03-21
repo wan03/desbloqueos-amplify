@@ -1,8 +1,10 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import ReactDOM from 'react-dom/client';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './shared/apollo/Apollo';
 import reportWebVitals from './reportWebVitals';
+import store from './store';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '@fontsource/roboto/300.css';
@@ -14,13 +16,13 @@ import App from './App';
 
 // eslint-disable-next-line no-unused-vars
 const BUILD_ENV = process.env.REACT_APP_BUILD_ENV || 'any-default-local-build_env';
-const rootElement = document.getElementById('root');
-const root = createRoot(rootElement);
-
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ApolloProvider>
   </React.StrictMode>,
 );
