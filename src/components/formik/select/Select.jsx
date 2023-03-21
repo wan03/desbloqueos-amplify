@@ -5,12 +5,19 @@ import { FormControl, InputLabel, MenuItem } from '@mui/material';
 import PropTypes from 'prop-types';
 import Select from '@mui/material/Select';
 
-function SelectInput({ label, options, ...props }) {
+function SelectInput({
+  label, options, opciones, ...props
+}) {
   const [field, meta] = useField(props);
   const [valueOptions, setValueOptions] = useState('');
 
   const handleChange = (event) => {
     setValueOptions(event.target.value);
+    opciones.push(
+      {
+        [label]: event.target.value,
+      },
+    );
   };
   return (
     <FormControl sx={{ width: { xs: '100%', sm: '50%' } }}>
@@ -24,7 +31,7 @@ function SelectInput({ label, options, ...props }) {
       >
         {
           options.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem key={option.value} value={option.text}>
               {option.text}
             </MenuItem>
           ))

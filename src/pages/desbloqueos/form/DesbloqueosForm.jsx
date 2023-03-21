@@ -182,14 +182,6 @@ function DesbloqueosForm() {
     formActivePanelChange: false,
   });
 
-  const [valueOptions, setValueOptions] = useState();
-
-  const handleChange = (event) => {
-    setValueOptions(event.target.value);
-    console.log(event.target.value);
-    console.log(valueOptions);
-  };
-
   const handleNextPrevClick = (active) => {
     setFromActivePanel({
       formActivePanelId: active,
@@ -210,6 +202,8 @@ function DesbloqueosForm() {
   const [devicesOptions] = useState(formatForOptions(devices));
 
   const [formImei, setFormImei] = useState(false);
+
+  const opciones = [];
 
   return (
     <Box sx={{
@@ -303,16 +297,16 @@ function DesbloqueosForm() {
                 }}
                 >
                   <Select
-                    value={valueOptions}
-                    onChange={handleChange}
                     name="country"
                     options={countriesOptions}
                     label="Pais"
+                    opciones={opciones}
                   />
                   <Select
                     name="network"
                     options={networkOptions}
                     label="Compañia telefonica"
+                    opciones={opciones}
                   />
                 </Box>
                 <Button variant="contained" onClick={() => handleNextPrevClick(2)}> Siguiente </Button>
@@ -341,11 +335,13 @@ function DesbloqueosForm() {
                     name="brand"
                     options={brandOptions}
                     label="Marca"
+                    opciones={opciones}
                   />
                   <Select
                     name="device"
                     options={devicesOptions}
                     label="Modelo"
+                    opciones={opciones}
                   />
                 </Box>
                 <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
