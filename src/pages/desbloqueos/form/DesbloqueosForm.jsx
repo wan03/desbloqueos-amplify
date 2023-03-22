@@ -203,8 +203,6 @@ function DesbloqueosForm() {
 
   const [formImei, setFormImei] = useState(false);
 
-  const opciones = [];
-
   return (
     <Box sx={{
       display: 'flex',
@@ -300,13 +298,13 @@ function DesbloqueosForm() {
                     name="country"
                     options={countriesOptions}
                     label="Pais"
-                    opciones={opciones}
+                    id={1}
                   />
                   <Select
                     name="network"
                     options={networkOptions}
                     label="Compañia telefonica"
-                    opciones={opciones}
+                    id={2}
                   />
                 </Box>
                 <Button variant="contained" onClick={() => handleNextPrevClick(2)}> Siguiente </Button>
@@ -335,13 +333,13 @@ function DesbloqueosForm() {
                     name="brand"
                     options={brandOptions}
                     label="Marca"
-                    opciones={opciones}
+                    id={3}
                   />
                   <Select
                     name="device"
                     options={devicesOptions}
                     label="Modelo"
-                    opciones={opciones}
+                    id={4}
                   />
                 </Box>
                 <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
