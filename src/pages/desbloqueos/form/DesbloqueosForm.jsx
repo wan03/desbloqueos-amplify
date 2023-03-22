@@ -210,9 +210,7 @@ function DesbloqueosForm() {
   const [networkOptions] = useState(formatForOptions(networks));
   const [brandOptions] = useState(formatForOptions(brands));
   const [devicesOptions] = useState(formatForOptions(devices));
-
   const [formImei, setFormImei] = useState(false);
-
   return (
     <Box sx={{
       display: 'flex',

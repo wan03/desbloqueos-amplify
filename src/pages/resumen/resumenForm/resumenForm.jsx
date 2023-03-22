@@ -38,7 +38,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input3"
           label="Marca"
-          defaultValue="Samsumg"
+          value={opciones[2].Marca}
           InputProps={{
             readOnly: true,
           }}
@@ -47,7 +47,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input4"
           label="Modelo"
-          defaultValue="Note 10"
+          value={opciones[3].Modelo}
           InputProps={{
             readOnly: true,
           }}
@@ -58,7 +58,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input5"
           label="Tiempo Minimo de Desbloqueo"
-          defaultValue="1 dia"
+          value="1 dia"
           InputProps={{
             readOnly: true,
           }}
