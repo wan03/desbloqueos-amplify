@@ -2,8 +2,10 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
+import { useSelector } from 'react-redux';
 
 function ResumenForm() {
+  const opciones = useSelector((state) => state.opciones);
   return (
     <Box
       sx={{
@@ -16,7 +18,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input1"
           label="Pais"
-          defaultValue="Venezuela"
+          value={opciones[0].Pais}
           InputProps={{
             readOnly: true,
           }}

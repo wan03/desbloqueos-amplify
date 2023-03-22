@@ -16,12 +16,27 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonIcon from '@mui/icons-material/Person';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+// eslint-disable-next-line import/no-unresolved
+// import { createData } from 'getDrSimData/index';
+import axios from 'axios';
 import Pagar from '../../pagar/Pagar';
 import {
   formatForOptions, countries, networks, brands, devices,
 } from './desbloqueosFormUtils';
 import Select from '../../../components/formik/select/Select';
 import Input from '../../../components/payment/input/Input';
+
+const api = axios.create({
+  baseURL: 'https://n5um5iws84.execute-api.us-east-2.amazonaws.com/$default',
+});
+
+api.get('/items')
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -139,6 +154,15 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
   }),
 }));
 
+/* async function handleCreateData() {
+  try {
+    await createData();
+    console.log('Datos creados correctamente.');
+  } catch (error) {
+    console.error('Error al crear los datos:', error);
+  }
+} */
+
 function ColorlibStepIcon(props) {
   const {
     active, completed, className, icon,
@@ -177,6 +201,7 @@ const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'terminos y condi
 const step = ['pais', 'telefono', 'terminos', 'Finalizado'];
 
 function DesbloqueosForm() {
+  // handleCreateData();
   const [formActivePanel, setFromActivePanel] = useState({
     formActivePanelId: 1,
     formActivePanelChange: false,
@@ -202,8 +227,6 @@ function DesbloqueosForm() {
   const [devicesOptions] = useState(formatForOptions(devices));
 
   const [formImei, setFormImei] = useState(false);
-
-  const opciones = [];
 
   return (
     <Box sx={{
@@ -300,13 +323,13 @@ function DesbloqueosForm() {
                     name="country"
                     options={countriesOptions}
                     label="Pais"
-                    opciones={opciones}
+                    id={1}
                   />
                   <Select
                     name="network"
                     options={networkOptions}
                     label="Compañia telefonica"
-                    opciones={opciones}
+                    id={2}
                   />
                 </Box>
                 <Button variant="contained" onClick={() => handleNextPrevClick(2)}> Siguiente </Button>
@@ -335,13 +358,13 @@ function DesbloqueosForm() {
                     name="brand"
                     options={brandOptions}
                     label="Marca"
-                    opciones={opciones}
+                    id={3}
                   />
                   <Select
                     name="device"
                     options={devicesOptions}
                     label="Modelo"
-                    opciones={opciones}
+                    id={4}
                   />
                 </Box>
                 <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>

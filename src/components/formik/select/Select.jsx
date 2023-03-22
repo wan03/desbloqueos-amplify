@@ -4,26 +4,19 @@ import { useField } from 'formik';
 import { FormControl, InputLabel, MenuItem } from '@mui/material';
 import PropTypes from 'prop-types';
 import Select from '@mui/material/Select';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setOpcionesGlobal } from '../../../store/slices/opciones.slice';
 
 function SelectInput({
-  label, options, ...props
+  label, options, id, ...props
 }) {
   const [field, meta] = useField(props);
   const [valueOptions, setValueOptions] = useState('');
-  const opciones = useSelector((state) => state.opciones);
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
     setValueOptions(event.target.value);
-    // opciones.push(
-    //   {
-    //     [label]: event.target.value,
-    //   },
-    // );
-    dispatch(setOpcionesGlobal());
-    console.log(opciones);
+    dispatch(setOpcionesGlobal({ [label]: event.target.value, id: `${id}` }));
   };
   return (
     <FormControl sx={{ width: { xs: '100%', sm: '50%' } }}>
