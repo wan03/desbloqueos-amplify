@@ -10,10 +10,9 @@ export const opcionesSlice = createSlice({
       if (index === -1) {
         state.push(action.payload);
       } else {
-        state.splice(index, 1);
-        state.push(action.payload);
+        // eslint-disable-next-line no-param-reassign
+        state[index] = action.payload;
       }
-      // state.push(action.payload);
     },
   },
 });
