@@ -367,7 +367,8 @@ const InsertData = async (data) => {
   return 'There was an error inserting data into database!';
 };
 
-exports.handler = async (event) => {
+async function createData(event) {
+/* exports.handler = async (event) => { */
   console.log('This is the event: ', event);
 
   const data = await getData();
@@ -392,4 +393,8 @@ exports.handler = async (event) => {
       'Access-Control-Allow-Origin': '*',
     },
   };
+};
+
+module.exports = {
+  createData,
 };
