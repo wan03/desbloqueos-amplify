@@ -9,7 +9,7 @@ function Input({ setFormImei, formImei, Next }) {
       <TextField id="email" label="Correo electronico" variant="filled" />
       <Box sx={{ display: 'flex', gap: '30px' }}>
         <Button variant="contained" onClick={() => Next(3)}> Volver</Button>
-        <Button variant="contained" onClick={() => setFormImei(!formImei)}> Siguiente </Button>
+        <Button variant="contained" onClick={() => setFormImei(!formImei)} type="button"> Siguiente </Button>
       </Box>
     </Box>
   );
