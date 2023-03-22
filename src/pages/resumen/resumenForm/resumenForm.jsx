@@ -27,7 +27,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input2"
           label="Operadora"
-          defaultValue="Movistar"
+          value={opciones[1]['Compañia telefonica']}
           InputProps={{
             readOnly: true,
           }}

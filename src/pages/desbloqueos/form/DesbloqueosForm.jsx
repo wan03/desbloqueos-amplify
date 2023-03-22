@@ -16,27 +16,12 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonIcon from '@mui/icons-material/Person';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-// eslint-disable-next-line import/no-unresolved
-// import { createData } from 'getDrSimData/index';
-import axios from 'axios';
 import Pagar from '../../pagar/Pagar';
 import {
   formatForOptions, countries, networks, brands, devices,
 } from './desbloqueosFormUtils';
 import Select from '../../../components/formik/select/Select';
 import Input from '../../../components/payment/input/Input';
-
-const api = axios.create({
-  baseURL: 'https://n5um5iws84.execute-api.us-east-2.amazonaws.com/$default',
-});
-
-api.get('/items')
-  .then((response) => {
-    console.log(response.data);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
