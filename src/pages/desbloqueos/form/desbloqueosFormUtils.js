@@ -1,8 +1,22 @@
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'https://z3djga9l6h.execute-api.us-east-2.amazonaws.com',
+});
+
+export const countries = api.get('/items')
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error(error);
+});
+
 export const formatForOptions = (rawOptions) => rawOptions.map(
   (option) => ({ value: option.id, text: option.name }),
 );
 
-export const countries = [
+/* export const countries = [
   {
 
     id: '1146',
@@ -17,7 +31,7 @@ export const countries = [
     id: '1937',
     name: 'China',
   },
-];
+]; */
 
 export const networks = [
   {
