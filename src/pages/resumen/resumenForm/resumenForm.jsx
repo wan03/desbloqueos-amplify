@@ -78,7 +78,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input7"
           label="IMEI"
-          defaultValue="2121545479852144535462324"
+          value={opciones[4].imei}
           InputProps={{
             readOnly: true,
           }}
@@ -87,7 +87,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input8"
           label="E-Mail"
-          defaultValue="rlunar@mercadeoracional.com"
+          value={opciones[5].email}
           InputProps={{
             readOnly: true,
           }}
