@@ -1,27 +1,26 @@
-import axios from 'axios';
+/* import axios from 'axios';
+import React from 'react';
 
-const api = axios.create({
-  baseURL: 'https://z3djga9l6h.execute-api.us-east-2.amazonaws.com',
-});
-
-export const countries = api.get('/items')
-  .then(response => {
-    console.log(response.data);
-  })
-  .catch(error => {
-    console.error(error);
-});
-
+const baseURL = 'https://z3djga9l6h.execute-api.us-east-2.amazonaws.com';
+function paises() {
+  const [post, setPost] = React.useState(null);
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => { setPost(response.data); });
+  }, []);
+  if (!post) { return null; }
+  return (post);
+}
+const prueba = paises();
+console.log(prueba);
+*/
 export const formatForOptions = (rawOptions) => rawOptions.map(
   (option) => ({ value: option.id, text: option.name }),
 );
 
-/* export const countries = [
+export const countries = [
   {
-
     id: '1146',
     name: 'Argentina',
-
   },
   {
     id: '1932',
@@ -31,7 +30,7 @@ export const formatForOptions = (rawOptions) => rawOptions.map(
     id: '1937',
     name: 'China',
   },
-]; */
+];
 
 export const networks = [
   {
