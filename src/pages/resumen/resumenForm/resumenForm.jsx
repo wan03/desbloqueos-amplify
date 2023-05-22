@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 
 function ResumenForm() {
   const opciones = useSelector((state) => state.opciones);
+  // eslint-disable-next-line no-console
+  console.log(opciones);
   return (
     <Box
       sx={{

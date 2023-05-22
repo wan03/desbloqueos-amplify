@@ -16,6 +16,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonIcon from '@mui/icons-material/Person';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+// import { useSelector } from 'react-redux';
 import Pagar from '../../pagar/Pagar';
 import {
   formatForOptions, countries, networks, brands, devices,
@@ -192,12 +193,26 @@ function DesbloqueosForm() {
     formActivePanelChange: false,
   });
 
+  const [countriesOptions] = useState(formatForOptions(countries));
+  const [networkOptions] = useState(formatForOptions(networks));
+  const [brandOptions] = useState(formatForOptions(brands));
+  const [devicesOptions] = useState(formatForOptions(devices));
+  const [formImei, setFormImei] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event) => {
+    console.log('hola mundo');
+    console.log(event);
+    setInputValue(event.target.value);
+  };
+
   const handleNextPrevClick = (active) => {
     setFromActivePanel({
       formActivePanelId: active,
       formActivePanelChange: true,
     });
   };
+
   const handleSubmission = () => {
     setFromActivePanel({
       formActivePanelId: formActivePanel.formActivePanelId + 1,
@@ -206,11 +221,7 @@ function DesbloqueosForm() {
     // eslint-disable-next-line no-alert
     console.log('Form submitted!');
   };
-  const [countriesOptions] = useState(formatForOptions(countries));
-  const [networkOptions] = useState(formatForOptions(networks));
-  const [brandOptions] = useState(formatForOptions(brands));
-  const [devicesOptions] = useState(formatForOptions(devices));
-  const [formImei, setFormImei] = useState(false);
+
   return (
     <Box sx={{
       display: 'flex',
@@ -378,7 +389,7 @@ function DesbloqueosForm() {
             )}
             { formActivePanel.formActivePanelId === 4 && (
               // eslint-disable-next-line max-len
-              formImei ? <Pagar /> : <Input setFormImei={setFormImei} formImei={formImei} Next={handleNextPrevClick} />
+              formImei ? <Pagar /> : <Input setFormImei={setFormImei} formImei={formImei} Next={handleNextPrevClick} value={inputValue} onChange={handleInputChange} />
             )}
             { formActivePanel.formActivePanelId === 5 && (
               <Card sx={{

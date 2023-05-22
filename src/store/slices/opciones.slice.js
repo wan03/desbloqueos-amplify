@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { createSlice } from '@reduxjs/toolkit';
 
 // Cambiamos mySlice por el nombre de nuestro slice (usersSlice, toDosSlice...)
@@ -6,7 +7,7 @@ export const opcionesSlice = createSlice({
   initialState: [],
   reducers: {
     setOpcionesGlobal: (state, action) => {
-      const index = state.findIndex((e) => e.id === action.payload.id);
+      const index = state.findIndex((e) => (e.id === action.payload.id));
       if (index === -1) {
         state.push(action.payload);
       } else {

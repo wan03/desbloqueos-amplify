@@ -10,12 +10,12 @@ export const countries = [
 
   },
   {
-    id: '1932',
-    name: 'Canada',
+    id: '1024',
+    name: 'Rep. Dominican',
   },
   {
-    id: '1937',
-    name: 'China',
+    id: '1150',
+    name: 'Venezuela',
   },
 ];
 
@@ -53,7 +53,7 @@ export const brands = [
   },
   {
     id: '29',
-    name: 'iPhone',
+    name: 'Apple',
   },
 ];
 
