@@ -198,13 +198,6 @@ function DesbloqueosForm() {
   const [brandOptions] = useState(formatForOptions(brands));
   const [devicesOptions] = useState(formatForOptions(devices));
   const [formImei, setFormImei] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-
-  const handleInputChange = (event) => {
-    console.log('hola mundo');
-    console.log(event);
-    setInputValue(event.target.value);
-  };
 
   const handleNextPrevClick = (active) => {
     setFromActivePanel({
@@ -389,7 +382,7 @@ function DesbloqueosForm() {
             )}
             { formActivePanel.formActivePanelId === 4 && (
               // eslint-disable-next-line max-len
-              formImei ? <Pagar /> : <Input setFormImei={setFormImei} formImei={formImei} Next={handleNextPrevClick} value={inputValue} onChange={handleInputChange} />
+              formImei ? <Pagar /> : <Input setFormImei={setFormImei} formImei={formImei} Next={handleNextPrevClick} />
             )}
             { formActivePanel.formActivePanelId === 5 && (
               <Card sx={{
