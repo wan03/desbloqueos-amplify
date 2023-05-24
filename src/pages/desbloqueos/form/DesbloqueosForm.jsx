@@ -17,12 +17,14 @@ import PersonIcon from '@mui/icons-material/Person';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 // import { useSelector } from 'react-redux';
+import AppSettingsAltIcon from '@mui/icons-material/AppSettingsAlt';
 import Pagar from '../../pagar/Pagar';
 import {
-  formatForOptions, countries, networks, brands, devices,
+  formatForOptions, countries, networks, brands, devices, tools,
 } from './desbloqueosFormUtils';
 import Select from '../../../components/formik/select/Select';
 import Input from '../../../components/payment/input/Input';
+import SelectService from '../../servicios/input/SelectService';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -157,9 +159,10 @@ function ColorlibStepIcon(props) {
   const icons = {
     1: <LocationCityIcon name="Compañia Télefonica" />,
     2: <LocalPhoneIcon name="Personal Data" />,
-    3: <PersonIcon name="Terms and Conditions" />,
-    4: <PaymentIcon name="payment" />,
-    5: <CheckCircleIcon name="Finish" />,
+    4: <PersonIcon name="Terms and Conditions" />,
+    5: <PaymentIcon name="payment" />,
+    6: <CheckCircleIcon name="Finish" />,
+    3: <AppSettingsAltIcon name="Finish" />,
   };
 
   return (
@@ -183,8 +186,8 @@ ColorlibStepIcon.defaultProps = {
   icon: '',
 };
 
-const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'terminos y condiciones', 'Pagar', 'Finalizado'];
-const step = ['pais', 'telefono', 'terminos', 'Finalizado'];
+const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'Servicio', 'terminos y condiciones', 'Pagar', 'Finalizado'];
+const step = ['pais', 'telefono', 'terminos', 'pagar', 'Finalizado'];
 
 function DesbloqueosForm() {
   // handleCreateData();
@@ -197,6 +200,7 @@ function DesbloqueosForm() {
   const [networkOptions] = useState(formatForOptions(networks));
   const [brandOptions] = useState(formatForOptions(brands));
   const [devicesOptions] = useState(formatForOptions(devices));
+  const [toolOptions] = useState(tools);
   const [formImei, setFormImei] = useState(false);
 
   const handleNextPrevClick = (active) => {
@@ -360,7 +364,39 @@ function DesbloqueosForm() {
                 </Box>
               </Card>
             )}
-            { formActivePanel.formActivePanelId === 3 && (
+            {formActivePanel.formActivePanelId === 3 && (
+              <Card sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '20px',
+                alignItems: 'center',
+                padding: '20px',
+              }}
+              >
+                <Typography variant="h6"> servicio </Typography>
+                <Box sx={{
+                  display: 'flex',
+                  gap: '10px',
+                  padding: '20px',
+                  justifyContent: 'center',
+                  width: '100%',
+                  flexDirection: { xs: 'column', sm: 'row' },
+                }}
+                >
+                  <SelectService
+                    name="tools"
+                    options={toolOptions}
+                    label="Servicio"
+                    id={7}
+                  />
+                </Box>
+                <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
+                  <Button variant="contained" onClick={() => handleNextPrevClick(2)}> Anterior </Button>
+                  <Button variant="contained" onClick={() => handleNextPrevClick(4)}> Siguiente </Button>
+                </Box>
+              </Card>
+            )}
+            { formActivePanel.formActivePanelId === 4 && (
               <Card sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -375,16 +411,16 @@ function DesbloqueosForm() {
                 <FormControlLabel control={<Checkbox />} label="I agreee to the terms and conditions" id="checkbox" />
                 <FormControlLabel control={<Checkbox />} label="I want to receive newsletter" id="checkbox2" />
                 <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
-                  <Button variant="contained" onClick={() => handleNextPrevClick(2)}> Anterior </Button>
-                  <Button variant="contained" onClick={() => handleNextPrevClick(4)}> Siguiente </Button>
+                  <Button variant="contained" onClick={() => handleNextPrevClick(3)}> Anterior </Button>
+                  <Button variant="contained" onClick={() => handleNextPrevClick(5)}> Siguiente </Button>
                 </Box>
               </Card>
             )}
-            { formActivePanel.formActivePanelId === 4 && (
+            { formActivePanel.formActivePanelId === 5 && (
               // eslint-disable-next-line max-len
               formImei ? <Pagar /> : <Input setFormImei={setFormImei} formImei={formImei} Next={handleNextPrevClick} />
             )}
-            { formActivePanel.formActivePanelId === 5 && (
+            { formActivePanel.formActivePanelId === 6 && (
               <Card sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -401,7 +437,7 @@ function DesbloqueosForm() {
                   Registration completed!
                 </Typography>
                 <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
-                  <Button variant="contained" onClick={() => handleNextPrevClick(3)}> Anterior </Button>
+                  <Button variant="contained" onClick={() => handleNextPrevClick(4)}> Anterior </Button>
                   <Button variant="contained" onClick={() => handleSubmission()}> Submit </Button>
                 </Box>
               </Card>

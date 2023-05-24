@@ -40,7 +40,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input3"
           label="Marca"
-          value={opciones[2].Marca}
+          value={opciones[2]?.Marca}
           InputProps={{
             readOnly: true,
           }}
@@ -49,7 +49,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input4"
           label="Modelo"
-          value={opciones[3].Modelo}
+          value={opciones[3]?.Modelo}
           InputProps={{
             readOnly: true,
           }}
@@ -80,7 +80,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input7"
           label="IMEI"
-          value={opciones[4].imei}
+          value={opciones[5]?.imei}
           InputProps={{
             readOnly: true,
           }}
@@ -89,7 +89,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input8"
           label="E-Mail"
-          value={opciones[5].email}
+          value={opciones[6]?.email}
           InputProps={{
             readOnly: true,
           }}

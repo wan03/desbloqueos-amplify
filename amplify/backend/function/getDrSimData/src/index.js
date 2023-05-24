@@ -218,7 +218,7 @@ const asyncForEach = async (array, callback) => {
     await callback(array[index], index, array);
   }
 };
-
+//  configurar para una nueva llamada
 const insertDataIntoDatabase = async (data, query, type) => {
   const req = new AWS.HttpRequest(appsyncUrl, region);
 
@@ -261,7 +261,7 @@ const insertDataIntoDatabase = async (data, query, type) => {
 
   return response.data;
 };
-
+//  termina funcion para ingresar datos a la base de datos
 const batchCreate = async ({
   data, mutation, type, fieldName,
 }) => {
