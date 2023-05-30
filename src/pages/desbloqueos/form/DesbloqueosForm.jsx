@@ -373,7 +373,7 @@ function DesbloqueosForm() {
                 padding: '20px',
               }}
               >
-                <Typography variant="h6"> servicio </Typography>
+                <Typography variant="h6"> Servicios </Typography>
                 <Box sx={{
                   display: 'flex',
                   gap: '10px',

@@ -1,3 +1,5 @@
+/* eslint-disable quote-props */
+/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useField } from 'formik';
@@ -7,7 +9,40 @@ import {
 import PropTypes from 'prop-types';
 import Select from '@mui/material/Select';
 import { useDispatch } from 'react-redux';
+// import { environments } from '../../../environments/environment';
+import getToolsDrSim from '../../../api/drsimtools';
 import { setOpcionesGlobal } from '../../../store/slices/opciones.slice';
+
+// const env = environments;
+// const url = 'https://api.doctorsim.com/tools/15910/1';
+/*
+const getToolsDrSim = async () => {
+  // let respuesta = {};
+  const config = {
+    headers: {
+      DSIM_KEY: 'sbox3i4QEgwwGe83rN',
+      DSIM_SECRET: 'C8xfdtXJ9i4s7fBUUzzh',
+    },
+  };
+  const data = async () => {
+    const result = await axios.get(url, config)
+      .then((res) => console.log(res.data.res))
+      .catch((error) => console.log(error));
+    return result;
+  };
+  // console.log(data);
+  return data;
+};
+*/
+const getTools = async () => {
+  getToolsDrSim()
+    .then((respuesta) => {
+      console.log(respuesta);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 function SelectService({
   label, options, id, ...props
@@ -15,12 +50,11 @@ function SelectService({
   const [field, meta] = useField(props);
   const [valueOptions, setValueOptions] = useState('');
   const dispatch = useDispatch();
-
   const handleChange = (event) => {
     setValueOptions(event.target.value);
     dispatch(setOpcionesGlobal({ [label]: event.target.value, id: `${id}` }));
   };
-
+  getTools();
   // eslint-disable-next-line eqeqeq
   const descripcion = options.filter((descrip) => descrip.name == valueOptions);
 
