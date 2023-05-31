@@ -9,40 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import Select from '@mui/material/Select';
 import { useDispatch } from 'react-redux';
-// import { environments } from '../../../environments/environment';
-import getToolsDrSim from '../../../api/drsimtools';
 import { setOpcionesGlobal } from '../../../store/slices/opciones.slice';
-
-// const env = environments;
-// const url = 'https://api.doctorsim.com/tools/15910/1';
-/*
-const getToolsDrSim = async () => {
-  // let respuesta = {};
-  const config = {
-    headers: {
-      DSIM_KEY: 'sbox3i4QEgwwGe83rN',
-      DSIM_SECRET: 'C8xfdtXJ9i4s7fBUUzzh',
-    },
-  };
-  const data = async () => {
-    const result = await axios.get(url, config)
-      .then((res) => console.log(res.data.res))
-      .catch((error) => console.log(error));
-    return result;
-  };
-  // console.log(data);
-  return data;
-};
-*/
-const getTools = async () => {
-  getToolsDrSim()
-    .then((respuesta) => {
-      console.log(respuesta);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
 
 function SelectService({
   label, options, id, ...props
@@ -54,9 +21,19 @@ function SelectService({
     setValueOptions(event.target.value);
     dispatch(setOpcionesGlobal({ [label]: event.target.value, id: `${id}` }));
   };
-  getTools();
   // eslint-disable-next-line eqeqeq
-  const descripcion = options.filter((descrip) => descrip.name == valueOptions);
+  // const descripcion = options.filter((descrip) => descrip.name == valueOptions);
+  // eslint-disable-next-line prefer-const
+  let descripcion = [];
+  console.log(options);
+  // eslint-disable-next-line no-restricted-syntax, prefer-const
+  for (let descrip of options) {
+    console.log(descrip);
+    // eslint-disable-next-line eqeqeq
+    if (descrip.name == valueOptions) {
+      descripcion.push(descrip);
+    }
+  }
 
   return (
     <Box sx={{
@@ -79,7 +56,7 @@ function SelectService({
         >
           {
           options.map((option) => (
-            <MenuItem key={option.id} value={option.name}>
+            <MenuItem key={option.id} value={option.id_tool}>
               {option.name}
             </MenuItem>
           ))

@@ -8,5 +8,5 @@ export const environments = {
   AWS_API_GATEWAY: 'https://n5um5iws84.execute-api.us-east-2.amazonaws.com',
   DSIM_KEY: 'sbox3i4QEgwwGe83rN',
   DSIM_SECRET: 'C8xfdtXJ9i4s7fBUUzzh',
-  apiDrSimTools: 'https://api.doctorsim.com/tools',
+  apiDrSimTools: 'http://localhost:3002/drsim/tools',
 };

@@ -72,14 +72,14 @@ export const brands = [
 
 export const devices = [
   {
-    id: '1',
+    id: '15503',
     name: 'Galaxy Note 10',
     image: 'https://via.placeholder.com/75',
     description: 'Alguna Descripcion1',
   },
   {
-    id: '6',
-    name: 'iPhone 12',
+    id: '15910',
+    name: 'iPhone 6',
     image: 'https://via.placeholder.com/75',
     description: 'Alguna Descripcion2',
   },
