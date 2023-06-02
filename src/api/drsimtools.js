@@ -9,20 +9,16 @@ import { environments } from '../environments/environment';
 const env = environments;
 
 const getToolsDrSim = async (id_terminal, id_operador) => {
-  let respuesta = [];
+  let tools = [];
   try {
     const { data } = await axios.get(`${env.apiDrSimTools}/${id_terminal}/${id_operador}`);
     console.log(data);
-    respuesta = data?.res?.tools;
-    // eslint-disable-next-line no-restricted-syntax, prefer-const
-    for (let tool of data?.res?.tools){
-        respuesta.push({ id: tool.id_tool, name: tool.name, desc: tool.desc });
-    }
+    tools = data.res.tools;
   } catch (error) {
     console.log(error);
   }
 
-  return respuesta;
+  return tools;
 };
 
 export default getToolsDrSim;

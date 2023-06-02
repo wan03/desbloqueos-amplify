@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -16,7 +16,6 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonIcon from '@mui/icons-material/Person';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { useSelector } from 'react-redux';
 import AppSettingsAltIcon from '@mui/icons-material/AppSettingsAlt';
 import Pagar from '../../pagar/Pagar';
 import {
@@ -25,7 +24,6 @@ import {
 import Select from '../../../components/formik/select/Select';
 import Input from '../../../components/payment/input/Input';
 import SelectService from '../../servicios/input/SelectService';
-import getToolsDrSim from '../../../api/drsimtools';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -201,45 +199,7 @@ function DesbloqueosForm() {
   const [networkOptions] = useState(formatForOptions(networks));
   const [brandOptions] = useState(formatForOptions(brands));
   const [devicesOptions] = useState(formatForOptions(devices));
-  const opciones = useSelector((state) => state.opciones);
   const [formImei, setFormImei] = useState(false);
-  // eslint-disable-next-line prefer-const
-  let tools = [];
-  const getTools = async () => {
-    let servicios = [];
-    // eslint-disable-next-line camelcase
-    const id_terminal = opciones[3].idReg;
-    // eslint-disable-next-line camelcase
-    const id_operador = opciones[1].idReg;
-    // eslint-disable-next-line camelcase
-    console.log(`terminal: ${id_terminal}`);
-    // eslint-disable-next-line camelcase
-    console.log(`operador: ${id_operador}`);
-    await getToolsDrSim(id_terminal, id_operador)
-      .then((respuesta) => {
-        servicios = respuesta;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    return servicios;
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (opciones[3]?.idReg !== undefined && opciones[1] !== undefined) {
-        try {
-          tools = await getTools();
-          console.log(tools);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
-
-    fetchData();
-  });
-  const [toolOptions] = useState(formatForOptions(tools));
 
   const handleNextPrevClick = (active) => {
     setFromActivePanel({
@@ -423,7 +383,6 @@ function DesbloqueosForm() {
                 >
                   <SelectService
                     name="tools"
-                    options={toolOptions}
                     label="Servicio"
                     id={7}
                   />
