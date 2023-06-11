@@ -60,7 +60,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input5"
           label="Tiempo Minimo de Desbloqueo"
-          value="1 dia"
+          value={opciones[5]?.timeMin}
           InputProps={{
             readOnly: true,
           }}
@@ -69,7 +69,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input6"
           label="Tiempo Maximo de Desbloqueo"
-          defaultValue="6 dias"
+          value={opciones[6]?.timeMax}
           InputProps={{
             readOnly: true,
           }}
@@ -80,7 +80,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input7"
           label="IMEI"
-          value={opciones[5]?.imei}
+          value={opciones[8]?.imei}
           InputProps={{
             readOnly: true,
           }}
@@ -89,7 +89,7 @@ function ResumenForm() {
         <TextField
           id="filled-read-only-input8"
           label="E-Mail"
-          value={opciones[6]?.email}
+          value={opciones[9]?.email}
           InputProps={{
             readOnly: true,
           }}
@@ -98,8 +98,8 @@ function ResumenForm() {
       </div>
       <div>
         <TextField
-          label="Custom"
-          defaultValue="Prueba"
+          label="Promedio"
+          value={opciones[7]?.avg}
           variant="filled"
           InputProps={{
             readOnly: true,
@@ -108,8 +108,8 @@ function ResumenForm() {
           focused
         />
         <TextField
-          label="Monto a Pagar"
-          defaultValue="$ 15.00"
+          label="Monto a Pagar $"
+          value={opciones[4]?.price}
           variant="filled"
           InputProps={{
             readOnly: true,

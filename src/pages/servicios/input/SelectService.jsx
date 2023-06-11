@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { useField } from 'formik';
 import {
-  Box, FormControl, InputLabel, MenuItem, Typography,
+  Box, FormControl, InputLabel, MenuItem, TextField, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import Select from '@mui/material/Select';
@@ -16,14 +16,51 @@ import getToolsDrSim from '../../../api/drsimtools';
 function SelectService({
   label, id, ...props
 }) {
+  let tools = [];
+  let descripcion;
   const [field, meta] = useField(props);
   const [valueOptions, setValueOptions] = useState('');
+  const [price, setPrice] = useState('');
+  const [timeMin, setTimeMin] = useState('');
+  const [timeMax, setTimeMax] = useState('');
+  const [avg, setAvg] = useState('');
   const opciones = useSelector((state) => state.opciones);
   const [options, setToolOptions] = useState([]);
   const dispatch = useDispatch();
-  const handleChange = (event) => {
+
+  function buscarElementoAsync(services, idServ) {
+    return new Promise((resolve) => {
+      const serviceFinded = services.find((elemento) => elemento.id === idServ);
+      if (serviceFinded) {
+        resolve(serviceFinded);
+      }
+    });
+  }
+
+  function resumir(textoLargo) {
+    const chater = '.';
+    let newText = '';
+    const arr = textoLargo.split(chater);
+    newText = arr[0] + chater + arr[1] + chater + arr[3] + chater;
+    if (newText.length < 415 && arr[4]) {
+      newText += arr[4];
+    }
+    return newText;
+  }
+
+  const handleChange = async (event) => {
     setValueOptions(event.target.value);
-    dispatch(setOpcionesGlobal({ [label]: event.target.value, id: `${id}` }));
+    descripcion = await buscarElementoAsync(options, event.target.value);
+    descripcion.desc = resumir(descripcion?.desc);
+    setPrice(descripcion?.price);
+    setTimeMin(descripcion?.timeMin);
+    setTimeMax(descripcion?.timeMax);
+    setAvg(descripcion?.avg);
+    dispatch(setOpcionesGlobal({ [label]: descripcion.name, id: `${id}`, idReg: `${valueOptions}` }));
+    dispatch(setOpcionesGlobal({ id: '7', price: `${descripcion.price}` }));
+    dispatch(setOpcionesGlobal({ id: '8', timeMin: `${descripcion.timeMin}` }));
+    dispatch(setOpcionesGlobal({ id: '9', timeMax: `${descripcion.timeMax}` }));
+    dispatch(setOpcionesGlobal({ id: '10', avg: `${descripcion.avg}` }));
   };
 
   const getTools = async () => {
@@ -46,7 +83,6 @@ function SelectService({
     return servicios;
   };
 
-  let tools = [];
   useEffect(() => {
     const fetchData = async () => {
       if (opciones[3]?.idReg !== undefined && opciones[1] !== undefined) {
@@ -57,6 +93,10 @@ function SelectService({
               id: opt.id_tool,
               name: opt.name,
               desc: opt.desc,
+              price: opt.price,
+              timeMin: opt.time.min,
+              timeMax: opt.time.max,
+              avg: opt.avg,
             };
             return tool;
           });
@@ -70,10 +110,10 @@ function SelectService({
 
     fetchData();
   }, []);
-  console.log(options);
-  // eslint-disable-next-line eqeqeq
-  const descripcion = options?.filter((descrip) => descrip.name == valueOptions);
 
+  // eslint-disable-next-line eqeqeq
+  descripcion = options?.find((descrip) => descrip.id == valueOptions);
+  // descripcion = buscarElementoAsync(options, valueOptions);
   return (
     <Box sx={{
       display: 'flex',
@@ -95,19 +135,23 @@ function SelectService({
         >
           {
           options?.map((option) => (
-            <MenuItem key={option.id} value={option.name}>
+            <MenuItem key={option.id} value={option.id}>
               {option.name}
             </MenuItem>
           ))
         }
         </Select>
+        <TextField id="txtPrice" label="Precio $" variant="filled" value={price} InputProps={{ readOnly: true }} />
+        <TextField id="txtTimeMin" label="Dias Minimo" variant="filled" value={timeMin} InputProps={{ readOnly: true }} />
+        <TextField id="txtTimeMax" label="Dias Maximo" variant="filled" value={timeMax} InputProps={{ readOnly: true }} />
+        <TextField id="txtAvg" label="Promedio" variant="filled" value={avg} InputProps={{ readOnly: true }} />
         {meta.touched && meta.error ? (
           <div className="error">{meta.error}</div>
         ) : null}
       </FormControl>
       <Typography sx={{ width: { xs: '100%', sm: '50%' } }}>
         {
-          descripcion[0]?.desc
+          descripcion?.desc
         }
       </Typography>
     </Box>

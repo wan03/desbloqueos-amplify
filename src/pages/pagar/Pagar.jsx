@@ -6,6 +6,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/function-component-definition */
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
 import {
   Elements, CardElement, useStripe, useElements,
@@ -21,6 +22,7 @@ import '../../assets/formPayment.css';
 import Resumen from '../resumen/Resumen';
 
 const env = environments;
+// const opciones = useSelector((state) => state.opciones);
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -43,8 +45,6 @@ const CARD_ELEMENT_OPTIONS = {
 };
 
 const stripePromise = loadStripe(env.key_public);
-
-// eslint-disable-next-line arrow-body-style
 const CheckoutForm = () => {
   const stripe = useStripe();
   const element = useElements();
