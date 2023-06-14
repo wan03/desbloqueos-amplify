@@ -22,7 +22,6 @@ import '../../assets/formPayment.css';
 import Resumen from '../resumen/Resumen';
 
 const env = environments;
-// const opciones = useSelector((state) => state.opciones);
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -46,12 +45,13 @@ const CARD_ELEMENT_OPTIONS = {
 
 const stripePromise = loadStripe(env.key_public);
 const CheckoutForm = () => {
+  const opcion = useSelector((state) => state.opciones);
+  const price = opcion[4]?.price;
   const stripe = useStripe();
   const element = useElements();
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: element.getElement(CardElement),
@@ -64,7 +64,7 @@ const CheckoutForm = () => {
         const { data } = await axios.post(env.apiStripeUrl, {
           id,
           // eslint-disable-next-line max-len
-          amount: 15 * 100, /* en stripe los montos van explesados en centavos. monto en dolares multiplicado por 100 centavos */
+          amount: price * 100, /* en stripe los montos van explesados en centavos. monto en dolares multiplicado por 100 centavos */
         });
         console.log(data);
         element.getElement(CardElement).clear();
