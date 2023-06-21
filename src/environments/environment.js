@@ -9,4 +9,5 @@ export const environments = {
   DSIM_KEY: 'sbox3i4QEgwwGe83rN',
   DSIM_SECRET: 'C8xfdtXJ9i4s7fBUUzzh',
   apiDrSimTools: 'http://localhost:3002/drsim/tools',
+  apiDrSimCreateOrden: 'http://localhost:3002/drsim/create_order',
 };

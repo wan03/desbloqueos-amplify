@@ -6,7 +6,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/function-component-definition */
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
 import {
   Elements, CardElement, useStripe, useElements,
@@ -14,12 +14,14 @@ import {
 import {
   Box,
   Card,
-  Container, Typography,
+  Container, Typography, Dialog, Button,
 } from '@mui/material';
 import axios from 'axios';
 import { environments } from '../../environments/environment';
 import '../../assets/formPayment.css';
 import Resumen from '../resumen/Resumen';
+import postCreateOrdenDrSim from '../../api/drsimcreateordenes';
+import { setOpcionesGlobal } from '../../store/slices/opciones.slice';
 
 const env = environments;
 
@@ -43,10 +45,37 @@ const CARD_ELEMENT_OPTIONS = {
   },
 };
 
+function dosDecimales(n) {
+  const t = n.toString();
+  const regex = /(\d*.\d{0,2})/;
+  return t.match(regex)[0];
+}
+
+async function createOrden(idTerminal, idOperador, imei, idService) {
+  let servicios = [];
+  await postCreateOrdenDrSim(idTerminal, idOperador, imei, idService)
+    .then((respuesta) => {
+      servicios = respuesta;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  return servicios;
+}
+
 const stripePromise = loadStripe(env.key_public);
-const CheckoutForm = () => {
+// eslint-disable-next-line react/prop-types
+const CheckoutForm = ({ next }) => {
+  const dispatch = useDispatch();
+  const [msnSolicitud, setMsnSolicitud] = useState('');
   const opcion = useSelector((state) => state.opciones);
-  const price = opcion[4]?.price;
+  const idTerminal = opcion[3].idReg;
+  const idOperador = opcion[1].idReg;
+  const { imei } = opcion[9] !== undefined ? opcion[9] : '';
+  const idService = opcion[4].idReg;
+  let price = opcion[5]?.price;
+  price = dosDecimales(price) * 100;
+  price = parseInt(price.toString(), 10);
   const stripe = useStripe();
   const element = useElements();
   const [loading, setLoading] = useState(false);
@@ -56,7 +85,7 @@ const CheckoutForm = () => {
       type: 'card',
       card: element.getElement(CardElement),
     });
-    setLoading(true);
+    setLoading(false);
     if (!error) {
       console.log(paymentMethod);
       const { id } = paymentMethod;
@@ -64,14 +93,26 @@ const CheckoutForm = () => {
         const { data } = await axios.post(env.apiStripeUrl, {
           id,
           // eslint-disable-next-line max-len
-          amount: price * 100, /* en stripe los montos van explesados en centavos. monto en dolares multiplicado por 100 centavos */
+          amount: price, /* en stripe los montos van expresados en centavos (entero). monto en dolares multiplicado por 100 centavos */
         });
         console.log(data);
+        if (data.message === 'Succesfull Payment') {
+          const ticket = await createOrden(idTerminal, idOperador, imei, idService);
+          if (ticket?.res.id_ticket) {
+            // `Solicitid: ${ticket.status}. Nro. Ticket: ${ticket.res.id_ticket}`
+            setMsnSolicitud(ticket);
+            dispatch(setOpcionesGlobal({ id: '12', id_ticket: `${ticket?.res.id_ticket}` }));
+            next(7);
+          } else {
+            setMsnSolicitud('Solicitid: NO Procesada');
+          }
+          setLoading(true);
+          console.log(ticket);
+        }
         element.getElement(CardElement).clear();
       } catch (er) {
         console.log(er);
       }
-      setLoading(false);
     } else {
       console.log(error);
     }
@@ -84,16 +125,22 @@ const CheckoutForm = () => {
         <label className="form-label">Tarjeta</label>
         <CardElement options={CARD_ELEMENT_OPTIONS} />
       </div>
-      <button disabled={!stripe} onClick={handleSubmit} className="form_payment-btn">
+      <Button disabled={loading} onClick={handleSubmit} variant="contained">
         {loading ? (
-          <div>Loading...</div>
+          <div>Cargando...</div>
         ) : 'Pagar'}
-      </button>
+      </Button>
+      <Button variant="contained" onClick={() => next(5)}> Anterior </Button>
+      <Typography variant="subtitle1" component="div">
+        {' '}
+        { msnSolicitud?.status }
+      </Typography>
     </div>
   );
 };
 
-function Pagar() {
+// eslint-disable-next-line react/prop-types
+function Pagar({ next }) {
   return (
     <Container sx={{
       width: { xs: '100%', sm: '80%' },
@@ -118,7 +165,7 @@ function Pagar() {
         }}
         >
           <Elements stripe={stripePromise}>
-            <CheckoutForm />
+            <CheckoutForm next={next} />
           </Elements>
         </Box>
 

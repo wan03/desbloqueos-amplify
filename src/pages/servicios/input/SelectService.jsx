@@ -56,11 +56,11 @@ function SelectService({
     setTimeMin(descripcion?.timeMin);
     setTimeMax(descripcion?.timeMax);
     setAvg(descripcion?.avg);
-    dispatch(setOpcionesGlobal({ [label]: descripcion.name, id: `${id}`, idReg: `${valueOptions}` }));
-    dispatch(setOpcionesGlobal({ id: '7', price: `${descripcion.price}` }));
-    dispatch(setOpcionesGlobal({ id: '8', timeMin: `${descripcion.timeMin}` }));
-    dispatch(setOpcionesGlobal({ id: '9', timeMax: `${descripcion.timeMax}` }));
-    dispatch(setOpcionesGlobal({ id: '10', avg: `${descripcion.avg}` }));
+    dispatch(setOpcionesGlobal({ [label]: descripcion.name, id: `${id}`, idReg: `${event.target.value}` }));
+    dispatch(setOpcionesGlobal({ id: '8', price: `${descripcion.price}` }));
+    dispatch(setOpcionesGlobal({ id: '9', timeMin: `${descripcion.timeMin}` }));
+    dispatch(setOpcionesGlobal({ id: '10', timeMax: `${descripcion.timeMax}` }));
+    dispatch(setOpcionesGlobal({ id: '11', avg: `${descripcion.avg}` }));
   };
 
   const getTools = async () => {
@@ -69,10 +69,6 @@ function SelectService({
     const id_terminal = opciones[3].idReg;
     // eslint-disable-next-line camelcase
     const id_operador = opciones[1].idReg;
-    // eslint-disable-next-line camelcase
-    console.log(`terminal: ${id_terminal}`);
-    // eslint-disable-next-line camelcase
-    console.log(`operador: ${id_operador}`);
     await getToolsDrSim(id_terminal, id_operador)
       .then((respuesta) => {
         servicios = respuesta;

@@ -17,6 +17,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AppSettingsAltIcon from '@mui/icons-material/AppSettingsAlt';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import Pagar from '../../pagar/Pagar';
 import {
   formatForOptions, countries, networks, brands, devices,
@@ -141,15 +143,6 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
   }),
 }));
 
-/* async function handleCreateData() {
-  try {
-    await createData();
-    console.log('Datos creados correctamente.');
-  } catch (error) {
-    console.error('Error al crear los datos:', error);
-  }
-} */
-
 function ColorlibStepIcon(props) {
   const {
     active, completed, className, icon,
@@ -159,9 +152,10 @@ function ColorlibStepIcon(props) {
     1: <LocationCityIcon name="Compañia Télefonica" />,
     2: <LocalPhoneIcon name="Personal Data" />,
     4: <PersonIcon name="Terms and Conditions" />,
-    5: <PaymentIcon name="payment" />,
+    7: <PaymentIcon name="payment" />,
     6: <CheckCircleIcon name="Finish" />,
-    3: <AppSettingsAltIcon name="Finish" />,
+    3: <AppSettingsAltIcon name="services" />,
+    5: <LocalPhoneIcon name="imei" />,
   };
 
   return (
@@ -185,10 +179,11 @@ ColorlibStepIcon.defaultProps = {
   icon: '',
 };
 
-const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'Servicio', 'terminos y condiciones', 'Pagar', 'Finalizado'];
+const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'Servicio', 'Terminos y Condiciones', 'Imei', 'Pagar', 'Finalizado'];
 const step = ['pais', 'telefono', 'terminos', 'pagar', 'Finalizado'];
 
 function DesbloqueosForm() {
+  const navigate = useNavigate();
   // handleCreateData();
   const [formActivePanel, setFromActivePanel] = useState({
     formActivePanelId: 1,
@@ -199,7 +194,8 @@ function DesbloqueosForm() {
   const [networkOptions] = useState(formatForOptions(networks));
   const [brandOptions] = useState(formatForOptions(brands));
   const [devicesOptions] = useState(formatForOptions(devices));
-  const [formImei, setFormImei] = useState(false);
+  const opciones = useSelector((state) => state.opciones);
+  const idTicket = opciones[11]?.id_ticket;
 
   const handleNextPrevClick = (active) => {
     setFromActivePanel({
@@ -215,6 +211,7 @@ function DesbloqueosForm() {
     });
     // eslint-disable-next-line no-alert
     console.log('Form submitted!');
+    navigate('/');
   };
 
   return (
@@ -415,9 +412,14 @@ function DesbloqueosForm() {
             )}
             { formActivePanel.formActivePanelId === 5 && (
               // eslint-disable-next-line max-len
-              formImei ? <Pagar /> : <Input setFormImei={setFormImei} formImei={formImei} Next={handleNextPrevClick} />
+              <Input Next={handleNextPrevClick} />
             )}
             { formActivePanel.formActivePanelId === 6 && (
+              <div>
+                <Pagar next={handleNextPrevClick} />
+              </div>
+            )}
+            { formActivePanel.formActivePanelId === 7 && (
               <Card sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -431,10 +433,11 @@ function DesbloqueosForm() {
                   Finish
                 </Typography>
                 <Typography textAlign="center">
-                  Registration completed!
+                  {`Solicitud Creada. Nro. Ticket: ${idTicket}.`}
+                  <br />
+                  Pronto estara recibiendo en su correo el estatus de su solicitud.
                 </Typography>
                 <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
-                  <Button variant="contained" onClick={() => handleNextPrevClick(4)}> Anterior </Button>
                   <Button variant="contained" onClick={() => handleSubmission()}> Submit </Button>
                 </Box>
               </Card>

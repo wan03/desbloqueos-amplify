@@ -8,17 +8,17 @@ import { environments } from '../environments/environment';
 
 const env = environments;
 
-const getToolsDrSim = async (id_terminal, id_operador) => {
-  let tools = [];
+const postCreateOrdenDrSim = async (id_terminal, id_operador, imei, id_servicio) => {
+  let orden = {};
   try {
-    const { data } = await axios.get(`${env.apiDrSimTools}/${id_terminal}/${id_operador}`);
-    // console.log(data);
-    tools = data.res.tools;
+    const { data } = await axios.post(`${env.apiDrSimCreateOrden}/${id_terminal}/${id_operador}/${imei}/${id_servicio}`, {});
+    console.log(data);
+    orden = data;
   } catch (error) {
     console.log(error);
   }
 
-  return tools;
+  return orden;
 };
 
-export default getToolsDrSim;
+export default postCreateOrdenDrSim;
