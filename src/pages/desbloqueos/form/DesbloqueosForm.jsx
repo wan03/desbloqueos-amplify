@@ -152,8 +152,8 @@ function ColorlibStepIcon(props) {
     1: <LocationCityIcon name="Compañia Télefonica" />,
     2: <LocalPhoneIcon name="Personal Data" />,
     4: <PersonIcon name="Terms and Conditions" />,
-    7: <PaymentIcon name="payment" />,
-    6: <CheckCircleIcon name="Finish" />,
+    7: <CheckCircleIcon name="payment" />,
+    6: <PaymentIcon name="Finish" />,
     3: <AppSettingsAltIcon name="services" />,
     5: <LocalPhoneIcon name="imei" />,
   };
