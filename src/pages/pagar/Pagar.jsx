@@ -75,6 +75,7 @@ const CheckoutForm = ({ next }) => {
   const { imei } = opcion[9] !== undefined ? opcion[9] : '';
   const { email } = opcion[10] !== undefined ? opcion[10] : '';
   const idService = opcion[4].idReg;
+  let message = 'CARGANDO...';
   let price = opcion[5]?.price;
   price = dosDecimales(price) * 100;
   price = parseInt(price.toString(), 10);
@@ -117,6 +118,7 @@ const CheckoutForm = ({ next }) => {
         element.getElement(CardElement).clear();
       } catch (er) {
         console.log(er);
+        message = er?.message;
       }
     } else {
       console.log(error);
@@ -132,8 +134,8 @@ const CheckoutForm = ({ next }) => {
       </div>
       <Button disabled={loading} onClick={handleSubmit} variant="contained">
         {loading ? (
-          <div>Cargando...</div>
-        ) : 'Pagar'}
+          <div>{ message }</div>
+        ) : 'PAGAR' }
       </Button>
       <Button disabled={loading} variant="contained" onClick={() => next(5)}> Anterior </Button>
       <Typography variant="subtitle1" component="div">
