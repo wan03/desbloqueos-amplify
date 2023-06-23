@@ -433,9 +433,9 @@ function DesbloqueosForm() {
                   Finish
                 </Typography>
                 <Typography textAlign="center">
-                  {`Solicitud Creada. Nro. Ticket: ${idTicket}.`}
+                  <strong>{`Solicitud Creada. Nro. Ticket: ${idTicket}.`}</strong>
                   <br />
-                  Pronto estara recibiendo en su correo el estatus de su solicitud.
+                  <strong>Pronto estará recibiendo en su correo el estatus de su solicitud.</strong>
                 </Typography>
                 <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
                   <Button variant="contained" onClick={() => handleSubmission()}> Submit </Button>
