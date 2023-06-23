@@ -10,4 +10,5 @@ export const environments = {
   DSIM_SECRET: 'C8xfdtXJ9i4s7fBUUzzh',
   apiDrSimTools: 'http://localhost:3002/drsim/tools',
   apiDrSimCreateOrden: 'http://localhost:3002/drsim/create_order',
+  apiGatewayOrdenTicket: 'https://0v8aexvf86.execute-api.us-east-1.amazonaws.com/tickets/ordenes',
 };

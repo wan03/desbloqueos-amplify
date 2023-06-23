@@ -22,6 +22,7 @@ import '../../assets/formPayment.css';
 import Resumen from '../resumen/Resumen';
 import postCreateOrdenDrSim from '../../api/drsimcreateordenes';
 import { setOpcionesGlobal } from '../../store/slices/opciones.slice';
+import putDynamobdOrden from '../../api/putDynamodbOrden';
 
 const env = environments;
 
@@ -72,6 +73,7 @@ const CheckoutForm = ({ next }) => {
   const idTerminal = opcion[3].idReg;
   const idOperador = opcion[1].idReg;
   const { imei } = opcion[9] !== undefined ? opcion[9] : '';
+  const { email } = opcion[10] !== undefined ? opcion[10] : '';
   const idService = opcion[4].idReg;
   let price = opcion[5]?.price;
   price = dosDecimales(price) * 100;
@@ -85,7 +87,7 @@ const CheckoutForm = ({ next }) => {
       type: 'card',
       card: element.getElement(CardElement),
     });
-    setLoading(false);
+    setLoading(true);
     if (!error) {
       console.log(paymentMethod);
       const { id } = paymentMethod;
@@ -99,14 +101,17 @@ const CheckoutForm = ({ next }) => {
         if (data.message === 'Succesfull Payment') {
           const ticket = await createOrden(idTerminal, idOperador, imei, idService);
           if (ticket?.res.id_ticket) {
-            // `Solicitid: ${ticket.status}. Nro. Ticket: ${ticket.res.id_ticket}`
+            const timestamp = Date.now();
+            const fecha = new Date(timestamp);
+            const hoy = fecha.toISOString();
+            putDynamobdOrden(timestamp, `${ticket?.res.id_ticket}`, hoy, email, `${imei}`, id, `${price}`, 'PENDIENTE');
             setMsnSolicitud(ticket);
             dispatch(setOpcionesGlobal({ id: '12', id_ticket: `${ticket?.res.id_ticket}` }));
             next(7);
           } else {
             setMsnSolicitud('Solicitid: NO Procesada');
           }
-          setLoading(true);
+          // setLoading(true);
           console.log(ticket);
         }
         element.getElement(CardElement).clear();
@@ -130,7 +135,7 @@ const CheckoutForm = ({ next }) => {
           <div>Cargando...</div>
         ) : 'Pagar'}
       </Button>
-      <Button variant="contained" onClick={() => next(5)}> Anterior </Button>
+      <Button disabled={loading} variant="contained" onClick={() => next(5)}> Anterior </Button>
       <Typography variant="subtitle1" component="div">
         {' '}
         { msnSolicitud?.status }
