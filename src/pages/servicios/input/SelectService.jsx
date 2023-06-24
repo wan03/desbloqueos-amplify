@@ -97,7 +97,6 @@ function SelectService({
             return tool;
           });
           setToolOptions(tools);
-          console.log(tools);
         } catch (error) {
           console.log(error);
         }
