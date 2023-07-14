@@ -1,101 +1,42 @@
-/* import axios from 'axios';
-import React from 'react';
+import axios from 'axios';
 
-const baseURL = 'https://z3djga9l6h.execute-api.us-east-2.amazonaws.com';
-function paises() {
-  const [post, setPost] = React.useState(null);
-  React.useEffect(() => {
-    axios.get(baseURL).then((response) => { setPost(response.data); });
-  }, []);
-  if (!post) { return null; }
-  return (post);
-}
-const prueba = paises();
-console.log(prueba);
-*/
-export const formatForOptions = (rawOptions) => rawOptions.map(
-  (option) => ({ value: option.id, text: option.name }),
-);
+// eslint-disable-next-line max-len
+export const formatForOptions = (rawOptions) => rawOptions?.map((option) => ({ value: option.drSimID, text: option.name }));
 
-export const countries = [
-  {
-    id: '1146',
-    name: 'Argentina',
-  },
-  {
-    id: '1024',
-    name: 'Rep. Dominican',
-  },
-  {
-    id: '1150',
-    name: 'Venezuela',
-  },
-];
+export const countries = () => {
+  const URL = 'https://2pr78ypovg.execute-api.us-east-1.amazonaws.com/items';
 
-export const networks = [
-  {
-    id: '1',
-    name: 'Movistar',
-  },
-  {
-    id: '2',
-    name: 'Vodafone',
-  },
-  {
-    id: '3',
-    name: 'Orange',
-  },
-  {
-    id: '4',
-    name: 'Yoigo',
-  },
-];
+  axios.get(URL)
+    .then((response) => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch((error) => error.data);
+};
 
-export const brands = [
-  {
-    id: '1',
-    name: 'Alcatel',
-  },
-  {
-    id: '6',
-    name: 'LG',
-  },
-  {
-    id: '15',
-    name: 'Samsung',
-  },
-  {
-    id: '29',
-    name: 'Apple',
-  },
-];
+export const networks = () => {
+  const URL = 'https://omb7k0gyvj.execute-api.us-east-1.amazonaws.com/items';
 
-export const devices = [
-  {
-    id: '15503',
-    name: 'Galaxy Note 10',
-    image: 'https://via.placeholder.com/75',
-    description: 'Alguna Descripcion1',
-  },
-  {
-    id: '15910',
-    name: 'iPhone 6',
-    image: 'https://via.placeholder.com/75',
-    description: 'Alguna Descripcion2',
-  },
-  {
-    id: '15',
-    name: 'Pixel 3',
-    image: 'https://via.placeholder.com/75',
-    description: 'Alguna Descripcion3',
-  },
-  {
-    id: '29',
-    name: 'OnePlus 7',
-    image: 'https://via.placeholder.com/75',
-    description: 'Alguna Descripcion4',
-  },
-];
+  axios.get(URL)
+    .then((response) => response.data)
+    .catch((error) => error.data);
+};
+
+export const brands = () => {
+  const URL = 'https://mbt0pse1f1.execute-api.us-east-1.amazonaws.com/items';
+
+  axios.get(URL)
+    .then((response) => response.data)
+    .catch((error) => error.data);
+};
+
+export const devices = () => {
+  const URL = 'https://t4q0kvdhu4.execute-api.us-east-1.amazonaws.com/items';
+
+  axios.get(URL)
+    .then((response) => response.data)
+    .catch((error) => error.data);
+};
 
 export const tools = [
   {

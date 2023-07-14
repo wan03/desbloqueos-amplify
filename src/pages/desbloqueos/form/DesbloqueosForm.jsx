@@ -1,5 +1,6 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -19,36 +20,11 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AppSettingsAltIcon from '@mui/icons-material/AppSettingsAlt';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 import Pagar from '../../pagar/Pagar';
-import {
-  formatForOptions, countries, networks, brands, devices,
-} from './desbloqueosFormUtils';
 import Select from '../../../components/formik/select/Select';
 import Input from '../../../components/payment/input/Input';
 import SelectService from '../../servicios/input/SelectService';
-
-const QontoConnector = styled(StepConnector)(({ theme }) => ({
-  [`&.${stepConnectorClasses.alternativeLabel}`]: {
-    top: 4,
-    left: 'calc(-50% + 16px)',
-    right: 'calc(50% + 16px)',
-  },
-  [`&.${stepConnectorClasses.active}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#784af4',
-    },
-  },
-  [`&.${stepConnectorClasses.completed}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#784af4',
-    },
-  },
-  [`& .${stepConnectorClasses.line}`]: {
-    borderColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
-    borderTopWidth: 3,
-    borderRadius: 1,
-  },
-}));
 
 const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
   color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
@@ -180,7 +156,6 @@ ColorlibStepIcon.defaultProps = {
 };
 
 const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'Servicio', 'Terminos y Condiciones', 'Imei', 'Pagar', 'Finalizado'];
-const step = ['pais', 'telefono', 'terminos', 'pagar', 'Finalizado'];
 
 function DesbloqueosForm() {
   const navigate = useNavigate();
@@ -190,13 +165,64 @@ function DesbloqueosForm() {
     formActivePanelChange: false,
   });
 
-  const [countriesOptions] = useState(formatForOptions(countries));
-  const [networkOptions] = useState(formatForOptions(networks));
-  const [brandOptions] = useState(formatForOptions(brands));
-  const [devicesOptions] = useState(formatForOptions(devices));
+  const [countriesOptions, setCountriesOptions] = useState();
+  const [networkOptions, setNetworkOptions] = useState();
+  const [brandOptions, setBrandOptions] = useState();
+  const [devicesOptions, setDevicesOptions] = useState();
+  // const [networksOptionsFilter, setNetworksOptionsFilter] = useState();
   const opciones = useSelector((state) => state.opciones);
   const idTicket = opciones[11]?.id_ticket;
 
+  const countries = () => {
+    const URL = 'https://2pr78ypovg.execute-api.us-east-1.amazonaws.com/items';
+
+    axios.get(URL)
+      .then((response) => setCountriesOptions(response.data))
+      .catch((error) => error.data);
+  };
+
+  const networks = () => {
+    const URL = 'https://omb7k0gyvj.execute-api.us-east-1.amazonaws.com/items';
+
+    axios.get(URL)
+      .then((response) => setNetworkOptions(response.data))
+      .catch((error) => error.data);
+  };
+
+  const brands = () => {
+    const URL = 'https://mbt0pse1f1.execute-api.us-east-1.amazonaws.com/items';
+
+    axios.get(URL)
+      .then((response) => setBrandOptions(response.data))
+      .catch((error) => error.data);
+  };
+
+  const devices = () => {
+    const URL = 'https://t4q0kvdhu4.execute-api.us-east-1.amazonaws.com/items';
+
+    axios.get(URL)
+      .then((response) => setDevicesOptions(response.data))
+      .catch((error) => error.data);
+  };
+
+  useEffect(() => {
+    countries();
+    networks();
+    brands();
+    devices();
+  }, []);
+  let opcionesNetworksFilter = [];
+  if (opciones[0]?.idReg) {
+    const opcionesNetworks = networkOptions?.filter((item) => item.countryDrSimID === opciones[0].idReg);
+    // eslint-disable-next-line no-unused-vars
+    opcionesNetworksFilter = opcionesNetworks;
+  }
+  let opcionesDevicesFilter = [];
+  if (opciones[2]?.idReg) {
+    const opcionesDevices = devicesOptions?.filter((item) => item.brandDrSimID === opciones[2].idReg);
+    // eslint-disable-next-line no-unused-vars
+    opcionesDevicesFilter = opcionesDevices;
+  }
   const handleNextPrevClick = (active) => {
     setFromActivePanel({
       formActivePanelId: active,
@@ -213,7 +239,6 @@ function DesbloqueosForm() {
     console.log('Form submitted!');
     navigate('/');
   };
-
   return (
     <Box sx={{
       display: 'flex',
@@ -223,19 +248,6 @@ function DesbloqueosForm() {
     >
       <Typography variant="h6"> Desbloquea tu celular </Typography>
       <Stack sx={{ width: '100%' }} spacing={4}>
-        <Stepper alternativeLabel activeStep={formActivePanel.formActivePanelId - 1} connector={<QontoConnector />} sx={{ display: { xs: 'flex', sm: 'none' } }}>
-          {
-            step.map((label) => (
-              <Step key={label}>
-                <StepLabel StepIconComponent={QontoStepIcon}>
-                  {
-                  label
-                }
-                </StepLabel>
-              </Step>
-            ))
-          }
-        </Stepper>
         <Stepper
           alternativeLabel
           activeStep={formActivePanel.formActivePanelId - 1}
@@ -313,7 +325,7 @@ function DesbloqueosForm() {
                   />
                   <Select
                     name="network"
-                    options={networkOptions}
+                    options={opcionesNetworksFilter}
                     label="Compañia telefonica"
                     id={2}
                   />
@@ -348,7 +360,7 @@ function DesbloqueosForm() {
                   />
                   <Select
                     name="device"
-                    options={devicesOptions}
+                    options={opcionesDevicesFilter}
                     label="Modelo"
                     id={4}
                   />

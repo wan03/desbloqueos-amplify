@@ -13,17 +13,30 @@ function SelectInput({
   const [field, meta] = useField(props);
   const [valueOptions, setValueOptions] = useState('');
   const dispatch = useDispatch();
-
+  /*
+  if (label === 'Compañia telefonica') {
+    const url = 'https://omb7k0gyvj.execute-api.us-east-1.amazonaws.com/items';
+    const opciones = useSelector((state) => state.opciones[0]?.idReg);
+    const optionNetwork = () => {
+      axios.get(`${url}/${opciones}`)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
+    };
+    optionNetwork();
+  }
+*/
   // eslint-disable-next-line arrow-body-style
   async function findAsync(arr, valor) {
     // eslint-disable-next-line no-return-await
-    return await arr.find((m) => m.text === valor);
+    return await arr.find((m) => m.name === valor);
   }
   let opt = [];
   async function handleChange(event) {
     opt = await findAsync(options, event.target.value);
     setValueOptions(event.target.value);
-    dispatch(setOpcionesGlobal({ [label]: event.target.value, id: `${id}`, idReg: `${opt.value}` }));
+    dispatch(setOpcionesGlobal({ [label]: event.target.value, id: `${id}`, idReg: `${opt.drSimID}` }));
   }
   return (
     <FormControl sx={{ width: { xs: '100%', sm: '50%' } }}>
@@ -37,9 +50,9 @@ function SelectInput({
         label={label}
       >
         {
-          options.map((option) => (
-            <MenuItem key={option.value} name={option.value} value={option.text}>
-              {option.text}
+          options?.map((option) => (
+            <MenuItem key={option.id} name={option.id} value={option.name}>
+              {option.name}
             </MenuItem>
           ))
         }

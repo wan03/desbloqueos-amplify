@@ -35,18 +35,18 @@ if (error) {
       flexDirection: 'column',
       display: 'flex',
       justifyContent: 'center',
-      gap: '30px',
+      gap: '50px',
       padding: '20px',
       alignItems: 'center',
     }}
     >
       <Carousel />
       <FeaturedPhones />
+      <WhyUS whyUsTitle={inicio?.whyUsTitle} whyUsReasons={inicio?.whyUsReasonsCollection.items} />
       <Servicios
         servicioTitle={inicio?.servicioTitle}
         servicios={inicio?.serviciosCollection.items}
       />
-      <WhyUS whyUsTitle={inicio?.whyUsTitle} whyUsReasons={inicio?.whyUsReasonsCollection.items} />
     </Box>
   );
 }

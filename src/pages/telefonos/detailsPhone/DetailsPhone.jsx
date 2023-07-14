@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { getPhones } from '../../../shared/api/getPhones';
+import axios from 'axios';
 import FeaturedPhones from '../../inicio/featuredPhones/FeaturedPhones';
 
 function DetailsPhone() {
@@ -12,11 +12,15 @@ function DetailsPhone() {
   const [getPhone, setGetPhone] = useState([]);
 
   useEffect(() => {
-    const phones = getPhones();
-    setGetPhone([...phones]);
-  }, []);
+    const URL = 'https://t4q0kvdhu4.execute-api.us-east-1.amazonaws.com/items';
 
-  const filtered = getPhone.filter((phone) => phone.id === id);
+    axios.get(`${URL}/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setGetPhone(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const navigate = useNavigate();
   return (
@@ -43,7 +47,7 @@ function DetailsPhone() {
         >
           <Box
             component="img"
-            src={filtered[0]?.imageURL}
+            src={getPhone?.image}
             sx={{
               width: { xs: '50%', sm: '70%' },
             }}
@@ -58,7 +62,7 @@ function DetailsPhone() {
         }}
         >
           <Typography variant="body1">
-            {filtered[0]?.description}
+            {getPhone?.description}
           </Typography>
           <Button
             variant="contained"

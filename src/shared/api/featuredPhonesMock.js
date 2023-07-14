@@ -1,4 +1,21 @@
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+
 // eslint-disable-next-line import/prefer-default-export
+export const GetDevice = () => {
+  const [getDevice, setGetDevice] = useState();
+  useEffect(() => {
+    const URL = 'https://t4q0kvdhu4.execute-api.us-east-1.amazonaws.com/items';
+
+    axios.get(URL)
+      .then((response) => {
+        console.log(response.data);
+        setGetDevice(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+  return { getDevice };
+};
 export const featuredPhonesMock = [
   {
     id: '15910',

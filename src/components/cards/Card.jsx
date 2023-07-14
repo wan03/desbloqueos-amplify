@@ -21,22 +21,6 @@ function MediaCard({
 }) {
   const navigate = useNavigate();
   return (
-    /*
-      <MDBCard className="align-items-center">
-        {imgsrc && (
-        <MDBCardImage
-          className="img-fluid"
-          src={imgsrc}
-          waves
-        />
-        )}
-        <MDBCardBody>
-          {title && <MDBCardTitle>{title}</MDBCardTitle>}
-          {text && <MDBCardText>{text}</MDBCardText>}
-          {buttonText && <MDBBtn href={buttonhref}>{buttonText}</MDBBtn>}
-        </MDBCardBody>
-      </MDBCard>
-      */
     <Card>
       <CardMedia component="img" image={imgsrc} />
       <CardContent>

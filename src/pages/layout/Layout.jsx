@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from '@mui/material/styles';
 import Navbar from '../../components/navbar/Navbar';
-import Footer from '../../components/footer/Footer';
 import theme from '../../themeConfig';
 
 function Layout({ children }) {
@@ -10,7 +9,6 @@ function Layout({ children }) {
     <ThemeProvider theme={theme}>
       <Navbar />
       <main>{children}</main>
-      <Footer />
     </ThemeProvider>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
   Box,
   Card,
@@ -8,7 +9,6 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import ContactForm from './contactForm/ContactForm';
-import { LOREM_IPSUM } from '../../shared/constants/dev';
 
 function Contactanos() {
   return (
@@ -23,9 +23,10 @@ function Contactanos() {
         Contactanos
       </Typography>
       <Typography>
-        {LOREM_IPSUM}
+        Si quieres mantenerte al tanto y recibir información sobre nuestros servicios déjanos tu información aquí y te contactaremos
       </Typography>
       <Box
+        className="form-Contact"
         sx={{
           padding: { xs: '10px', ms: '30px' },
           justifyContent: 'center',

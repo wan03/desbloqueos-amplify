@@ -9,5 +9,4 @@ export const PATHS = [
   { name: 'Contáctanos', path: '/contactanos' },
   { name: 'Desbloqueos', path: '/desbloqueos' },
   { name: 'Telefonos', path: '/telefonos' },
-  { name: 'Pagar', path: '/pagar' },
 ];
