@@ -5,9 +5,10 @@ import { client } from './shared/apollo/Apollo';
 import reportWebVitals from './reportWebVitals';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@fortawesome/fontawesome-free/css/all.min.css';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'bootstrap-css-only/css/bootstrap.min.css';
-import './shared/mdbreact/css/mdb.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 import App from './App';
 

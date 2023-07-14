@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ThemeProvider } from '@mui/material/styles';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer';
+import theme from '../../themeConfig';
 
-const Layout = ({ children }) => (
-  <div className="d-flex flex-column min-vh-100">
-    <Navbar />
-    <main className="flex-shrink-0">{children}</main>
-    <Footer />
-  </div>
-);
+function Layout({ children }) {
+  return (
+    <ThemeProvider theme={theme}>
+      <Navbar />
+      <main>{children}</main>
+      <Footer />
+    </ThemeProvider>
+  );
+}
 
 Layout.propTypes = {
   children: PropTypes.oneOfType([

@@ -1,16 +1,14 @@
 import {
-  Box,
-  Card,
-  Container,
-  Typography,
+  Box, Button, Card, Container, Typography,
 } from '@mui/material';
-import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import ContactForm from './contactForm/ContactForm';
-import { LOREM_IPSUM } from '../../shared/constants/dev';
+import React from 'react';
+import { useNavigate } from 'react-router';
+import IniciarSesionForm from './iniciarSesionForm/IniciarSesionForm';
 
-function Contactanos() {
+function IniciarSesion() {
+  const navigate = useNavigate();
   return (
     <Container sx={{
       display: 'flex',
@@ -19,15 +17,10 @@ function Contactanos() {
       padding: '30px',
     }}
     >
-      <Typography variant="h5" color="initial">
-        Contactanos
-      </Typography>
-      <Typography>
-        {LOREM_IPSUM}
-      </Typography>
+      <Typography variant="h5" color="initial"> Iniciar Sesion </Typography>
       <Box
         sx={{
-          padding: { xs: '10px', ms: '30px' },
+          padding: '30px',
           justifyContent: 'center',
           display: 'flex',
         }}
@@ -43,21 +36,13 @@ function Contactanos() {
         >
           <Box
             sx={{
-              '& .MuiTextField-root': { mr: 1 },
-              padding: { xs: '10px', sm: '30px' },
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '20px',
-              width: { xs: '250px', sm: '300px' },
+              '& .MuiTextField-root': { mr: 1 }, padding: { xs: '20px 10px', sm: '30px' }, display: 'flex', flexDirection: 'column', gap: '20px',
             }}
             noValidate
             autoComplete="off"
           >
-            <Typography variant="h6" color="initial">
-              Escribenos
-            </Typography>
             <Formik
-              component={ContactForm}
+              component={IniciarSesionForm}
               initialValues={{
                 name: '',
                 email: '',
@@ -68,12 +53,7 @@ function Contactanos() {
               validationSchema={Yup.object({
                 name: Yup.string()
                   .required('*Requerido'),
-                email: Yup.string()
-                  .required('*Requerido'),
-                phone: Yup.string()
-                  .required('*Requerido'),
-                company: Yup.string(),
-                message: Yup.string()
+                password: Yup.string()
                   .required('*Requerido'),
               })}
               onSubmit={(values, { setSubmitting }) => {
@@ -84,6 +64,17 @@ function Contactanos() {
                 }, 400);
               }}
             />
+            <Typography sx={{ display: 'flex', gap: '10px' }}>
+              Estas registrado?
+              <Button
+                color="primary"
+                onClick={() => {
+                  navigate('/register');
+                }}
+              >
+                Registrese
+              </Button>
+            </Typography>
           </Box>
         </Card>
       </Box>
@@ -91,4 +82,4 @@ function Contactanos() {
   );
 }
 
-export default Contactanos;
+export default IniciarSesion;
