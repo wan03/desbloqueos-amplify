@@ -8,10 +8,6 @@ import imagenExperiencia from '../../../shared/image/3(3).png';
 import imagenGarantia from '../../../shared/image/7(8).png';
 import imagenRapido from '../../../shared/image/6(8).png';
 import imagenAtencion from '../../../shared/image/Desbloquea tu cel.png';
-// import PropTypes from 'prop-types';
-/* son los parametro de la funcion
-{ whyUsTitle, whyUsReasons }
-*/
 
 function WhyUS() {
   return (

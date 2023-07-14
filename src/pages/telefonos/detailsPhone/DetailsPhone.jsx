@@ -16,7 +16,6 @@ function DetailsPhone() {
 
     axios.get(`${URL}/${id}`)
       .then((response) => {
-        console.log(response.data);
         setGetPhone(response.data);
       })
       .catch((error) => console.log(error));

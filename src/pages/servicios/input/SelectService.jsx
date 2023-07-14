@@ -11,7 +11,6 @@ import Select from '@mui/material/Select';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpcionesGlobal } from '../../../store/slices/opciones.slice';
 import getToolsDrSim from '../../../api/drsimtools';
-// import { formatForOptions } from '../../desbloqueos/form/desbloqueosFormUtils';
 
 function SelectService({
   label, id, ...props
