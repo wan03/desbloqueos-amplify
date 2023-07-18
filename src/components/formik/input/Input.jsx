@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Input({
-  name, label, placeholder, validation, ...props
+  name, label, value, handleInputChange, placeholder, validation, ...props
 }) {
   return (
     <Container sx={{ display: 'column', gap: '50px' }}>
@@ -17,6 +17,8 @@ function Input({
         name={name}
         label={label}
         placeholder={placeholder}
+        value={value}
+        onChange={handleInputChange}
         {...props}
         variant="outlined"
       />

@@ -12,8 +12,8 @@ query GetInicio($id: String!) {
         }
         title
         text
-        buttonText
-        buttonHref
+        buttontext
+        buttonhref
       }
     }
     whyUsReasonsCollection {
@@ -38,8 +38,8 @@ query GetAcerca($id: String!) {
       items {
         title
         text
-        buttonText
-        buttonHref
+        buttontext
+        buttonhref
       }
     }
     whyUsReasonsCollection {

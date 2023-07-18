@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router';
 import Layout from './pages/layout/Layout';
 import awsExports from './aws-exports';
 import Acerca from './pages/acerca/Acerca';
+import Pagar from './pages/pagar/Pagar';
 import Contactanos from './pages/contactanos/Contactanos';
 import Desbloqueos from './pages/desbloqueos/Desbloqueos';
 import Inicio from './pages/inicio/Inicio';
@@ -22,6 +23,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/acerca" element={<Acerca> </Acerca>}> </Route>
+          <Route path="/pagar" element={<Pagar> </Pagar>}> </Route>
           <Route path="/contactanos" element={<Contactanos> </Contactanos>}> </Route>
           <Route path="/desbloqueos" element={<Desbloqueos> </Desbloqueos>}> </Route>
           <Route path="/" element={<Inicio> </Inicio>}> </Route>
