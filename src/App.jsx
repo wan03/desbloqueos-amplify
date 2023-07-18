@@ -13,6 +13,7 @@ import Telefonos from './pages/telefonos/Telefonos';
 import DetailsPhone from './pages/telefonos/detailsPhone/DetailsPhone';
 import IniciarSesion from './pages/iniciarSesion/IniciarSesion';
 import Register from './pages/registrarse/Register';
+import Members from './pages/members/Members';
 
 Amplify.configure(awsExports);
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/telefonos/:id" element={<DetailsPhone />} />
           <Route path="/login" element={<IniciarSesion />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/members" element={<Members />} />
         </Routes>
       </Layout>
     </Router>
