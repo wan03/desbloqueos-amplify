@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './shared/apollo/Apollo';
-import reportWebVitals from './reportWebVitals';
 import store from './store';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -28,4 +27,3 @@ root.render(
     </ApolloProvider>
   </React.StrictMode>,
 );
-reportWebVitals();
