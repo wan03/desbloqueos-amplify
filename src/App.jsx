@@ -1,9 +1,7 @@
 import React from 'react';
-import { Amplify } from 'aws-amplify';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router';
 import Layout from './pages/layout/Layout';
-import awsExports from './aws-exports';
 import Acerca from './pages/acerca/Acerca';
 import Pagar from './pages/pagar/Pagar';
 import Contactanos from './pages/contactanos/Contactanos';
@@ -14,8 +12,6 @@ import DetailsPhone from './pages/telefonos/detailsPhone/DetailsPhone';
 import IniciarSesion from './pages/iniciarSesion/IniciarSesion';
 import Register from './pages/registrarse/Register';
 import Members from './pages/members/Members';
-
-Amplify.configure(awsExports);
 
 function App() {
   return (

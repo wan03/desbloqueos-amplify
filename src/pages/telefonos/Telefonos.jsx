@@ -11,10 +11,9 @@ function Telefonos() {
 
     axios.get(URL)
       .then((response) => {
-        console.log(response.data);
         setGetDevice(response.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => (error));
   }, []);
   return (
     <Container sx={{ padding: '20px', textAlign: 'center' }}>

@@ -18,7 +18,7 @@ function DetailsPhone() {
       .then((response) => {
         setGetPhone(response.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => (error));
   }, []);
 
   const navigate = useNavigate();
