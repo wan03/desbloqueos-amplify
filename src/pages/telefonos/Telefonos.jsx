@@ -1,15 +1,19 @@
 import { Box, Container, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Card from '../../components/cards/Card';
-import { getPhones } from '../../shared/api/getPhones';
 import { CONSTANTS } from '../../shared/constants/Constants';
 
 function Telefonos() {
-  const [getPhone, setGetPhone] = useState([]);
-
+  const [getDevice, setGetDevice] = useState();
   useEffect(() => {
-    const phones = getPhones();
-    setGetPhone([...phones]);
+    const URL = 'https://t4q0kvdhu4.execute-api.us-east-1.amazonaws.com/items';
+
+    axios.get(URL)
+      .then((response) => {
+        setGetDevice(response.data);
+      })
+      .catch((error) => (error));
   }, []);
   return (
     <Container sx={{ padding: '20px', textAlign: 'center' }}>
@@ -23,12 +27,12 @@ function Telefonos() {
       }}
       >
         {
-          getPhone.map((phone) => (
+          getDevice?.map((phone) => (
             <Card
               key={phone.id}
               title={phone.name}
-              imgSrc={phone.imageURL}
-              buttonText={CONSTANTS.DESBLOQUEATUCELULAR}
+              imgsrc={phone.image}
+              buttontext={CONSTANTS.DESBLOQUEATUCELULAR}
               id={phone.id}
             />
           ))

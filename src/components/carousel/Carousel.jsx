@@ -1,95 +1,59 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import MobileStepper from '@mui/material/MobileStepper';
-// import Paper from '@mui/material/Paper';
-// import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
+import React, { useState } from 'react';
+import { Box } from '@mui/material';
 import { getFeaturedPhones } from '../../shared/api/getPhones';
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const classImg = ['', 'second-img', 'third-img'];
 
 function Carousel() {
-  const phone = getFeaturedPhones();
-  const theme = useTheme();
-  const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = phone.length;
+  const phones = getFeaturedPhones();
+  const [indexClass, setIndexClass] = useState(0);
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  /* const clickPrev = () => {
+    const prevClass = indexClass - 1;
+    if (prevClass < 0) {
+      setIndexClass(classImg.length - 1);
+    } else {
+      setIndexClass(prevClass);
+    }
+  }; */
+  const clickNext = () => {
+    const nextClass = indexClass + 1;
+    if (nextClass > classImg.length - 1) {
+      setIndexClass(0);
+    } else {
+      setIndexClass(nextClass);
+    }
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleStepChange = (step) => {
-    setActiveStep(step);
-  };
+  setInterval(clickNext, 10000);
   return (
-    <Box sx={{ width: { sm: '400px', ms: '350px' }, flexGrow: 1 }}>
-      <AutoPlaySwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {
-          phone.map((step, index) => (
-            <div key={step.name}>
-              {Math.abs(activeStep - index) <= 2 ? (
-                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <Box
-                    component="img"
-                    sx={{
-                      display: 'block',
-                      overflow: 'hidden',
-                      width: '70%',
-                    }}
-                    src={step.imageURL}
-                    alt={step.name}
-                  />
-                </Box>
-              ) : null}
-            </div>
-          ))
+    <div className="slider">
+      <div className={`slider__container ${classImg[indexClass]}`}>
+        {phones?.map((phone) => (
+          <img className="slider__imgs" key={phone.id} src={phone.imageURL} alt="imagenes" />
+        ))}
+      </div>
+      <div className="puntitos-container">
+        <Box
+          onClick={() => setIndexClass(0)}
+          className={
+            indexClass === 0 ? 'puntitos puntitos__active' : 'puntitos'
           }
-      </AutoPlaySwipeableViews>
-      <MobileStepper
-        steps={maxSteps}
-        position="static"
-        activeStep={activeStep}
-        nextButton={(
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-          >
-            Next
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        )}
-        backButton={(
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-            Back
-          </Button>
-        )}
-      />
-    </Box>
+        />
+        <Box
+          onClick={() => setIndexClass(1)}
+          className={
+            indexClass === 1 ? 'puntitos puntitos__active' : 'puntitos'
+          }
+        />
+        <Box
+          onClick={() => setIndexClass(2)}
+          className={
+            indexClass === 2 ? 'puntitos puntitos__active' : 'puntitos'
+          }
+        />
+      </div>
+    </div>
   );
 }
 

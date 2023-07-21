@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
   Box,
   Container,
@@ -5,25 +6,11 @@ import {
   CardMedia,
 } from '@mui/material';
 import React from 'react';
-import { LOREM_IPSUM, PLACEHOLDER_IMAGE } from '../../shared/constants/dev';
+import imagen from '../../shared/image/CM5bcOaWwAAhoKj.jpg';
+import imagenMobile from '../../shared/image/MicrosoftTeams-image.png';
 
 function Acerca() {
   return (
-  /*
-    <MDBContainer className="mb-4">
-      <h2 className="h1-responsive font-weight-bold text-center my-5">
-        Acerca
-      </h2>
-      <MDBRow>
-        <p>{LOREM_IPSUM}</p>
-        <p>{LOREM_IPSUM}</p>
-        <p>{LOREM_IPSUM}</p>
-      </MDBRow>
-      <MDBRow>
-        <img src={PLACEHOLDER_IMAGE(300)} className="img-fluid mx-auto d-block" alt="" />
-      </MDBRow>
-    </MDBContainer>
-    */
     <Container sx={{
       display: 'flex',
       flexDirection: 'column',
@@ -36,17 +23,23 @@ function Acerca() {
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
         <Typography variant="body1">
-          { LOREM_IPSUM }
+          En DesbloqueaTuCell, nos especializamos en desbloquear teléfonos inteligentes, brindándote la libertad de utilizar tu dispositivo con cualquier operador y aprovechar al máximo su potencial. Trabajamos con todas las marcas líderes del mercado, incluyendo Samsung, Apple, Huawei, Xiaomi, Motorola y muchas más.
         </Typography>
         <Typography variant="body1">
-          { LOREM_IPSUM }
+          Tenemos una amplia variedad de modelos y sistemas operativos, garantizando un desbloqueo seguro y eficiente. Ya sea que estés buscando liberar un Samsung Galaxy, un iPhone de Apple, un Huawei P30, un Xiaomi Mi 11 o cualquier otro modelo popular, ¡estamos aquí para ayudarte!
         </Typography>
         <Typography variant="body1">
-          { LOREM_IPSUM }
+          En DesbloqueaTuCell, entendemos que cada teléfono es único, y es por eso que utilizamos métodos y herramientas avanzadas para garantizar un desbloqueo exitoso sin comprometer la integridad de tu dispositivo. Nos enorgullece ofrecer un servicio rápido y conveniente, permitiéndote disfrutar de todas las características y funcionalidades de tu teléfono sin limitaciones.
+        </Typography>
+        <Typography variant="body1">
+          No importa la marca o el modelo de tu teléfono inteligente, en DesbloqueaTuCell tenemos la experiencia y los conocimientos necesarios para desbloquearlo de manera segura y confiable. Contáctanos hoy mismo y descubre la libertad y flexibilidad que te ofrecemos para aprovechar al máximo tu teléfono inteligente
         </Typography>
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <CardMedia component="img" image={PLACEHOLDER_IMAGE(300)} alt="place holder" height="300" />
+      <Box sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'center' }}>
+        <CardMedia component="img" image={imagen} alt="place holder" height="500" />
+      </Box>
+      <Box sx={{ display: { sm: 'none', xs: 'flex' }, justifyContent: 'center' }}>
+        <CardMedia component="img" image={imagenMobile} alt="place holder" height="500" />
       </Box>
     </Container>
   );

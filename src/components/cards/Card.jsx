@@ -15,30 +15,14 @@ import { useNavigate } from 'react-router';
 function MediaCard({
   title,
   text,
-  buttonText,
-  imgSrc,
+  buttontext,
+  imgsrc,
   id,
 }) {
   const navigate = useNavigate();
   return (
-    /*
-      <MDBCard className="align-items-center">
-        {imgSrc && (
-        <MDBCardImage
-          className="img-fluid"
-          src={imgSrc}
-          waves
-        />
-        )}
-        <MDBCardBody>
-          {title && <MDBCardTitle>{title}</MDBCardTitle>}
-          {text && <MDBCardText>{text}</MDBCardText>}
-          {buttonText && <MDBBtn href={buttonHref}>{buttonText}</MDBBtn>}
-        </MDBCardBody>
-      </MDBCard>
-      */
     <Card>
-      <CardMedia component="img" image={imgSrc} />
+      <CardMedia component="img" image={imgsrc} />
       <CardContent>
         <Typography>
           {title}
@@ -52,7 +36,7 @@ function MediaCard({
             navigate(`/telefonos/${id}`);
           }}
         >
-          {buttonText}
+          {buttontext}
         </Button>
       </CardContent>
     </Card>
@@ -62,17 +46,17 @@ function MediaCard({
 Card.propTypes = {
   title: PropTypes.string,
   text: PropTypes.string,
-  buttonText: PropTypes.string,
-  buttonHref: PropTypes.string,
-  imgSrc: PropTypes.string,
+  buttontext: PropTypes.string,
+  buttonhref: PropTypes.string,
+  imgsrc: PropTypes.string,
 };
 
 Card.defaultProps = {
   title: '',
   text: '',
-  buttonText: '',
-  buttonHref: '',
-  imgSrc: '',
+  buttontext: '',
+  buttonhref: '',
+  imgsrc: '',
 };
 
 export default MediaCard;

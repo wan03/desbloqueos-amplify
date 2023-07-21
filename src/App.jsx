@@ -1,10 +1,9 @@
 import React from 'react';
-import { Amplify } from 'aws-amplify';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router';
 import Layout from './pages/layout/Layout';
-import awsExports from './aws-exports';
 import Acerca from './pages/acerca/Acerca';
+import Pagar from './pages/pagar/Pagar';
 import Contactanos from './pages/contactanos/Contactanos';
 import Desbloqueos from './pages/desbloqueos/Desbloqueos';
 import Inicio from './pages/inicio/Inicio';
@@ -12,8 +11,7 @@ import Telefonos from './pages/telefonos/Telefonos';
 import DetailsPhone from './pages/telefonos/detailsPhone/DetailsPhone';
 import IniciarSesion from './pages/iniciarSesion/IniciarSesion';
 import Register from './pages/registrarse/Register';
-
-Amplify.configure(awsExports);
+import Members from './pages/members/Members';
 
 function App() {
   return (
@@ -21,6 +19,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/acerca" element={<Acerca> </Acerca>}> </Route>
+          <Route path="/pagar" element={<Pagar> </Pagar>}> </Route>
           <Route path="/contactanos" element={<Contactanos> </Contactanos>}> </Route>
           <Route path="/desbloqueos" element={<Desbloqueos> </Desbloqueos>}> </Route>
           <Route path="/" element={<Inicio> </Inicio>}> </Route>
@@ -28,6 +27,7 @@ function App() {
           <Route path="/telefonos/:id" element={<DetailsPhone />} />
           <Route path="/login" element={<IniciarSesion />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/members" element={<Members />} />
         </Routes>
       </Layout>
     </Router>
