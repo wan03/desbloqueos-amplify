@@ -244,6 +244,7 @@ function DesbloqueosForm() {
       display: 'flex',
       flexDirection: 'column',
       gap: '50px',
+      textAlign: 'center',
     }}
     >
       <Typography variant="h6"> Desbloquea tu celular </Typography>
