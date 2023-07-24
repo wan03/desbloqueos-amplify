@@ -1,5 +1,8 @@
-import { Box, Container, Typography } from '@mui/material';
+import {
+  Box, Button, Container, Typography,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { CONSTANTS, PATHS } from '../../../shared/constants/Constants';
 import CardWithImage from '../../../components/cards/Card';
 import { getFeaturedPhones } from '../../../shared/api/getPhones';
@@ -24,6 +27,12 @@ function FeaturedPhones() {
     return card;
   });
 
+  const navigate = useNavigate();
+
+  const desbloqueosDirection = () => {
+    navigate('/desbloqueos');
+  };
+
   return (
     <Container>
       <Typography variant="h5" alignItems="center"> Teléfonos Destacados </Typography>
@@ -46,6 +55,7 @@ function FeaturedPhones() {
             />
           ))
         }
+        <Button onClick={desbloqueosDirection} variant="contained"> Mas telefonos </Button>
       </Box>
     </Container>
   );
