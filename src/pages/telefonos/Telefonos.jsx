@@ -7,7 +7,7 @@ import { CONSTANTS } from '../../shared/constants/Constants';
 function Telefonos() {
   const [getDevice, setGetDevice] = useState();
   useEffect(() => {
-    const URL = 'https://t4q0kvdhu4.execute-api.us-east-1.amazonaws.com/items';
+    const URL = 'https://eb5dut1866.execute-api.us-east-1.amazonaws.com/items';
 
     axios.get(URL)
       .then((response) => {
