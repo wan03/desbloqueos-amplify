@@ -72,3 +72,46 @@
   .puntitos__active {
 	background-color: #1565c0;
   }
+  
+.pagination-prev-next {
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    width: 40px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1565c0;
+    border-radius: 8px;
+}
+.pagination-number-container {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding-left: 0;
+}
+
+.pagination-container-1 {
+    box-shadow: none;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;    
+    text-align: center;
+    gap: 5px;
+}
+.page-active {
+    background-color: #1565c0;
+    color: #fff;
+}
+.pagination-number {
+    font-size: 20px;
+    cursor: pointer;
+    width: 40px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
