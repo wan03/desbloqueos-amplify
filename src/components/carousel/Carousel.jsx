@@ -8,14 +8,6 @@ function Carousel() {
   const phones = getFeaturedPhones();
   const [indexClass, setIndexClass] = useState(0);
 
-  /* const clickPrev = () => {
-    const prevClass = indexClass - 1;
-    if (prevClass < 0) {
-      setIndexClass(classImg.length - 1);
-    } else {
-      setIndexClass(prevClass);
-    }
-  }; */
   const clickNext = () => {
     const nextClass = indexClass + 1;
     if (nextClass > classImg.length - 1) {
@@ -30,7 +22,7 @@ function Carousel() {
     <div className="slider">
       <div className={`slider__container ${classImg[indexClass]}`}>
         {phones?.map((phone) => (
-          <img className="slider__imgs" key={phone.id} src={phone.imageURL} alt="imagenes" />
+          <img className="slider__imgs" key={phone.id} src={phone.image} alt="imagenes" />
         ))}
       </div>
       <div className="puntitos-container">

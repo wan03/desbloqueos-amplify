@@ -14,18 +14,7 @@ function SelectInput({
   const [valueOptions, setValueOptions] = useState('');
   const dispatch = useDispatch();
   /*
-  if (label === 'Compañia telefonica') {
-    const url = 'https://omb7k0gyvj.execute-api.us-east-1.amazonaws.com/items';
-    const opciones = useSelector((state) => state.opciones[0]?.idReg);
-    const optionNetwork = () => {
-      axios.get(`${url}/${opciones}`)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => console.log(error));
-    };
-    optionNetwork();
-  }
+
 */
   // eslint-disable-next-line arrow-body-style
   async function findAsync(arr, valor) {
