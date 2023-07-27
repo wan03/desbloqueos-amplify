@@ -14,7 +14,7 @@ import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import Check from '@mui/icons-material/Check';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import PersonIcon from '@mui/icons-material/Person';
+/* import PersonIcon from '@mui/icons-material/Person'; */
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AppSettingsAltIcon from '@mui/icons-material/AppSettingsAlt';
@@ -127,11 +127,11 @@ function ColorlibStepIcon(props) {
   const icons = {
     1: <LocationCityIcon name="Compañia Télefonica" />,
     2: <LocalPhoneIcon name="Personal Data" />,
-    4: <PersonIcon name="Terms and Conditions" />,
-    7: <CheckCircleIcon name="payment" />,
-    6: <PaymentIcon name="Finish" />,
     3: <AppSettingsAltIcon name="services" />,
-    5: <LocalPhoneIcon name="imei" />,
+    4: <LocalPhoneIcon name="imei" />,
+    /* 4: <PersonIcon name="Terms and Conditions" />, */
+    5: <PaymentIcon name="Finish" />,
+    6: <CheckCircleIcon name="payment" />,
   };
 
   return (
@@ -155,7 +155,7 @@ ColorlibStepIcon.defaultProps = {
   icon: '',
 };
 
-const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'Servicio', 'Terminos y Condiciones', 'Imei', 'Pagar', 'Finalizado'];
+const steps = ['Selecciona tu pais', 'Selecciona tu telefono', 'Servicio', 'Imei', 'Pagar', 'Finalizado'];
 
 function DesbloqueosForm() {
   const navigate = useNavigate();
@@ -403,7 +403,7 @@ function DesbloqueosForm() {
                 </Box>
               </Card>
             )}
-            { formActivePanel.formActivePanelId === 4 && (
+            { formActivePanel.formActivePanelId === 44 && (
               <Card sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -423,16 +423,36 @@ function DesbloqueosForm() {
                 </Box>
               </Card>
             )}
-            { formActivePanel.formActivePanelId === 5 && (
+            { formActivePanel.formActivePanelId === 4 && (
               // eslint-disable-next-line max-len
               <Input Next={handleNextPrevClick} />
             )}
-            { formActivePanel.formActivePanelId === 6 && (
+            { formActivePanel.formActivePanelId === 5 && (
               <div>
-                <Pagar next={handleNextPrevClick} />
+                <div>
+                  <Card sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '20px',
+                    alignItems: 'center',
+                    padding: '20px',
+                  }}
+                  >
+                    <Typography variant="h6">
+                      Servicios de desbloqueos
+                    </Typography>
+                    <FormControlLabel control={<Checkbox />} label="Aceptar los términos  y condiciones" id="checkbox" />
+                    <FormControlLabel control={<Checkbox />} label="Recibir boletín informativo" id="checkbox2" />
+                    <Pagar next={handleNextPrevClick} />
+                    <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
+                      {/* <Button variant="contained" onClick={() => handleNextPrevClick(4)}> Anterior </Button>
+                      <Button variant="contained" onClick={() => handleNextPrevClick(6)}> Siguiente </Button> */}
+                    </Box>
+                  </Card>
+                </div>
               </div>
             )}
-            { formActivePanel.formActivePanelId === 7 && (
+            { formActivePanel.formActivePanelId === 6 && (
               <Card sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -442,17 +462,30 @@ function DesbloqueosForm() {
                 padding: '20px',
               }}
               >
-                <Typography variant="h6">
-                  Finish
-                </Typography>
-                <Typography textAlign="center">
-                  <strong>{`Solicitud Creada. Nro. Ticket: ${idTicket}.`}</strong>
-                  <br />
-                  <strong>Pronto estará recibiendo en su correo el estatus de su solicitud.</strong>
-                </Typography>
-                <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
-                  <Button variant="contained" onClick={() => handleSubmission()}> Submit </Button>
-                </Box>
+                <Typography variant="h6">Completado!</Typography>
+                { idTicket !== undefined ? (
+                  <div>
+                    <Typography textAlign="center">
+                      <strong>{`Solicitud Creada. Nro. Ticket: ${idTicket}.`}</strong>
+                      <br />
+                      <strong>Pronto estará recibiendo en su correo el estatus de su solicitud.</strong>
+                    </Typography>
+                    <Box sx={{
+                      display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', marginTop: '20px',
+                    }}
+                    >
+                      {' '}
+                      <Button variant="contained" onClick={() => handleSubmission()}>Submit</Button>
+                    </Box>
+                  </div>
+                ) : (
+                  // This block will be executed if idTicket is undefined
+                  <Typography variant="body1" textAlign="center">
+                    <strong>No se ha recibido un número de ticket válido.</strong>
+                    <br />
+                    <strong>Por favor, inténtelo nuevamente más tarde o contactenos.</strong>
+                  </Typography>
+                )}
               </Card>
             )}
           </Container>

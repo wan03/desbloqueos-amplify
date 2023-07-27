@@ -22,8 +22,8 @@ function Input({ Next }) {
       <TextField id="imei" label="IMEI" variant="filled" onChange={handleChangeImei} defaultValue={valueOptions} />
       <TextField id="email" label="Correo electronico" variant="filled" onChange={handleChangeEmail} defaultValue={valueOptionsEmail} />
       <Box sx={{ display: 'flex', gap: '30px' }}>
-        <Button variant="contained" onClick={() => Next(4)}> Volver</Button>
-        <Button variant="contained" onClick={() => Next(6)}> Siguiente </Button>
+        <Button variant="contained" onClick={() => Next(3)}> Volver</Button>
+        <Button variant="contained" onClick={() => Next(5)}> Siguiente </Button>
       </Box>
     </Box>
   );
