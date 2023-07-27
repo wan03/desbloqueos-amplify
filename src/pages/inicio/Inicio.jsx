@@ -22,6 +22,7 @@ function Inicio() {
       gap: '50px',
       padding: '20px',
       alignItems: 'center',
+      width: '90%',
     }}
     >
       <Carousel />

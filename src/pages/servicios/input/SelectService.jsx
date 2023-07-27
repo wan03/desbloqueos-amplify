@@ -23,6 +23,7 @@ function SelectService({
   const [timeMin, setTimeMin] = useState('');
   const [timeMax, setTimeMax] = useState('');
   const [avg, setAvg] = useState('');
+  const [toolType, setToolType] = useState('');
   const opciones = useSelector((state) => state.opciones);
   const [options, setToolOptions] = useState([]);
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function SelectService({
     setTimeMin(descripcion?.timeMin);
     setTimeMax(descripcion?.timeMax);
     setAvg(descripcion?.avg);
+    setToolType(descripcion?.toolType);
     dispatch(setOpcionesGlobal({ [label]: descripcion.name, id: `${id}`, idReg: `${event.target.value}` }));
     dispatch(setOpcionesGlobal({ id: '8', price: `${descripcion.price}` }));
     dispatch(setOpcionesGlobal({ id: '9', timeMin: `${descripcion.timeMin}` }));
@@ -92,6 +94,7 @@ function SelectService({
               timeMin: opt.time.min,
               timeMax: opt.time.max,
               avg: opt.avg,
+              toolType: opt.tool_type,
             };
             return tool;
           });
@@ -139,6 +142,7 @@ function SelectService({
         <TextField id="txtTimeMin" label="Dias Minimo" variant="filled" value={timeMin} InputProps={{ readOnly: true }} />
         <TextField id="txtTimeMax" label="Dias Maximo" variant="filled" value={timeMax} InputProps={{ readOnly: true }} />
         <TextField id="txtAvg" label="Promedio" variant="filled" value={avg} InputProps={{ readOnly: true }} />
+        <TextField id="txtRequiere" label="Requiere" variant="filled" value={toolType} InputProps={{ readOnly: true }} />
         {meta.touched && meta.error ? (
           <div className="error">{meta.error}</div>
         ) : null}
