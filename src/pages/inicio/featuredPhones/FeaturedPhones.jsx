@@ -21,7 +21,7 @@ function FeaturedPhones() {
       title: phone.name,
       buttontext: CONSTANTS.DESBLOQUEATUCELULAR,
       buttonhref: PATHS.DESBLOQUEOS,
-      imgsrc: phone.imageURL,
+      imgsrc: phone.image,
       text: phone.description,
     };
     return card;
@@ -30,7 +30,7 @@ function FeaturedPhones() {
   const navigate = useNavigate();
 
   const desbloqueosDirection = () => {
-    navigate('/desbloqueos');
+    navigate('/telefonos');
   };
 
   return (

@@ -12,7 +12,7 @@ function DetailsPhone() {
   const [getPhone, setGetPhone] = useState([]);
 
   useEffect(() => {
-    const URL = 'https://t4q0kvdhu4.execute-api.us-east-1.amazonaws.com/items';
+    const URL = 'https://eb5dut1866.execute-api.us-east-1.amazonaws.com/items';
 
     axios.get(`${URL}/${id}`)
       .then((response) => {
