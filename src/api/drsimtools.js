@@ -13,8 +13,9 @@ const getToolsDrSim = async (id_terminal, id_operador) => {
   let tools = [];
   try {
     const { data } = await axios.get(`${env.apiDrSimTools}/${id_terminal}/${id_operador}`);
+    // console.log(data);
     if (data.status === 'OK'){
-      console.log({
+       console.log({
  code: data.code, status: data.estatus, info: data.info, services: 'Available',
 });
       tools = data.res.tools;
@@ -27,6 +28,7 @@ const getToolsDrSim = async (id_terminal, id_operador) => {
         price: '--',
         time: { min: '--', max: '--' },
         avg: '--',
+        tool_type: '--',
       };
     }
   } catch (error) {

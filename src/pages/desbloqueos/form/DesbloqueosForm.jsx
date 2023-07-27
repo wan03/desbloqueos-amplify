@@ -441,15 +441,15 @@ function DesbloqueosForm() {
                     <Typography variant="h6">
                       Servicios de desbloqueos
                     </Typography>
-                    <FormControlLabel control={<Checkbox />} label="I agreee to the terms and conditions" id="checkbox" />
-                    <FormControlLabel control={<Checkbox />} label="I want to receive newsletter" id="checkbox2" />
+                    <FormControlLabel control={<Checkbox />} label="Aceptar los términos  y condiciones" id="checkbox" />
+                    <FormControlLabel control={<Checkbox />} label="Recibir boletín informativo" id="checkbox2" />
+                    <Pagar next={handleNextPrevClick} />
                     <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
-                      <Button variant="contained" onClick={() => handleNextPrevClick(3)}> Anterior </Button>
-                      <Button variant="contained" onClick={() => handleNextPrevClick(5)}> Siguiente </Button>
+                      {/* <Button variant="contained" onClick={() => handleNextPrevClick(4)}> Anterior </Button>
+                      <Button variant="contained" onClick={() => handleNextPrevClick(6)}> Siguiente </Button> */}
                     </Box>
                   </Card>
                 </div>
-                <Pagar next={handleNextPrevClick} />
               </div>
             )}
             { formActivePanel.formActivePanelId === 6 && (
@@ -470,7 +470,11 @@ function DesbloqueosForm() {
                       <br />
                       <strong>Pronto estará recibiendo en su correo el estatus de su solicitud.</strong>
                     </Typography>
-                    <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
+                    <Box sx={{
+                      display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', marginTop: '20px',
+                    }}
+                    >
+                      {' '}
                       <Button variant="contained" onClick={() => handleSubmission()}>Submit</Button>
                     </Box>
                   </div>

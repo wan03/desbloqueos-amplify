@@ -57,6 +57,7 @@ async function createOrden(idTerminal, idOperador, imei, idService) {
   await postCreateOrdenDrSim(idTerminal, idOperador, imei, idService)
     .then((respuesta) => {
       servicios = respuesta;
+      // console.log(respuesta);
     })
     .catch((error) => {
       console.log(error);
@@ -98,19 +99,22 @@ const CheckoutForm = ({ next }) => {
           // eslint-disable-next-line max-len
           amount: price, /* en stripe los montos van expresados en centavos (entero). monto en dolares multiplicado por 100 centavos */
         });
-        console.log(data);
+        // console.log(data);
         if (data.message === 'Succesfull Payment') {
           const ticket = await createOrden(idTerminal, idOperador, imei, idService);
-          if (ticket?.res.id_ticket) {
+          if (ticket?.res?.id_ticket) {
             const timestamp = Date.now();
             const fecha = new Date(timestamp);
             const hoy = fecha.toISOString();
             putDynamobdOrden(timestamp, `${ticket?.res.id_ticket}`, hoy, email, `${imei}`, id, `${price}`, 'PENDIENTE');
             setMsnSolicitud(ticket);
             dispatch(setOpcionesGlobal({ id: '12', id_ticket: `${ticket?.res.id_ticket}` }));
-            next(7);
+            next(6);
           } else {
-            setMsnSolicitud('Solicitid: NO Procesada');
+            setMsnSolicitud('Solicitid: NO Procesada!');
+            if (ticket?.res?.id_ticket === undefined) {
+              setLoading(true);
+            }
           }
           // setLoading(true);
           console.log(ticket);
@@ -137,7 +141,13 @@ const CheckoutForm = ({ next }) => {
           <div>{ message }</div>
         ) : 'PAGAR' }
       </Button>
-      <Button disabled={loading} variant="contained" onClick={() => next(5)}> Anterior </Button>
+      <Button
+        disabled={loading}
+        variant="contained"
+        onClick={() => next(4)}
+      >
+        Anterior
+      </Button>
       <Typography variant="subtitle1" component="div">
         {' '}
         { msnSolicitud?.status }
