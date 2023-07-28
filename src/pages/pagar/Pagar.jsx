@@ -67,7 +67,7 @@ async function createOrden(idTerminal, idOperador, imei, idService) {
 
 const stripePromise = loadStripe(env.key_public);
 // eslint-disable-next-line react/prop-types
-const CheckoutForm = ({ next }) => {
+const CheckoutForm = ({ next, disabledButton }) => {
   const dispatch = useDispatch();
   const [msnSolicitud, setMsnSolicitud] = useState('');
   const opcion = useSelector((state) => state.opciones);
@@ -128,7 +128,7 @@ const CheckoutForm = ({ next }) => {
       console.log(error);
     }
   };
-
+  const disabled = (!disabledButton || loading) ? 'disabled' : undefined;
   return (
     <div className="div_payment-cardElement">
       <Resumen />
@@ -136,7 +136,7 @@ const CheckoutForm = ({ next }) => {
         <label className="form-label">Tarjeta</label>
         <CardElement options={CARD_ELEMENT_OPTIONS} />
       </div>
-      <Button disabled={loading} onClick={handleSubmit} variant="contained">
+      <Button disabled={disabled} onClick={handleSubmit} variant="contained">
         {loading ? (
           <div>{ message }</div>
         ) : 'PAGAR' }
@@ -157,7 +157,7 @@ const CheckoutForm = ({ next }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-function Pagar({ next }) {
+function Pagar({ next, disabledButton }) {
   return (
     <Container sx={{
       width: { xs: '100%', sm: '80%' },
@@ -182,7 +182,7 @@ function Pagar({ next }) {
         }}
         >
           <Elements stripe={stripePromise}>
-            <CheckoutForm next={next} />
+            <CheckoutForm next={next} disabledButton={disabledButton} />
           </Elements>
         </Box>
 
