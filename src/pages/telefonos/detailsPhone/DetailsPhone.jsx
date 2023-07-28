@@ -19,7 +19,7 @@ function DetailsPhone() {
         setGetPhone(response.data);
       })
       .catch((error) => (error));
-  }, []);
+  }, [id]);
 
   const navigate = useNavigate();
   return (

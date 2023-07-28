@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
 import { Box, Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setOpcionesGlobal } from '../../../store/slices/opciones.slice';
 
 function Input({ Next }) {
   const [valueOptions, setValueOptions] = useState('');
   const [valueOptionsEmail, setValueOptionsEmail] = useState('');
   const dispatch = useDispatch();
+  const opciones = useSelector((state) => state.opciones);
 
   const handleChangeImei = (event) => {
     setValueOptions(event.target.value);
@@ -17,13 +18,15 @@ function Input({ Next }) {
     setValueOptionsEmail(event.target.value);
     dispatch(setOpcionesGlobal({ id: '6', email: event.target.value }));
   };
+
+  const disabledImei = opciones[9] && opciones[10] ? undefined : 'disabled';
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
       <TextField id="imei" label="IMEI" variant="filled" onChange={handleChangeImei} defaultValue={valueOptions} />
       <TextField id="email" label="Correo electronico" variant="filled" onChange={handleChangeEmail} defaultValue={valueOptionsEmail} />
       <Box sx={{ display: 'flex', gap: '30px' }}>
         <Button variant="contained" onClick={() => Next(3)}> Volver</Button>
-        <Button variant="contained" onClick={() => Next(5)}> Siguiente </Button>
+        <Button variant="contained" disabled={disabledImei} onClick={() => Next(5)}> Siguiente </Button>
       </Box>
     </Box>
   );
