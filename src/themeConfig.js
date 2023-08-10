@@ -11,6 +11,9 @@ const theme = createTheme({
     secondary: {
       main: '#E1A73E',
     },
+    tertiaryColor: {
+      main: '#2586AF',
+    },
   },
   typography: {
     fontFamily: 'Roboto, sans-serif',

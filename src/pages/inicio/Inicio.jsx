@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { Box } from '@mui/material';
+import { Box, Fab, Typography } from '@mui/material';
+import { useNavigate } from 'react-router';
 import Carousel from '../../components/carousel/Carousel';
 import FeaturedPhones from './featuredPhones/FeaturedPhones';
 import Servicios from './services/Services';
@@ -14,17 +15,34 @@ function Inicio() {
   const inicio = data?.inicio;
   if (loading === false) return <Spinner center />;
 
+  const navigate = useNavigate();
+
+  const goContactanos = () => {
+    navigate('/contactanos');
+  };
+
   return (
     <Box sx={{
       flexDirection: 'column',
       display: 'flex',
       justifyContent: 'center',
-      gap: '50px',
-      padding: '20px',
+      gap: '40px',
+      paddingTop: '50px',
       alignItems: 'center',
-      width: '90%',
+      width: '100%',
     }}
     >
+      <Fab
+        variant="extended"
+        sx={{
+          position: 'fixed', top: '150px', right: 100, backgroundColor: '#2586AF', border: '8px solid #E1A73E', padding: '20px',
+        }}
+        size="large"
+        onClick={goContactanos}
+      >
+        <Typography fontWeight="800"> Contactanos </Typography>
+      </Fab>
+      <Typography variant="h4" color="white">¿Necesitas desbloquear tu celular?</Typography>
       <Carousel />
       <FeaturedPhones />
       <WhyUS whyUsTitle={inicio?.whyUsTitle} whyUsReasons={inicio?.whyUsReasonsCollection.items} />

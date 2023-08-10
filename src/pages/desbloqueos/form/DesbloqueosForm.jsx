@@ -263,7 +263,6 @@ function DesbloqueosForm() {
       textAlign: 'center',
     }}
     >
-      <Typography variant="h6"> Desbloquea tu celular </Typography>
       <Stack sx={{ width: '100%' }} spacing={4}>
         <Stepper
           alternativeLabel

@@ -3,11 +3,17 @@ import {
   Box,
   Card,
   Container,
+  Fab,
+  Grid,
   Typography,
 } from '@mui/material';
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+import EmailIcon from '@mui/icons-material/Email';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import ContactForm from './contactForm/ContactForm';
 
 function Contactanos() {
@@ -17,14 +23,39 @@ function Contactanos() {
       flexDirection: 'column',
       gap: '30px',
       padding: '30px',
+      paddingTop: '50px',
     }}
     >
-      <Typography variant="h5" color="initial">
-        Contactanos
+      <Typography variant="h4" color="white" textAlign="center" fontWeight="800">
+        ¡Contactanos!
       </Typography>
-      <Typography>
-        Si quieres mantenerte al tanto y recibir información sobre nuestros servicios déjanos tu información aquí y te contactaremos
-      </Typography>
+      <Grid container spacing={2} justifyContent="space-between" padding="20px">
+        <Grid item>
+          <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
+            <PhoneInTalkIcon />
+            <Typography> (561) 207-8335</Typography>
+          </Fab>
+        </Grid>
+        <Grid item>
+          <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
+            <EmailIcon />
+            <Typography> ??????????</Typography>
+          </Fab>
+        </Grid>
+        <Grid item>
+          <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
+            <InstagramIcon />
+            <Typography> ??????????</Typography>
+          </Fab>
+        </Grid>
+        <Grid item>
+          <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
+            <FacebookIcon />
+            <Typography> ???????????</Typography>
+          </Fab>
+        </Grid>
+      </Grid>
+      <Typography color="white" textAlign="center" variant="h5" fontWeight="700">Registra tus datos y nos comunicaremos contigo</Typography>
       <Box
         className="form-Contact"
         sx={{

@@ -2,14 +2,18 @@
 import {
   Box,
   Container,
+  Fab,
   Typography,
-  CardMedia,
 } from '@mui/material';
 import React from 'react';
-import imagen from '../../shared/image/CM5bcOaWwAAhoKj.jpg';
-import imagenMobile from '../../shared/image/MicrosoftTeams-image.png';
+import { useNavigate } from 'react-router';
 
 function Acerca() {
+  const navigate = useNavigate();
+
+  const goContactanos = () => {
+    navigate('/contactanos');
+  };
   return (
     <Container sx={{
       display: 'flex',
@@ -21,6 +25,17 @@ function Acerca() {
       <Typography variant="h5">
         Acerca
       </Typography>
+
+      <Fab
+        variant="extended"
+        sx={{
+          position: 'fixed', top: '120px', right: '45%', backgroundColor: '#2586AF', border: '8px solid #E1A73E', padding: '20px',
+        }}
+        size="large"
+        onClick={goContactanos}
+      >
+        <Typography fontWeight="800"> Contactanos </Typography>
+      </Fab>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
         <Typography variant="body1">
           En DesbloqueaTuCell, nos especializamos en desbloquear teléfonos inteligentes, brindándote la libertad de utilizar tu dispositivo con cualquier operador y aprovechar al máximo su potencial. Trabajamos con todas las marcas líderes del mercado, incluyendo Samsung, Apple, Huawei, Xiaomi, Motorola y muchas más.
@@ -34,12 +49,6 @@ function Acerca() {
         <Typography variant="body1">
           No importa la marca o el modelo de tu teléfono inteligente, en DesbloqueaTuCell tenemos la experiencia y los conocimientos necesarios para desbloquearlo de manera segura y confiable. Contáctanos hoy mismo y descubre la libertad y flexibilidad que te ofrecemos para aprovechar al máximo tu teléfono inteligente
         </Typography>
-      </Box>
-      <Box sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'center' }}>
-        <CardMedia component="img" image={imagen} alt="place holder" height="500" />
-      </Box>
-      <Box sx={{ display: { sm: 'none', xs: 'flex' }, justifyContent: 'center' }}>
-        <CardMedia component="img" image={imagenMobile} alt="place holder" height="500" />
       </Box>
     </Container>
   );
