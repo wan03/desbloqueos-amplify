@@ -2,6 +2,7 @@
 import {
   Box,
   Card,
+  CardMedia,
   Container,
   Fab,
   Grid,
@@ -15,6 +16,8 @@ import EmailIcon from '@mui/icons-material/Email';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import ContactForm from './contactForm/ContactForm';
+import imagenFondo from '../../shared/image/15(2).png';
+import imagenFondoDerecho from '../../shared/image/MicrosoftTeams-image.png';
 
 function Contactanos() {
   return (
@@ -56,6 +59,20 @@ function Contactanos() {
         </Grid>
       </Grid>
       <Typography color="white" textAlign="center" variant="h5" fontWeight="700">Registra tus datos y nos comunicaremos contigo</Typography>
+      <CardMedia
+        component="img"
+        src={imagenFondo}
+        sx={{
+          width: '20%', height: '200px', position: 'absolute', left: '-4%', bottom: '-80% ', objectFit: 'cover',
+        }}
+      />
+      <CardMedia
+        component="img"
+        src={imagenFondoDerecho}
+        sx={{
+          width: '30%', height: '80%', position: 'absolute', right: '2%', bottom: '-80% ',
+        }}
+      />
       <Box
         className="form-Contact"
         sx={{

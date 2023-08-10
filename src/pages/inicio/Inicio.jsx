@@ -1,6 +1,8 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { Box, Fab, Typography } from '@mui/material';
+import {
+  Box, CardMedia, Fab, Typography,
+} from '@mui/material';
 import { useNavigate } from 'react-router';
 import Carousel from '../../components/carousel/Carousel';
 import FeaturedPhones from './featuredPhones/FeaturedPhones';
@@ -8,6 +10,7 @@ import Servicios from './services/Services';
 import WhyUS from './whyUs/WhyUs';
 import Spinner from '../../components/spinner/Spinner';
 import { getInicio } from '../../shared/api/contentful/queries';
+import imagenLateral from '../../shared/image/1(6).png';
 
 function Inicio() {
   const { data, loading } = useQuery(getInicio, { variables: { id: '3jDI1X9rZoL25IpElqhGKZ' } });
@@ -42,6 +45,13 @@ function Inicio() {
       >
         <Typography fontWeight="800"> Contactanos </Typography>
       </Fab>
+      <CardMedia
+        component="img"
+        src={imagenLateral}
+        sx={{
+          width: '40%', position: 'absolute', left: '-20%', top: '50%',
+        }}
+      />
       <Typography variant="h4" color="white">¿Necesitas desbloquear tu celular?</Typography>
       <Carousel />
       <FeaturedPhones />
