@@ -110,11 +110,11 @@ function Navbar() {
             color="secondary"
             variant="contained"
             onClick={() => {
-              navigate('/login');
+              navigate('/contactanos');
             }}
             sx={{ display: { xs: 'none', sm: 'block' }, color: '#224776' }}
           >
-            Iniciar Sesion/Registrarse
+            ¡Desbloquea tu cel ya!
           </Button>
         </StyledToolbar>
       </AppBar>

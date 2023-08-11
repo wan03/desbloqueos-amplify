@@ -23,10 +23,10 @@ function Servicios() {
       <Typography variant="h5" color="white" textAlign="center">
         Resultados efectivos con la marca que desees
       </Typography>
-      <Grid container spacing={{ xs: 4, sm: 2 }} justifyContent="center" sx={{ display: 'flex', gap: '20px' }}>
+      <Grid container spacing={{ xs: 2, sm: 2 }} justifyContent="center" sx={{ display: 'flex', gap: '20px' }}>
         <Grid
           item
-          xs={6}
+          xs={2}
           sm={2}
           sx={{
             display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', padding: '20px', borderRadius: '10%',
@@ -36,7 +36,7 @@ function Servicios() {
         </Grid>
         <Grid
           item
-          xs={6}
+          xs={2}
           sm={2}
           sx={{
             display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', padding: '20px', borderRadius: '10%',
@@ -46,7 +46,7 @@ function Servicios() {
         </Grid>
         <Grid
           item
-          xs={6}
+          xs={2}
           sm={2}
           sx={{
             display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', padding: '20px', borderRadius: '10%',

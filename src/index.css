@@ -82,7 +82,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1565c0;
+    background-color: #E1A73E;
     border-radius: 8px;
 }
 .pagination-number-container {
@@ -102,7 +102,7 @@ body {
     gap: 5px;
 }
 .page-active {
-    background-color: #1565c0;
+    background-color: #E1A73E;
     color: #fff;
 }
 .pagination-number {
@@ -114,4 +114,5 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    color: #fff;
 }

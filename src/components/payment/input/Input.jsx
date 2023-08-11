@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
-import { Box, Button, TextField } from '@mui/material';
+import {
+  Box, IconButton, TextField,
+} from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { setOpcionesGlobal } from '../../../store/slices/opciones.slice';
 
 function Input({ Next }) {
@@ -22,11 +26,15 @@ function Input({ Next }) {
   const disabledImei = opciones[9] && opciones[10] ? undefined : 'disabled';
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
-      <TextField id="imei" label="IMEI" variant="filled" onChange={handleChangeImei} defaultValue={valueOptions} />
-      <TextField id="email" label="Correo electronico" variant="filled" onChange={handleChangeEmail} defaultValue={valueOptionsEmail} />
+      <TextField sx={{ backgroundColor: 'white' }} color="secondary" id="imei" label="IMEI" variant="filled" onChange={handleChangeImei} defaultValue={valueOptions} />
+      <TextField sx={{ backgroundColor: 'white' }} color="secondary" id="email" label="Correo electronico" variant="filled" onChange={handleChangeEmail} defaultValue={valueOptionsEmail} />
       <Box sx={{ display: 'flex', gap: '30px' }}>
-        <Button variant="contained" onClick={() => Next(3)}> Volver</Button>
-        <Button variant="contained" disabled={disabledImei} onClick={() => Next(5)}> Siguiente </Button>
+        <IconButton onClick={() => Next(3)} sx={{ position: 'absolute', top: '60%', left: '23%' }}>
+          <ArrowBackIcon color="secondary" fontSize="large" />
+        </IconButton>
+        <IconButton disabled={disabledImei} onClick={() => Next(5)} sx={{ position: 'absolute', top: '60%', right: '23%' }}>
+          <ArrowForwardIcon color="secondary" fontSize="large" />
+        </IconButton>
       </Box>
     </Box>
   );

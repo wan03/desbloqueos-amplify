@@ -14,6 +14,9 @@ const theme = createTheme({
     tertiaryColor: {
       main: '#2586AF',
     },
+    formColor: {
+      main: '#000000',
+    },
   },
   typography: {
     fontFamily: 'Roboto, sans-serif',

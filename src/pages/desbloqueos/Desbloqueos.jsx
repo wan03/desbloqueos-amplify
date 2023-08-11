@@ -1,11 +1,14 @@
 /* eslint-disable max-len */
 import {
   Box,
+  CardMedia,
   Container,
   Typography,
 } from '@mui/material';
 import React from 'react';
 import DesbloqueosForm from './form/DesbloqueosForm';
+import mujer from '../../shared/image/17(1).png';
+import forma from '../../shared/image/18(1).png';
 
 function Desbloqueos() {
   return (
@@ -22,6 +25,20 @@ function Desbloqueos() {
       <Container>
         <DesbloqueosForm />
       </Container>
+      <CardMedia
+        component="img"
+        src={mujer}
+        sx={{
+          width: '30%', position: 'absolute', left: '0', bottom: '-85px', objectFit: 'cover',
+        }}
+      />
+      <CardMedia
+        component="img"
+        src={forma}
+        sx={{
+          width: '30%', position: 'absolute', right: '-5%', bottom: '-20%', overflow: 'hidden',
+        }}
+      />
     </Box>
   );
 }

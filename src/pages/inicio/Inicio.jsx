@@ -38,7 +38,7 @@ function Inicio() {
       <Fab
         variant="extended"
         sx={{
-          position: 'fixed', top: '150px', right: 100, backgroundColor: '#2586AF', border: '8px solid #E1A73E', padding: '20px',
+          position: 'fixed', top: '150px', right: { xs: '10px', sm: '40px' }, backgroundColor: '#2586AF', border: '8px solid #E1A73E', padding: '20px',
         }}
         size="large"
         onClick={goContactanos}
