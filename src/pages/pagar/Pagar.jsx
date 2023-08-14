@@ -13,8 +13,7 @@ import {
 } from '@stripe/react-stripe-js';
 import {
   Box,
-  Card,
-  Container, Typography, Dialog, Button,
+  Container, Typography, Button,
 } from '@mui/material';
 import axios from 'axios';
 import { environments } from '../../environments/environment';
@@ -163,15 +162,16 @@ function Pagar({ next, disabledButton }) {
       width: { xs: '100%', sm: '80%' },
     }}
     >
-      <Card sx={{
+      <Box sx={{
         display: 'flex',
         flexDirection: 'column',
         gap: '20px',
         alignItems: 'center',
         padding: '5px',
+        backgroundColor: '#2586AF',
       }}
       >
-        <Typography variant="h6" color="primary"> Pagar </Typography>
+        <Typography variant="h6" color="white"> Pagar </Typography>
         <Box sx={{
           display: 'flex',
           gap: '10px',
@@ -186,7 +186,7 @@ function Pagar({ next, disabledButton }) {
           </Elements>
         </Box>
 
-      </Card>
+      </Box>
 
     </Container>
   );

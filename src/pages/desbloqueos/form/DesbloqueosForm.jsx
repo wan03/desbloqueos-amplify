@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import {
   Box,
   Button,
-  Card, Checkbox, Container, FormControlLabel, Stack, Step, StepLabel, Stepper, Typography,
+  Card, Checkbox, Container, FormControlLabel, IconButton, Stack, Step, StepLabel, Stepper, Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
@@ -22,6 +22,8 @@ import AppSettingsAltIcon from '@mui/icons-material/AppSettingsAlt';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Pagar from '../../pagar/Pagar';
 import Select from '../../../components/formik/select/Select';
 import Input from '../../../components/payment/input/Input';
@@ -263,7 +265,6 @@ function DesbloqueosForm() {
       textAlign: 'center',
     }}
     >
-      <Typography variant="h6"> Desbloquea tu celular </Typography>
       <Stack sx={{ width: '100%' }} spacing={4}>
         <Stepper
           alternativeLabel
@@ -319,12 +320,13 @@ function DesbloqueosForm() {
               <Card sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '20px',
                 alignItems: 'center',
-                padding: '20px',
+                padding: '10px',
+                borderRadius: '35px',
+                backgroundColor: '#2586AF',
               }}
               >
-                <Typography variant="h6"> Pais y operadora </Typography>
+                <Typography variant="h5" fontWeight="700" color="white"> Pais y operadora </Typography>
                 <Box sx={{
                   display: 'flex',
                   gap: '30px',
@@ -347,19 +349,22 @@ function DesbloqueosForm() {
                     id={2}
                   />
                 </Box>
-                <Button variant="contained" disabled={disabledPais} onClick={() => handleNextPrevClick(2)}> Siguiente </Button>
+                <IconButton disabled={disabledPais} onClick={() => handleNextPrevClick(2)} sx={{ position: 'absolute', top: '75%', right: '25%' }}>
+                  <ArrowForwardIcon color="secondary" fontSize="large" />
+                </IconButton>
               </Card>
             )}
             {formActivePanel.formActivePanelId === 2 && (
               <Card sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '20px',
                 alignItems: 'center',
-                padding: '20px',
+                padding: '10px',
+                borderRadius: '35px',
+                backgroundColor: '#2586AF',
               }}
               >
-                <Typography variant="h6"> Telefono </Typography>
+                <Typography variant="h5" fontWeight="700" color="white"> Telefono </Typography>
                 <Box sx={{
                   display: 'flex',
                   gap: '30px',
@@ -383,8 +388,12 @@ function DesbloqueosForm() {
                   />
                 </Box>
                 <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
-                  <Button variant="contained" onClick={() => handleNextPrevClick(1)}> Anterior </Button>
-                  <Button variant="contained" disabled={disabledMarca} onClick={() => handleNextPrevClick(3)}> Siguiente </Button>
+                  <IconButton onClick={() => handleNextPrevClick(1)} sx={{ position: 'absolute', top: '60%', left: '23%' }}>
+                    <ArrowBackIcon color="secondary" fontSize="large" />
+                  </IconButton>
+                  <IconButton disabled={disabledMarca} onClick={() => handleNextPrevClick(3)} sx={{ position: 'absolute', top: '60%', right: '23%' }}>
+                    <ArrowForwardIcon color="secondary" fontSize="large" />
+                  </IconButton>
                 </Box>
               </Card>
             )}
@@ -392,12 +401,13 @@ function DesbloqueosForm() {
               <Card sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '20px',
                 alignItems: 'center',
-                padding: '20px',
+                padding: '10px',
+                borderRadius: '35px',
+                backgroundColor: '#2586AF',
               }}
               >
-                <Typography variant="h6"> Servicios </Typography>
+                <Typography variant="h5" fontWeight="700" color="white"> Servicios </Typography>
                 <Box sx={{
                   display: 'flex',
                   gap: '10px',
@@ -414,8 +424,12 @@ function DesbloqueosForm() {
                   />
                 </Box>
                 <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
-                  <Button variant="contained" onClick={() => handleNextPrevClick(2)}> Anterior </Button>
-                  <Button variant="contained" disabled={disabledServicio} onClick={() => handleNextPrevClick(4)}> Siguiente </Button>
+                  <IconButton onClick={() => handleNextPrevClick(2)} sx={{ position: 'absolute', top: '70%', left: '23%' }}>
+                    <ArrowBackIcon color="secondary" fontSize="large" />
+                  </IconButton>
+                  <IconButton disabled={disabledServicio} onClick={() => handleNextPrevClick(4)} sx={{ position: 'absolute', top: '70%', right: '23%' }}>
+                    <ArrowForwardIcon color="secondary" fontSize="large" />
+                  </IconButton>
                 </Box>
               </Card>
             )}
@@ -449,16 +463,17 @@ function DesbloqueosForm() {
                   <Card sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '20px',
                     alignItems: 'center',
-                    padding: '20px',
+                    padding: '10px',
+                    borderRadius: '35px',
+                    backgroundColor: '#2586AF',
                   }}
                   >
-                    <Typography variant="h6">
+                    <Typography variant="h5" fontWeight="700" color="white">
                       Servicios de desbloqueos
                     </Typography>
-                    <FormControlLabel control={<Checkbox checked={aceptarTerminos} onChange={(e) => setAceptarTerminos(e.target.checked)} />} label="Aceptar los términos  y condiciones" id="checkbox" />
-                    <FormControlLabel control={<Checkbox checked={recibirBoletin} onChange={(e) => setRecibirBoletin(e.target.checked)} />} label="Recibir boletín informativo" id="checkbox2" />
+                    <FormControlLabel control={<Checkbox color="secondary" checked={aceptarTerminos} onChange={(e) => setAceptarTerminos(e.target.checked)} />} label="Aceptar los términos  y condiciones" style={{ color: 'white' }} id="checkbox" />
+                    <FormControlLabel control={<Checkbox color="secondary" checked={recibirBoletin} onChange={(e) => setRecibirBoletin(e.target.checked)} />} label="Recibir boletín informativo" style={{ color: 'white' }} id="checkbox2" />
                     <Pagar disabledButton={disabledButton} next={handleNextPrevClick} />
                     <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
                       {/* <Button variant="contained" onClick={() => handleNextPrevClick(4)}> Anterior </Button>

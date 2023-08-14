@@ -1,7 +1,6 @@
 import {
   AppBar,
   Toolbar,
-  Typography,
   styled,
   IconButton,
   Button,
@@ -18,6 +17,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import MenuIcon from '@mui/icons-material/Menu';
 import { PATHS } from '../../shared/constants/Constants';
+import logo from '../../shared/image/2(7).png';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -81,7 +81,16 @@ function Navbar() {
           <IconButton color="otherColor" aria-label="open drawer" edge="start" sx={{ mr: 2, display: { sm: 'none' } }} onClick={handleDrawerToggle}>
             <MenuIcon> </MenuIcon>
           </IconButton>
-          <Typography variant="h6" width={{ xs: '90%', sm: '20%' }} textAlign="center"> Desbloquea tu celular </Typography>
+          <Box width={{ xs: '90%', sm: '20%' }} sx={{ height: '100px', overflow: 'hidden' }}>
+            <Box
+              component="img"
+              src={logo}
+              marginTop="-20px"
+              sx={{
+                width: '100%', height: '100%', objectFit: 'cover',
+              }}
+            />
+          </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {
               PATHS.map((item) => (
@@ -98,13 +107,14 @@ function Navbar() {
             }
           </Box>
           <Button
-            color="otherColor"
+            color="secondary"
+            variant="contained"
             onClick={() => {
-              navigate('/login');
+              navigate('/desbloqueos');
             }}
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+            sx={{ display: { xs: 'none', sm: 'block' }, color: '#224776' }}
           >
-            Iniciar Sesion/Registrarse
+            ¡Desbloquea tu cel ya!
           </Button>
         </StyledToolbar>
       </AppBar>

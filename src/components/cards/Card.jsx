@@ -21,10 +21,10 @@ function MediaCard({
 }) {
   const navigate = useNavigate();
   return (
-    <Card>
-      <CardMedia component="img" image={imgsrc} />
+    <Card sx={{ backgroundColor: '#2586AF', borderRadius: '20px' }}>
+      <CardMedia component="img" image={imgsrc} sx={{ height: '200px', objectFit: 'contain' }} />
       <CardContent>
-        <Typography>
+        <Typography color="white">
           {title}
         </Typography>
         <Typography>
@@ -35,6 +35,7 @@ function MediaCard({
           onClick={() => {
             navigate(`/telefonos/${id}`);
           }}
+          sx={{ backgroundColor: '#2586AF', border: '2px solid #E1A73E', borderRadius: '20px' }}
         >
           {buttontext}
         </Button>

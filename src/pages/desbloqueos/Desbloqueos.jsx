@@ -7,7 +7,8 @@ import {
 } from '@mui/material';
 import React from 'react';
 import DesbloqueosForm from './form/DesbloqueosForm';
-import ImagenDesbloquea from '../../shared/image/Desbloquea tu cel (1) (1).png';
+import mujer from '../../shared/image/17(1).png';
+import forma from '../../shared/image/18(1).png';
 
 function Desbloqueos() {
   return (
@@ -15,28 +16,29 @@ function Desbloqueos() {
       padding: '30px',
       display: 'flex',
       flexDirection: 'column',
-      gap: '30px',
+      gap: '10px',
+      paddingTop: '50px',
     }}
     >
-      <Typography variant="h5"> Desbloqueos </Typography>
-      <Container sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '30px',
-      }}
-      >
-        <Box>
-          <CardMedia component="img" image={ImagenDesbloquea} sx={{ width: { sm: '100%', xs: '100%' }, height: { sm: 600, xs: 200 } }} />
-        </Box>
-        <Box>
-          <Typography>
-            En Desbloquea tu Cel , nos esforzamos por ofrecerte el mejor servicio de desbloqueo de teléfonos inteligentes. Nuestra dedicación a la excelencia, la garantía de éxito, la rapidez, la atención al cliente y los precios competitivos nos convierten en la elección perfecta para satisfacer todas tus necesidades de desbloqueo. ¡No dudes en contactarnos y descubre la diferencia que podemos hacer en tu experiencia con tu teléfono inteligente!
-          </Typography>
-        </Box>
-      </Container>
+      <Typography color="white" textAlign="center" variant="h4" fontWeight="800">Todo sobre tu desbloqueo</Typography>
+      <Typography color="white" textAlign="center" variant="h5" fontWeight="700">en sencillos pasos</Typography>
       <Container>
         <DesbloqueosForm />
       </Container>
+      <CardMedia
+        component="img"
+        src={mujer}
+        sx={{
+          width: '30%', position: 'absolute', left: '0', bottom: '-85px', objectFit: 'cover',
+        }}
+      />
+      <CardMedia
+        component="img"
+        src={forma}
+        sx={{
+          width: '30%', position: 'absolute', right: '-5%', bottom: '-20%', overflow: 'hidden',
+        }}
+      />
     </Box>
   );
 }

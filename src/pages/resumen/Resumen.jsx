@@ -14,7 +14,7 @@ function Resumen() {
       padding: '3px',
     }}
     >
-      <Typography variant="h6" color="initial">
+      <Typography variant="h6" color="secondary">
         Resumen
       </Typography>
       <ResumenForm />
