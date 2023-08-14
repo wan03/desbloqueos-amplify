@@ -110,7 +110,7 @@ function Navbar() {
             color="secondary"
             variant="contained"
             onClick={() => {
-              navigate('/contactanos');
+              navigate('/desbloqueos');
             }}
             sx={{ display: { xs: 'none', sm: 'block' }, color: '#224776' }}
           >

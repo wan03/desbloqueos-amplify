@@ -349,7 +349,7 @@ function DesbloqueosForm() {
                     id={2}
                   />
                 </Box>
-                <IconButton disabled={disabledPais} onClick={() => handleNextPrevClick(2)} sx={{ position: 'absolute', top: '60%', right: '23%' }}>
+                <IconButton disabled={disabledPais} onClick={() => handleNextPrevClick(2)} sx={{ position: 'absolute', top: '75%', right: '25%' }}>
                   <ArrowForwardIcon color="secondary" fontSize="large" />
                 </IconButton>
               </Card>

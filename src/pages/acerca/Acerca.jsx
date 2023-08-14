@@ -95,11 +95,11 @@ function Acerca() {
         component="img"
         src={maleta}
         sx={{
-          position: 'absolute', width: '75px', top: '67%', left: '35%', zIndex: '2',
+          position: 'absolute', width: '75px', top: '75%', left: '35%', zIndex: '2',
         }}
       />
       <Card sx={{
-        width: '35%', padding: '20px', backgroundColor: '#2586AF', color: 'white', borderRadius: '15px', position: 'absolute', left: '-20px', top: '70%', paddingLeft: '40px',
+        width: '35%', padding: '20px', backgroundColor: '#2586AF', color: 'white', borderRadius: '15px', position: 'absolute', left: '-20px', top: '80%', paddingLeft: '40px',
       }}
       >
         <Typography variant="h5" textAlign="center" fontWeight="700">Experiencia</Typography>
@@ -111,7 +111,7 @@ function Acerca() {
         component="img"
         src={estrellas}
         sx={{
-          position: 'absolute', width: '150px', top: '67%', right: '30%', zIndex: '2',
+          position: 'absolute', width: '150px', top: '80%', right: '30%', zIndex: '2',
         }}
       />
       <Card sx={{
@@ -122,7 +122,7 @@ function Acerca() {
         borderRadius: '15px 0 0 15px',
         position: 'absolute',
         right: '0', // Cambiamos 'right: -20px' por 'right: 0'
-        top: '75%',
+        top: '90%',
         overflow: 'hidden',
       }}
       >
@@ -135,11 +135,11 @@ function Acerca() {
         component="img"
         src={audifonos}
         sx={{
-          position: 'absolute', width: '75px', top: '100%', left: '35%', zIndex: '2',
+          position: 'absolute', width: '75px', top: '120%', left: '35%', zIndex: '2',
         }}
       />
       <Card sx={{
-        width: '35%', padding: '20px', backgroundColor: '#2586AF', color: 'white', borderRadius: '15px', position: 'absolute', left: '-20px', top: '105%', paddingLeft: '40px',
+        width: '35%', padding: '20px', backgroundColor: '#2586AF', color: 'white', borderRadius: '15px', position: 'absolute', left: '-20px', top: '125%', paddingLeft: '40px',
       }}
       >
         <Typography variant="h5" textAlign="center" fontWeight="700">Atención personalizada</Typography>
@@ -151,7 +151,7 @@ function Acerca() {
         component="img"
         src={chip}
         sx={{
-          position: 'absolute', width: '75px', top: '105%', right: '35%', zIndex: '2',
+          position: 'absolute', width: '75px', top: '125%', right: '35%', zIndex: '2',
         }}
       />
       <Card sx={{
@@ -162,7 +162,7 @@ function Acerca() {
         borderRadius: '15px 0 0 15px',
         position: 'absolute',
         right: '0', // Cambiamos 'right: -20px' por 'right: 0'
-        top: '110%',
+        top: '130%',
         overflow: 'hidden',
       }}
       >
@@ -171,7 +171,7 @@ function Acerca() {
           Si estás buscando un servicio de desbloqueo de teléfonos inteligentes confiable y eficiente, no busques más. En Desbloquea tu cel, estamos listos para brindarte soluciones que transformarán la forma en que usas tu dispositivo. Únete a nuestra creciente lista de clientes satisfechos y descubre la libertad de elegir.
         </Typography>
       </Card>
-      <Typography color="white" textAlign="center" variant="h4" fontWeight="700" sx={{ position: 'absolute', top: '145%', right: '30%' }}>¡Gracias por elegir Desbloquea tu cel!</Typography>
+      <Typography color="white" textAlign="center" variant="h4" fontWeight="700" sx={{ position: 'absolute', top: '180%', right: '30%' }}>¡Gracias por elegir Desbloquea tu cel!</Typography>
     </Container>
   );
 }
