@@ -26,7 +26,7 @@ function Servicios() {
       <Grid container spacing={{ xs: 2, sm: 2 }} justifyContent="center" sx={{ display: 'flex', gap: '20px' }}>
         <Grid
           item
-          xs={2}
+          xs={6}
           sm={2}
           sx={{
             display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', padding: '20px', borderRadius: '10%',
@@ -36,7 +36,7 @@ function Servicios() {
         </Grid>
         <Grid
           item
-          xs={2}
+          xs={6}
           sm={2}
           sx={{
             display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', padding: '20px', borderRadius: '10%',
@@ -46,7 +46,7 @@ function Servicios() {
         </Grid>
         <Grid
           item
-          xs={2}
+          xs={6}
           sm={2}
           sx={{
             display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', padding: '20px', borderRadius: '10%',

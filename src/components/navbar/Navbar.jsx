@@ -34,14 +34,14 @@ function Navbar() {
   const navigate = useNavigate();
 
   const drawer = (
-    <Box>
+    <Box sx={{ backgroundColor: '#224776', height: '100vh' }}>
       <Toolbar> </Toolbar>
       <Divider> </Divider>
       <List>
         {
           PATHS.map((item) => (
             <ListItem key={item.name}>
-              <ListItemButton sx={{ textAlign: 'center' }}>
+              <ListItemButton sx={{ textAlign: 'center', color: 'white' }}>
                 <ListItemText
                   primary={item.name}
                   onClick={() => {
@@ -60,14 +60,17 @@ function Navbar() {
       <Toolbar> </Toolbar>
       <Divider> </Divider>
       <ListItem>
-        <ListItemButton sx={{ textAlign: 'center' }}>
+        <ListItemButton sx={{
+          textAlign: 'center', backgroundColor: '#E1A73E', borderRadius: '20px', color: '#224776',
+        }}
+        >
           <ListItemText
             onClick={() => {
               navigate('/login');
               handleDrawerToggle();
             }}
           >
-            Iniciar Sesion / Registrarse
+            Desbloquea tu cell ya
           </ListItemText>
         </ListItemButton>
       </ListItem>

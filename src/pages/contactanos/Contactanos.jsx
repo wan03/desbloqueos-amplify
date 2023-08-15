@@ -42,19 +42,21 @@ function Contactanos() {
         <Grid item>
           <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
             <EmailIcon />
-            <Typography> ??????????</Typography>
+            <Typography> servicios@desbloqueatucel.com</Typography>
           </Fab>
         </Grid>
         <Grid item>
           <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
             <InstagramIcon />
-            <Typography> ??????????</Typography>
+            <Typography>
+              desbloqueatuceloficial
+            </Typography>
           </Fab>
         </Grid>
         <Grid item>
           <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
             <FacebookIcon />
-            <Typography> ???????????</Typography>
+            <Typography> ??????????</Typography>
           </Fab>
         </Grid>
       </Grid>
@@ -63,14 +65,14 @@ function Contactanos() {
         component="img"
         src={imagenFondo}
         sx={{
-          width: '20%', height: '200px', position: 'absolute', left: '-4%', bottom: '-80% ', objectFit: 'cover',
+          width: '20%', height: '200px', position: 'absolute', left: '-4%', bottom: '-80% ', objectFit: 'cover', display: { xs: 'none', md: 'flex' },
         }}
       />
       <CardMedia
         component="img"
         src={imagenFondoDerecho}
         sx={{
-          width: '30%', height: '80%', position: 'absolute', right: '2%', bottom: '-80% ',
+          width: '30%', height: '80%', position: 'absolute', right: '2%', bottom: '-80% ', display: { xs: 'none', md: 'flex' },
         }}
       />
       <Box
