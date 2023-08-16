@@ -29,14 +29,14 @@ function Desbloqueos() {
         component="img"
         src={mujer}
         sx={{
-          width: '30%', position: 'absolute', left: '0', bottom: '-85px', objectFit: 'cover',
+          width: '30%', height: '40%', position: 'absolute', left: '-2%', bottom: '-0%', objectFit: 'cover', display: { xs: 'none', md: 'flex' },
         }}
       />
       <CardMedia
         component="img"
         src={forma}
         sx={{
-          width: '30%', position: 'absolute', right: '-5%', bottom: '-20%', overflow: 'hidden',
+          width: '30%', position: 'absolute', right: '0%', bottom: '0%', display: { xs: 'none' },
         }}
       />
     </Box>

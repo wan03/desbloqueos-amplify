@@ -66,7 +66,7 @@ function Navbar() {
         >
           <ListItemText
             onClick={() => {
-              navigate('/login');
+              navigate('/desbloqueos');
               handleDrawerToggle();
             }}
           >
