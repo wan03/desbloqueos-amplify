@@ -25,36 +25,38 @@ function Contactanos() {
       display: 'flex',
       flexDirection: 'column',
       gap: '30px',
-      padding: '30px',
+      padding: { xs: '10px', md: '30px' },
       paddingTop: '50px',
     }}
     >
       <Typography variant="h4" color="white" textAlign="center" fontWeight="800">
         ¡Contactanos!
       </Typography>
-      <Grid container spacing={2} justifyContent="space-between" padding="20px">
-        <Grid item>
+      <Grid container spacing={2} justifyContent="space-between" sx={{ width: '100%' }}>
+        <Grid item xs={12} md={2}>
           <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
             <PhoneInTalkIcon />
             <Typography> (561) 207-8335</Typography>
           </Fab>
         </Grid>
-        <Grid item>
+        <Grid item xs={12} md={3}>
           <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
             <EmailIcon />
-            <Typography> ??????????</Typography>
+            <Typography> servicios@desbloqueatucel.com</Typography>
           </Fab>
         </Grid>
-        <Grid item>
+        <Grid item xs={12} md={2}>
           <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
             <InstagramIcon />
-            <Typography> ??????????</Typography>
+            <Typography>
+              desbloqueatuceloficial
+            </Typography>
           </Fab>
         </Grid>
-        <Grid item>
+        <Grid item xs={12} md={2}>
           <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
             <FacebookIcon />
-            <Typography> ???????????</Typography>
+            <Typography> ??????????</Typography>
           </Fab>
         </Grid>
       </Grid>
@@ -63,24 +65,17 @@ function Contactanos() {
         component="img"
         src={imagenFondo}
         sx={{
-          width: '20%', height: '200px', position: 'absolute', left: '-4%', bottom: '-80% ', objectFit: 'cover',
+          width: '20%', height: '200px', position: 'absolute', left: '-4%', bottom: '-27% ', objectFit: 'cover', display: { xs: 'none', md: 'flex' },
         }}
       />
       <CardMedia
         component="img"
         src={imagenFondoDerecho}
         sx={{
-          width: '30%', height: '80%', position: 'absolute', right: '2%', bottom: '-80% ',
+          width: '30%', height: '80%', position: 'absolute', right: '0%', bottom: '-27% ', display: { xs: 'none', md: 'flex' },
         }}
       />
-      <Box
-        className="form-Contact"
-        sx={{
-          padding: { xs: '10px', ms: '30px' },
-          justifyContent: 'center',
-          display: 'flex',
-        }}
-      >
+      <Box>
         <Card
           sx={{
             display: 'flex',
