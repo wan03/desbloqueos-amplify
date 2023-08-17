@@ -25,14 +25,20 @@ function Input({ Next }) {
 
   const disabledImei = opciones[9] && opciones[10] ? undefined : 'disabled';
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
+    <Box sx={{
+      display: 'flex', flexDirection: 'column', gap: '50px', backgroundColor: '#2586AF', padding: '20px', borderRadius: '15px',
+    }}
+    >
       <TextField sx={{ backgroundColor: 'white' }} color="secondary" id="imei" label="IMEI" variant="filled" onChange={handleChangeImei} defaultValue={valueOptions} />
       <TextField sx={{ backgroundColor: 'white' }} color="secondary" id="email" label="Correo electronico" variant="filled" onChange={handleChangeEmail} defaultValue={valueOptionsEmail} />
-      <Box sx={{ display: 'flex', gap: '30px' }}>
-        <IconButton onClick={() => Next(3)} sx={{ position: 'absolute', top: '60%', left: '23%' }}>
+      <Box sx={{
+        display: 'flex', gap: '30px', justifyContent: 'center', width: '100%',
+      }}
+      >
+        <IconButton onClick={() => Next(3)}>
           <ArrowBackIcon color="secondary" fontSize="large" />
         </IconButton>
-        <IconButton disabled={disabledImei} onClick={() => Next(5)} sx={{ position: 'absolute', top: '60%', right: '23%' }}>
+        <IconButton disabled={disabledImei} onClick={() => Next(5)}>
           <ArrowForwardIcon color="secondary" fontSize="large" />
         </IconButton>
       </Box>

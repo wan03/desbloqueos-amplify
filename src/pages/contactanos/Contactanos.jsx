@@ -75,12 +75,13 @@ function Contactanos() {
           width: '30%', height: '80%', position: 'absolute', right: '0%', bottom: '-27% ', display: { xs: 'none', md: 'flex' },
         }}
       />
-      <Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Card
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
+            justifyItems: 'center',
+            alignItems: 'center',
             width: 'max-content',
           }}
           variant="outlined"
