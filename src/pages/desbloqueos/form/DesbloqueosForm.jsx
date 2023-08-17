@@ -387,11 +387,11 @@ function DesbloqueosForm() {
                     id={4}
                   />
                 </Box>
-                <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
-                  <IconButton onClick={() => handleNextPrevClick(1)} sx={{ position: 'absolute', top: '60%', left: '23%' }}>
+                <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: 'row' }}>
+                  <IconButton onClick={() => handleNextPrevClick(1)}>
                     <ArrowBackIcon color="secondary" fontSize="large" />
                   </IconButton>
-                  <IconButton disabled={disabledMarca} onClick={() => handleNextPrevClick(3)} sx={{ position: 'absolute', top: '60%', right: '23%' }}>
+                  <IconButton disabled={disabledMarca} onClick={() => handleNextPrevClick(3)}>
                     <ArrowForwardIcon color="secondary" fontSize="large" />
                   </IconButton>
                 </Box>
@@ -423,11 +423,11 @@ function DesbloqueosForm() {
                     id={7}
                   />
                 </Box>
-                <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
-                  <IconButton onClick={() => handleNextPrevClick(2)} sx={{ position: 'absolute', top: '70%', left: '23%' }}>
+                <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: 'row' }}>
+                  <IconButton onClick={() => handleNextPrevClick(2)}>
                     <ArrowBackIcon color="secondary" fontSize="large" />
                   </IconButton>
-                  <IconButton disabled={disabledServicio} onClick={() => handleNextPrevClick(4)} sx={{ position: 'absolute', top: '70%', right: '23%' }}>
+                  <IconButton disabled={disabledServicio} onClick={() => handleNextPrevClick(4)}>
                     <ArrowForwardIcon color="secondary" fontSize="large" />
                   </IconButton>
                 </Box>
@@ -467,6 +467,8 @@ function DesbloqueosForm() {
                     padding: '10px',
                     borderRadius: '35px',
                     backgroundColor: '#2586AF',
+                    gap: '20px',
+                    width: '100%',
                   }}
                   >
                     <Typography variant="h5" fontWeight="700" color="white">

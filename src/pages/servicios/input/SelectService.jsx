@@ -118,10 +118,10 @@ function SelectService({
       padding: '20px',
       justifyContent: 'center',
       width: '100%',
-      flexDirection: 'row',
+      flexDirection: { xs: 'column', md: 'row' },
     }}
     >
-      <FormControl sx={{ width: { xs: '100%', sm: '40%' } }}>
+      <FormControl sx={{ width: { xs: '80%', sm: '40%' } }}>
         <InputLabel id={field.name}>{label}</InputLabel>
         <Select
           labelId={field.name}
@@ -148,7 +148,7 @@ function SelectService({
           <div className="error">{meta.error}</div>
         ) : null}
       </FormControl>
-      <Typography color="white" sx={{ width: { xs: '100%', sm: '50%' } }}>
+      <Typography color="white" sx={{ width: { xs: '80%', sm: '50%' } }}>
         {
           descripcion?.desc
         }
