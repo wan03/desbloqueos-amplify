@@ -477,10 +477,6 @@ function DesbloqueosForm() {
                     <FormControlLabel control={<Checkbox color="secondary" checked={aceptarTerminos} onChange={(e) => setAceptarTerminos(e.target.checked)} />} label="Aceptar los términos  y condiciones" style={{ color: 'white' }} id="checkbox" />
                     <FormControlLabel control={<Checkbox color="secondary" checked={recibirBoletin} onChange={(e) => setRecibirBoletin(e.target.checked)} />} label="Recibir boletín informativo" style={{ color: 'white' }} id="checkbox2" />
                     <Pagar disabledButton={disabledButton} next={handleNextPrevClick} />
-                    <Box sx={{ display: 'flex', gap: { xs: '10px', sm: '100px' }, flexDirection: { xs: 'column', sm: 'row' } }}>
-                      {/* <Button variant="contained" onClick={() => handleNextPrevClick(4)}> Anterior </Button>
-                      <Button variant="contained" onClick={() => handleNextPrevClick(6)}> Siguiente </Button> */}
-                    </Box>
                   </Card>
                 </div>
               </div>

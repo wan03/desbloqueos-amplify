@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import {
   Box,
-  Card,
   CardMedia,
   Container,
   Fab,
@@ -9,8 +8,6 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import EmailIcon from '@mui/icons-material/Email';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -54,9 +51,9 @@ function Contactanos() {
           </Fab>
         </Grid>
         <Grid item xs={12} md={2}>
-          <Fab variant="extended" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
+          <Fab variant="extended" href="https://www.facebook.com/profile.php?id=100095645558264" sx={{ backgroundColor: '#2586AF', color: 'white' }}>
             <FacebookIcon />
-            <Typography> ??????????</Typography>
+            <Typography>Desbloquea tu Cel</Typography>
           </Fab>
         </Grid>
       </Grid>
@@ -76,61 +73,7 @@ function Contactanos() {
         }}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Card
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyItems: 'center',
-            alignItems: 'center',
-            width: 'max-content',
-          }}
-          variant="outlined"
-        >
-          <Box
-            sx={{
-              '& .MuiTextField-root': { mr: 1 },
-              padding: { xs: '10px', sm: '30px' },
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '20px',
-              width: { xs: '250px', sm: '300px' },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <Typography variant="h6" color="initial">
-              Escribenos
-            </Typography>
-            <Formik
-              component={ContactForm}
-              initialValues={{
-                name: '',
-                email: '',
-                phone: '',
-                company: '',
-                message: '',
-              }}
-              validationSchema={Yup.object({
-                name: Yup.string()
-                  .required('*Requerido'),
-                email: Yup.string()
-                  .required('*Requerido'),
-                phone: Yup.string()
-                  .required('*Requerido'),
-                company: Yup.string(),
-                message: Yup.string()
-                  .required('*Requerido'),
-              })}
-              onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                  // eslint-disable-next-line no-alert
-                  alert(JSON.stringify(values, null, 2));
-                  setSubmitting(false);
-                }, 400);
-              }}
-            />
-          </Box>
-        </Card>
+        <ContactForm />
       </Box>
     </Container>
   );
