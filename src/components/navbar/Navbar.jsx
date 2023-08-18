@@ -1,7 +1,6 @@
 import {
   AppBar,
   Toolbar,
-  Typography,
   styled,
   IconButton,
   Button,
@@ -18,6 +17,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import MenuIcon from '@mui/icons-material/Menu';
 import { PATHS } from '../../shared/constants/Constants';
+import logo from '../../shared/image/2(7).png';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -34,14 +34,14 @@ function Navbar() {
   const navigate = useNavigate();
 
   const drawer = (
-    <Box>
+    <Box sx={{ backgroundColor: '#224776', height: '100vh' }}>
       <Toolbar> </Toolbar>
       <Divider> </Divider>
       <List>
         {
           PATHS.map((item) => (
             <ListItem key={item.name}>
-              <ListItemButton sx={{ textAlign: 'center' }}>
+              <ListItemButton sx={{ textAlign: 'center', color: 'white' }}>
                 <ListItemText
                   primary={item.name}
                   onClick={() => {
@@ -60,14 +60,17 @@ function Navbar() {
       <Toolbar> </Toolbar>
       <Divider> </Divider>
       <ListItem>
-        <ListItemButton sx={{ textAlign: 'center' }}>
+        <ListItemButton sx={{
+          textAlign: 'center', backgroundColor: '#E1A73E', borderRadius: '20px', color: '#224776',
+        }}
+        >
           <ListItemText
             onClick={() => {
-              navigate('/login');
+              navigate('/desbloqueos');
               handleDrawerToggle();
             }}
           >
-            Iniciar Sesion / Registrarse
+            Desbloquea tu cell ya
           </ListItemText>
         </ListItemButton>
       </ListItem>
@@ -81,7 +84,16 @@ function Navbar() {
           <IconButton color="otherColor" aria-label="open drawer" edge="start" sx={{ mr: 2, display: { sm: 'none' } }} onClick={handleDrawerToggle}>
             <MenuIcon> </MenuIcon>
           </IconButton>
-          <Typography variant="h6" width={{ xs: '90%', sm: '20%' }} textAlign="center"> Desbloquea tu celular </Typography>
+          <Box width={{ xs: '90%', sm: '20%' }} sx={{ height: '100px', overflow: 'hidden' }}>
+            <Box
+              component="img"
+              src={logo}
+              marginTop="-20px"
+              sx={{
+                width: '100%', height: '100%', objectFit: 'cover',
+              }}
+            />
+          </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {
               PATHS.map((item) => (
@@ -98,13 +110,14 @@ function Navbar() {
             }
           </Box>
           <Button
-            color="otherColor"
+            color="secondary"
+            variant="contained"
             onClick={() => {
-              navigate('/login');
+              navigate('/desbloqueos');
             }}
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+            sx={{ display: { xs: 'none', sm: 'block' }, color: '#224776' }}
           >
-            Iniciar Sesion/Registrarse
+            ¡Desbloquea tu cel ya!
           </Button>
         </StyledToolbar>
       </AppBar>

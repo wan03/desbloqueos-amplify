@@ -23,6 +23,8 @@ function ResumenForm() {
             readOnly: true,
           }}
           variant="filled"
+          color="secondary"
+          sx={{ backgroundColor: 'white' }}
         />
         <TextField
           id="filled-read-only-input2"
@@ -32,6 +34,8 @@ function ResumenForm() {
             readOnly: true,
           }}
           variant="filled"
+          color="secondary"
+          sx={{ backgroundColor: 'white' }}
         />
       </div>
       <div>
@@ -43,6 +47,8 @@ function ResumenForm() {
             readOnly: true,
           }}
           variant="filled"
+          color="secondary"
+          sx={{ backgroundColor: 'white' }}
         />
         <TextField
           id="filled-read-only-input4"
@@ -52,6 +58,8 @@ function ResumenForm() {
             readOnly: true,
           }}
           variant="filled"
+          color="secondary"
+          sx={{ backgroundColor: 'white' }}
         />
       </div>
       <div>
@@ -63,6 +71,8 @@ function ResumenForm() {
             readOnly: true,
           }}
           variant="filled"
+          color="secondary"
+          sx={{ backgroundColor: 'white' }}
         />
         <TextField
           id="filled-read-only-input6"
@@ -72,6 +82,8 @@ function ResumenForm() {
             readOnly: true,
           }}
           variant="filled"
+          color="secondary"
+          sx={{ backgroundColor: 'white' }}
         />
       </div>
       <div>
@@ -83,6 +95,8 @@ function ResumenForm() {
             readOnly: true,
           }}
           variant="filled"
+          color="secondary"
+          sx={{ backgroundColor: 'white' }}
         />
         <TextField
           id="filled-read-only-input8"
@@ -92,6 +106,8 @@ function ResumenForm() {
             readOnly: true,
           }}
           variant="filled"
+          color="secondary"
+          sx={{ backgroundColor: 'white' }}
         />
       </div>
       <div>
@@ -99,6 +115,7 @@ function ResumenForm() {
           label="Promedio"
           value={opciones[8]?.avg}
           variant="filled"
+          sx={{ backgroundColor: 'white' }}
           InputProps={{
             readOnly: true,
           }}
@@ -114,6 +131,7 @@ function ResumenForm() {
           }}
           color="warning"
           focused
+          sx={{ backgroundColor: 'white' }}
         />
       </div>
     </Box>

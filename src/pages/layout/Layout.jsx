@@ -8,7 +8,7 @@ function Layout({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <Navbar />
-      <main>{children}</main>
+      <main className="app-general">{children}</main>
     </ThemeProvider>
   );
 }

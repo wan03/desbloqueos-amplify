@@ -14,18 +14,7 @@ function SelectInput({
   const [valueOptions, setValueOptions] = useState('');
   const dispatch = useDispatch();
   /*
-  if (label === 'Compañia telefonica') {
-    const url = 'https://omb7k0gyvj.execute-api.us-east-1.amazonaws.com/items';
-    const opciones = useSelector((state) => state.opciones[0]?.idReg);
-    const optionNetwork = () => {
-      axios.get(`${url}/${opciones}`)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => console.log(error));
-    };
-    optionNetwork();
-  }
+
 */
   // eslint-disable-next-line arrow-body-style
   async function findAsync(arr, valor) {
@@ -39,8 +28,8 @@ function SelectInput({
     dispatch(setOpcionesGlobal({ [label]: event.target.value, id: `${id}`, idReg: `${opt.drSimID}` }));
   }
   return (
-    <FormControl sx={{ width: { xs: '100%', sm: '50%' } }}>
-      <InputLabel id={field.name}>{label}</InputLabel>
+    <FormControl color="formColor" sx={{ width: { xs: '100%', sm: '50%' } }}>
+      <InputLabel id={field.name} color="formColor">{label}</InputLabel>
       <Select
         labelId={field.name}
         id={field.name}
@@ -48,6 +37,7 @@ function SelectInput({
         // eslint-disable-next-line react/jsx-no-bind
         onChange={handleChange}
         label={label}
+        sx={{ backgroundColor: 'white' }}
       >
         {
           options?.map((option) => (

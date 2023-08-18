@@ -118,10 +118,10 @@ function SelectService({
       padding: '20px',
       justifyContent: 'center',
       width: '100%',
-      flexDirection: 'row',
+      flexDirection: { xs: 'column', md: 'row' },
     }}
     >
-      <FormControl sx={{ width: { xs: '100%', sm: '40%' } }}>
+      <FormControl sx={{ width: { xs: '80%', sm: '40%' } }}>
         <InputLabel id={field.name}>{label}</InputLabel>
         <Select
           labelId={field.name}
@@ -129,6 +129,7 @@ function SelectService({
           value={valueOptions}
           onChange={handleChange}
           label={label}
+          sx={{ backgroundColor: 'white' }}
         >
           {
           options?.map((option) => (
@@ -138,16 +139,16 @@ function SelectService({
           ))
         }
         </Select>
-        <TextField id="txtPrice" label="Precio $" variant="filled" value={price} InputProps={{ readOnly: true }} />
-        <TextField id="txtTimeMin" label="Dias Minimo" variant="filled" value={timeMin} InputProps={{ readOnly: true }} />
-        <TextField id="txtTimeMax" label="Dias Maximo" variant="filled" value={timeMax} InputProps={{ readOnly: true }} />
-        <TextField id="txtAvg" label="Promedio" variant="filled" value={avg} InputProps={{ readOnly: true }} />
-        <TextField id="txtRequiere" label="Requiere" variant="filled" value={toolType} InputProps={{ readOnly: true }} />
+        <TextField sx={{ backgroundColor: 'white' }} id="txtPrice" label="Precio $" variant="filled" value={price} InputProps={{ readOnly: true }} />
+        <TextField sx={{ backgroundColor: 'white' }} id="txtTimeMin" label="Dias Minimo" variant="filled" value={timeMin} InputProps={{ readOnly: true }} />
+        <TextField sx={{ backgroundColor: 'white' }} id="txtTimeMax" label="Dias Maximo" variant="filled" value={timeMax} InputProps={{ readOnly: true }} />
+        <TextField sx={{ backgroundColor: 'white' }} id="txtAvg" label="Promedio" variant="filled" value={avg} InputProps={{ readOnly: true }} />
+        <TextField sx={{ backgroundColor: 'white' }} id="txtRequiere" label="Requiere" variant="filled" value={toolType} InputProps={{ readOnly: true }} />
         {meta.touched && meta.error ? (
           <div className="error">{meta.error}</div>
         ) : null}
       </FormControl>
-      <Typography sx={{ width: { xs: '100%', sm: '50%' } }}>
+      <Typography color="white" sx={{ width: { xs: '80%', sm: '50%' } }}>
         {
           descripcion?.desc
         }

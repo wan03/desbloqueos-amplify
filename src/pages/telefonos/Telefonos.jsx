@@ -53,13 +53,15 @@ function Telefonos() {
   }
   return (
     <Container sx={{ padding: '20px', textAlign: 'center' }}>
-      <Typography variant="h5"> Telefonos </Typography>
+      <Typography variant="h4" color="white" fontWeight="700" marginTop="60px">Desbloquea tu cel</Typography>
+      <Typography variant="h5" color="white">¡Consigue el que necesitas!</Typography>
       <Box sx={{
         display: 'flex',
         gap: '30px',
         justifyContent: 'center',
         flexWrap: 'wrap',
         marginTop: '30px',
+        width: '100%',
       }}
       >
         {
