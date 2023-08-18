@@ -62,14 +62,14 @@ function Contactanos() {
         component="img"
         src={imagenFondo}
         sx={{
-          width: '20%', height: '200px', position: 'absolute', left: '-4%', bottom: '-27% ', objectFit: 'cover', display: { xs: 'none', md: 'flex' },
+          width: '20%', height: '200px', position: 'absolute', left: '-4%', bottom: '-27% ', objectFit: 'cover', display: { xs: 'none', md: 'none' },
         }}
       />
       <CardMedia
         component="img"
         src={imagenFondoDerecho}
         sx={{
-          width: '30%', height: '80%', position: 'absolute', right: '0%', bottom: '-27% ', display: { xs: 'none', md: 'flex' },
+          width: '30%', height: '80%', position: 'absolute', right: '0%', bottom: '-27% ', display: { xs: 'none', md: 'none' },
         }}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
