@@ -11,8 +11,7 @@ import {
   ListItemButton,
   ListItemText,
   Drawer,
-}
-  from '@mui/material';
+} from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -22,6 +21,8 @@ import logo from '../../shared/image/2(7).png';
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
   justifyContent: 'space-between',
+  height: '100px',
+  alignContent: 'center',
 });
 
 function Navbar() {
@@ -35,34 +36,48 @@ function Navbar() {
 
   const drawer = (
     <Box sx={{ backgroundColor: '#224776', height: '100vh' }}>
-      <Toolbar> </Toolbar>
-      <Divider> </Divider>
+      <Toolbar>
+        {' '}
+        <Box
+          component="img"
+          src={logo}
+          sx={{
+            paddingRight: '35px',
+            paddingBottom: '25px',
+            width: '100%',
+            height: '70px',
+            objectFit: 'cover',
+          }}
+        />
+
+      </Toolbar>
+      <Divider />
       <List>
-        {
-          PATHS.map((item) => (
-            <ListItem key={item.name}>
-              <ListItemButton sx={{ textAlign: 'center', color: 'white' }}>
-                <ListItemText
-                  primary={item.name}
-                  onClick={() => {
-                    navigate(item.path);
-                    handleDrawerToggle();
-                  }}
-                >
-                  hola
-                </ListItemText>
-              </ListItemButton>
-            </ListItem>
-          ))
-        }
+        {PATHS.map((item) => (
+          <ListItem key={item.name}>
+            <ListItemButton sx={{ textAlign: 'center', color: 'white' }}>
+              <ListItemText
+                primary={item.name}
+                onClick={() => {
+                  navigate(item.path);
+                  handleDrawerToggle();
+                }}
+              >
+                hola
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+        ))}
       </List>
-      <Toolbar> </Toolbar>
-      <Toolbar> </Toolbar>
       <Divider> </Divider>
       <ListItem>
-        <ListItemButton sx={{
-          textAlign: 'center', backgroundColor: '#E1A73E', borderRadius: '20px', color: '#224776',
-        }}
+        <ListItemButton
+          sx={{
+            textAlign: 'center',
+            backgroundColor: '#E1A73E',
+            borderRadius: '20px',
+            color: '#224776',
+          }}
         >
           <ListItemText
             onClick={() => {
@@ -78,36 +93,61 @@ function Navbar() {
   );
 
   return (
-    <div>
+    <>
       <AppBar>
         <StyledToolbar>
-          <IconButton color="otherColor" aria-label="open drawer" edge="start" sx={{ mr: 2, display: { sm: 'none' } }} onClick={handleDrawerToggle}>
+          <IconButton
+            color="otherColor"
+            aria-label="open drawer"
+            edge="start"
+            sx={{ mr: 2, display: { sm: 'none' } }}
+            onClick={handleDrawerToggle}
+          >
             <MenuIcon> </MenuIcon>
           </IconButton>
-          <Box width={{ xs: '90%', sm: '20%' }} sx={{ height: '100px', overflow: 'hidden' }}>
+          <Box
+            width={{
+              xs: '200px', sm: '20%', md: '20%', lg: '18%', xl: '15%',
+            }}
+            sx={{
+              height: '100%',
+              overflow: 'hidden',
+              paddingBottom: {
+                xs: '26px', sm: '26px', md: '30px', lg: '40px', xl: '45px',
+              },
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <Box
               component="img"
               src={logo}
-              marginTop="-20px"
               sx={{
-                width: '100%', height: '100%', objectFit: 'cover',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
               }}
             />
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {
-              PATHS.map((item) => (
-                <Button
-                  key={item.name}
-                  color="otherColor"
-                  onClick={() => {
-                    navigate(item.path);
-                  }}
-                >
-                  {item.name}
-                </Button>
-              ))
-            }
+            {PATHS.map((item) => (
+              <Button
+                key={item.name}
+                color="otherColor"
+                onClick={() => {
+                  navigate(item.path);
+                }}
+                sx={{
+                  fontSize: {
+                    xs: 'none', sm: '10px', md: '12px', lg: '15px', xl: '15px',
+                  },
+                  margin: '2px',
+                }}
+              >
+                {item.name}
+              </Button>
+            ))}
           </Box>
           <Button
             color="secondary"
@@ -115,7 +155,7 @@ function Navbar() {
             onClick={() => {
               navigate('/desbloqueos');
             }}
-            sx={{ display: { xs: 'none', sm: 'block' }, color: '#224776' }}
+            sx={{ display: { xs: 'none', sm: 'none', md: 'block' }, color: '#224776' }}
           >
             ¡Desbloquea tu cel ya!
           </Button>
@@ -138,7 +178,7 @@ function Navbar() {
           {drawer}
         </Drawer>
       </Box>
-    </div>
+    </>
   );
 }
 
