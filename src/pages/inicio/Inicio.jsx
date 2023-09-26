@@ -5,6 +5,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router';
 import Navbar from '../../components/navbar/Navbar';
+import Header from './headerSection/header';
 import OpeningSection from './openingSection/openingSection';
 import FeaturedPhones from './featuredPhones/FeaturedPhones';
 import Servicios from './services/Services';
@@ -30,8 +31,8 @@ function Inicio() {
       flexDirection: 'column',
       display: 'flex',
       justifyContent: 'center',
-      gap: '40px',
-      paddingTop: '50px',
+      gap: '10px',
+      paddingTop: '30px',
       alignItems: 'center',
       width: '100%',
     }}
@@ -54,6 +55,7 @@ function Inicio() {
           width: '40%', position: 'absolute', left: '-20%', top: '50%',
         }}
       />
+      <Header />
       <OpeningSection />
       <FeaturedPhones />
       <WhyUS whyUsTitle={inicio?.whyUsTitle} whyUsReasons={inicio?.whyUsReasonsCollection.items} />
