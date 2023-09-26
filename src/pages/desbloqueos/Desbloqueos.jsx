@@ -9,6 +9,7 @@ import React from 'react';
 import DesbloqueosForm from './form/DesbloqueosForm';
 import mujer from '../../shared/image/17(1).png';
 import forma from '../../shared/image/18(1).png';
+import Navbar from '../../components/navbar/Navbar';
 
 function Desbloqueos() {
   return (
@@ -20,6 +21,7 @@ function Desbloqueos() {
       paddingTop: '50px',
     }}
     >
+      <Navbar />
       <Typography color="white" textAlign="center" variant="h4" fontWeight="800">Todo sobre tu desbloqueo</Typography>
       <Typography color="white" textAlign="center" variant="h5" fontWeight="700">en sencillos pasos</Typography>
       <Container>

@@ -4,7 +4,8 @@ import {
   Box, CardMedia, Fab, Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router';
-import Carousel from '../../components/carousel/Carousel';
+import Navbar from '../../components/navbar/Navbar';
+import OpeningSection from './openingSection/openingSection';
 import FeaturedPhones from './featuredPhones/FeaturedPhones';
 import Servicios from './services/Services';
 import WhyUS from './whyUs/WhyUs';
@@ -35,6 +36,7 @@ function Inicio() {
       width: '100%',
     }}
     >
+      <Navbar />
       <Fab
         variant="extended"
         sx={{
@@ -52,8 +54,7 @@ function Inicio() {
           width: '40%', position: 'absolute', left: '-20%', top: '50%',
         }}
       />
-      <Typography variant="h4" color="white">¿Necesitas desbloquear tu celular?</Typography>
-      <Carousel />
+      <OpeningSection />
       <FeaturedPhones />
       <WhyUS whyUsTitle={inicio?.whyUsTitle} whyUsReasons={inicio?.whyUsReasonsCollection.items} />
       <Servicios

@@ -6,6 +6,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import * as Yup from 'yup';
 import RegisterForm from './registerForm/RegisterForm';
+import Navbar from '../../components/navbar/Navbar';
 
 function Register() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ function Register() {
         textAlign: 'center',
       }}
     >
+      <Navbar />
       <Typography variant="h5">
         Register
       </Typography>

@@ -14,6 +14,7 @@ import maleta from '../../shared/image/11(3).png';
 import estrellas from '../../shared/image/12(2).png';
 import chip from '../../shared/image/14(2).png';
 import audifonos from '../../shared/image/13(2).png';
+import Navbar from '../../components/navbar/Navbar';
 
 function Acerca() {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ function Acerca() {
       }}
       spacing={2}
     >
+      <Navbar />
       <Fab
         variant="extended"
         sx={{

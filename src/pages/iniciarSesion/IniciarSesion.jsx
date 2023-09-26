@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import React from 'react';
 import { useNavigate } from 'react-router';
 import IniciarSesionForm from './iniciarSesionForm/IniciarSesionForm';
+import Navbar from '../../components/navbar/Navbar';
 
 function IniciarSesion() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function IniciarSesion() {
       textAlign: 'center',
     }}
     >
+      <Navbar />
       <Typography variant="h5" color="initial"> Iniciar Sesion </Typography>
       <Box
         sx={{

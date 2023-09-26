@@ -4,6 +4,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
+import Navbar from '../../../components/navbar/Navbar';
 
 function DetailsPhone() {
   const { id } = useParams();
@@ -28,6 +29,7 @@ function DetailsPhone() {
       gap: '50px',
     }}
     >
+      <Navbar />
       <Box sx={{
         display: 'flex',
         justifyContent: 'space-between',

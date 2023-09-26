@@ -5,8 +5,6 @@ import React from 'react';
 import apple from '../../../shared/image/25(1).png';
 import samsung from '../../../shared/image/22(1).png';
 import huawei from '../../../shared/image/20(1).png';
-/* import xiaomi from '../../../shared/image/21(1).png';
-Diez se ve mejor que once jaja. Si lo quieres de vuelta, simplemente elimina el comentarios. */
 import zte from '../../../shared/image/23(1).png';
 import alcatel from '../../../shared/image/24(1).png';
 import lg from '../../../shared/image/26(1).png';

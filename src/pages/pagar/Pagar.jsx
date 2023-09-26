@@ -22,6 +22,7 @@ import Resumen from '../resumen/Resumen';
 import postCreateOrdenDrSim from '../../api/drsimcreateordenes';
 import { setOpcionesGlobal } from '../../store/slices/opciones.slice';
 import putDynamobdOrden from '../../api/putDynamodbOrden';
+import Navbar from '../../components/navbar/Navbar';
 
 const env = environments;
 
@@ -130,6 +131,7 @@ const CheckoutForm = ({ next, disabledButton }) => {
   const disabled = (!disabledButton || loading) ? 'disabled' : undefined;
   return (
     <div className="div_payment-cardElement">
+      <Navbar />
       <Resumen />
       <div className="form_payment-cardElement">
         <label className="form-label">Tarjeta</label>

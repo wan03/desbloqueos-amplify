@@ -12,6 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { information } from '../../shared/api/memberInfomation';
+import Navbar from '../../components/navbar/Navbar';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,6 +37,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function Members() {
   return (
     <Box>
+      <Navbar />
       <Grid container rowSpacing={4} spacing={4}>
         <Grid item xs={4}>
           <Box align="center" color="white" borderRadius="15px" sx={{ background: '#1565c0' }} padding={4}>
