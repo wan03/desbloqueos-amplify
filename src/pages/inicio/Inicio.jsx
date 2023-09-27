@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import {
-  Box, CardMedia, Fab, Typography,
+  Box, CardMedia, Fab,
 } from '@mui/material';
 import { useNavigate } from 'react-router';
 import Navbar from '../../components/navbar/Navbar';
@@ -13,6 +13,7 @@ import WhyUS from './whyUs/WhyUs';
 import Spinner from '../../components/spinner/Spinner';
 import { getInicio } from '../../shared/api/contentful/queries';
 import imagenLateral from '../../shared/image/1(6).png';
+import Phone from '../../shared/image/Contáctanos.png';
 
 function Inicio() {
   const { data, loading } = useQuery(getInicio, { variables: { id: '3jDI1X9rZoL25IpElqhGKZ' } });
@@ -40,15 +41,26 @@ function Inicio() {
     >
       <Navbar />
       <Fab
-        variant="extended"
         sx={{
-          position: 'fixed', top: '150px', right: { xs: '10px', sm: '40px' }, backgroundColor: '#2586AF', border: '8px solid #E1A73E', padding: '20px',
+          background: `url(${Phone})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          position: 'fixed',
+          top: '150px',
+          right: { xs: '10px', sm: '60px' },
+          height: '199px',
+          width: '99px',
+          borderRadius: '5px',
+          margin: '0px',
+          boxShadow: 'none',
+          backgroundColor: 'none',
+          '&:hover': {
+            backgroundColor: 'none',
+          },
         }}
         size="large"
         onClick={goContactanos}
-      >
-        <Typography fontWeight="800"> Contactanos </Typography>
-      </Fab>
+      />
       <CardMedia
         component="img"
         src={imagenLateral}
