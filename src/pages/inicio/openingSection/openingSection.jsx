@@ -27,7 +27,7 @@ const openingSection = () => (
     }}
     >
       <Box sx={{
-        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', background: 'linear-gradient(to bottom right ,#091a30, blue)', borderRadius: '10px', width: '500px', height: '80%', position: 'relative', border: '2px solid #E3A72F', padding: '15px',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', background: 'linear-gradient(to bottom right ,#091a30, blue)', borderRadius: '10px', width: '500px', height: '80%', position: 'relative', border: '2px solid white', padding: '15px',
       }}
       >
         <Box sx={{

@@ -35,6 +35,7 @@ function Inicio() {
       paddingTop: '30px',
       alignItems: 'center',
       width: '100%',
+      backgroundColor: '#051650',
     }}
     >
       <Navbar />

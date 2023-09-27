@@ -23,6 +23,7 @@ const StyledToolbar = styled(Toolbar)({
   justifyContent: 'space-between',
   height: '100px',
   alignContent: 'center',
+  backgroundColor: '#0A2472',
 });
 
 function Navbar() {
@@ -35,7 +36,7 @@ function Navbar() {
   const navigate = useNavigate();
 
   const drawer = (
-    <Box sx={{ backgroundColor: '#224776', height: '100vh' }}>
+    <Box sx={{ backgroundColor: '#0A2472', height: '100vh' }}>
       <Toolbar>
         {' '}
         <Box
