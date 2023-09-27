@@ -5,7 +5,7 @@ import {
 
 const header = () => (
   <Box sx={{
-    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', width: '60vw', height: '10vh', padding: '100px 0px 0px 0px', borderBottom: '1.5px solid grey',
+    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', width: '60vw', height: '10vh', padding: '60px 0px 0px 0px', borderBottom: '1.5px solid grey',
   }}
   >
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Box, Typography, Autocomplete, TextField,
+  Box, Typography, Autocomplete, TextField, Button,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -31,6 +31,9 @@ const StyledAutocomplete = styled(Autocomplete)({
   },
   '& button': {
     color: 'white',
+    '&:hover': {
+      color: 'gold',
+    },
   },
 });
 
@@ -42,7 +45,7 @@ const top100Films = [
 
 const openingForm = () => (
   <Box sx={{
-    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', width: '28vw', height: '25vh', padding: '15px',
+    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', width: '28vw', height: '28vh', padding: '15px',
   }}
   >
     <Typography color="white" variant="h4" sx={{ textDecoration: 'underline', marginBottom: '15px' }} display="inline">Pais y operadora</Typography>
@@ -64,7 +67,9 @@ const openingForm = () => (
       disablePortal
       id="combo-box-demo"
       options={top100Films}
-      sx={{ width: '100%', height: '100px', color: 'white' }}
+      sx={{
+        width: '100%', height: '100px', color: 'white', paddingBottom: '0px',
+      }}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -72,7 +77,14 @@ const openingForm = () => (
         />
       )}
     />
-    <Typography color="white" variant="p" display="inline">Pais y operadora Pais y operadora Pais y operadora Pais y operadora Pais y operadora Pais y operadora Pais y operadora Pais y operadora Pais y operadora Pais y operadora Pais y operadora Pais y operadora Pais y operadora Pais y operadora</Typography>
+    <Typography color="white" display="inline" sx={{ paddingTop: '0px' }}>Pais y operadora Pais y operadora Pais y operadora Pais y operadora</Typography>
+    <Box sx={{
+      display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', width: '100%', paddingTop: '15px',
+    }}
+    >
+      <Button variant="contained" sx={{ width: '150px', background: 'linear-gradient(to bottom right ,gold, #E1A73E)', color: '#224776' }}>learn more</Button>
+      <Button variant="contained" sx={{ width: '150px', background: 'linear-gradient(to bottom right ,gold, #E1A73E)', color: '#224776' }}>go</Button>
+    </Box>
   </Box>
 );
 
